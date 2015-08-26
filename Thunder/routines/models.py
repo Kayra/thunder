@@ -21,7 +21,7 @@ class Exercise(models.Model):
     completion_time     = models.DurationField(default=timedelta())
     position            = models.IntegerField(null=True)
 
-    routine                = models.ForeignKey(Routine)
+    routine             = models.ForeignKey(Routine)
 
     def __unicode__(self):
         return self.name
