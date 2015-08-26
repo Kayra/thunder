@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Routines application
-    url(r'^routines/', include("atlas.routines.urls", namespace="routines")),
+    url(r'^routines/', include("Thunder.routines.urls", namespace="routines")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

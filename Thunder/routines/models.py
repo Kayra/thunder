@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from datetime import timedelta
 
 from django.db import models
-from atlas.users.models import User
+from Thunder.users.models import User
 
 
 class Routine(models.Model):
