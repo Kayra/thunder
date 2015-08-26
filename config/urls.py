@@ -17,8 +17,8 @@ urlpatterns = [
     url(r'^users/', include("Thunder.users.urls", namespace="users")),
     url(r'^accounts/', include('allauth.urls')),
 
-    # Your stuff: custom urls includes go here
-
+    # Routines application
+    url(r'^routines/', include("atlas.routines.urls", namespace="routines")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
