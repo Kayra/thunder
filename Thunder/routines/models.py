@@ -19,6 +19,7 @@ class Exercise(models.Model):
 
     name                = models.CharField("Skill name", max_length=255)
     completion_time     = models.DurationField(default=timedelta())
+    position            = models.IntegerField(null=True)
 
     routine                = models.ForeignKey(Routine)
 
