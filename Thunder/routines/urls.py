@@ -12,4 +12,10 @@ urlpatterns = [
 
     url(r'^use/$', views.routineUseView, name='use'),
 
+    # APIs
+
+    url(r'^api/routine_create$', views.routineCreate, name='routine_create'),
+
+    url(r'^api/exercise_create$', views.exerciseCreate, name='exercise_create'),
+
 ]
