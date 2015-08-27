@@ -58,4 +58,17 @@ def exerciseCreate(request):
 
 @api_view(['GET'])
 def routineGet(request):
-    pass
+
+    exercises = Exercise.objects.get(routine=request.data['routine'], routine__user=request.user)
+    serializer = ExerciseSerializer(exercises, many=True)
+
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def routinesGet(request):
+
+    routines = Routine.objects.get(user=request.user)
+    serializer = RoutineSerializer(routines, many=True)
+
+    return Response(serializer.data)
