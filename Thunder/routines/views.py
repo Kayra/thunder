@@ -13,18 +13,8 @@ from .serializers import RoutineSerializer, ExerciseSerializer
 
 
 @login_required
-def routineListView(request):
-    return render(request, 'routines/routine_list.html')
-
-
-@login_required
-def routineAddEditView(request):
-    return render(request, 'routines/routine_add_edit.html')
-
-
-@login_required
-def routineUseView(request):
-    return render(request, 'routines/routine_use.html')
+def routineView(request):
+    return render(request, 'routines/routine.html')
 
 
 # API #########################################################################

@@ -1,3 +1,4 @@
+<div ng-controller="RoutineListController as list">
 <table class="routine_list">
     <thead>
         <tr>
@@ -5,7 +6,7 @@
             <th>Total time</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody ng-repeat="routine in list.routines">
         <tr>
             <td>[[ routine.name ]]</td>
             <td>[[ routine.total_time ]]</td>
@@ -17,3 +18,4 @@
 </table>
 
 <button>Add new routine</button>
+</div>
