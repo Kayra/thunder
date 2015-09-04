@@ -7,7 +7,7 @@
         'routineApp.controllers',
     ])
 
-    .congfig(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $urlRouterProvider){
+    .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $urlRouterProvider){
 
     // Force angular to use square brackets for template tag
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
@@ -22,6 +22,16 @@
 
     });
 
+    // Routing
+
+    $urlRouterProvider.otherise('/routines/');
+
+    $stateProvider
+        .state('list', {
+            url: '/',
+            templateUrl: 'partials/routine/routine_list.html',
+            controller: 'RoutineListController',
+        })
 
 })();
 
