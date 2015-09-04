@@ -95,9 +95,13 @@
       <!-- Your stuff: Third-party javascript libraries go here -->
 
       <!-- place project specific Javascript in this file -->
-      <script src="{% static 'js/project.js' %}"></script>
+      <!-- <script src="{% static 'js/project.js' %}"></script> -->
+      <script src="{% static 'js/app.js' %}"></script>
+      <script src="{% static 'js/controllers.js' %}"></script>
+      <script src="{% static 'js/services.js' %}"></script>
 
-      <!-- Allows access to the current user id in angular controllers-->
+
+      <!-- Allows access to the current user id in angular controllers -->
       <script type="text/javascript">
         angular
             .module('tweeterApp.services')
