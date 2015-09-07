@@ -2,7 +2,7 @@
 
     var routineAppControllers = angular.module('routineApp.controllers', []);
 
-    //Test data
+    // Test data
     var routines = [
     {
         name: 'Insanity',

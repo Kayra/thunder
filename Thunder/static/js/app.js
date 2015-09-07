@@ -7,7 +7,7 @@
         'routineApp.controllers',
     ])
 
-    .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $urlRouterProvider){
+    .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $locationProvider, $urlRouterProvider){
 
     // Force angular to use square brackets for template tag
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
@@ -20,18 +20,21 @@
     // It makes dealing with Django slashes at the end of everything easier.
     $resourceProvider.defaults.stripTrailingSlashes = false;
 
-    });
-
     // Routing
-
-    $urlRouterProvider.otherise('/routines/');
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
         .state('list', {
             url: '/',
-            templateUrl: 'partials/routine/routine_list.html',
+            templateUrl: 'static/partials/routine/routine_list.html',
             controller: 'RoutineListController',
-        })
+        });
+
+    });
 
 })();
 

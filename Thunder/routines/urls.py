@@ -6,7 +6,7 @@ from . import views
 
 urlpatterns = [
 
-    url(r'^$', views.routineListView, name='routine'),
+    url(r'^$', views.routineView, name='routine'),
 
     # APIs
 
