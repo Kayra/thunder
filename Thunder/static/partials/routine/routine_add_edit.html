@@ -2,7 +2,7 @@
 
     <fieldset>
         <label>Routine name</label>
-        <input maxlength="255" name="name" type="text">
+        <input maxlength="255" name="name" type="text" ng-model="add.routine.name">
     </fieldset>
 
     <fieldset ng-repeat="exercise in add.exercises">
@@ -20,6 +20,6 @@
 
     <button type='button' ng-click="add.addNewExercise()">Add exercise</button>
 
-    <input type="submit" text="Save routine">
+    <input type="submit" ng-click="add.submit($event)" text="Save routine">
 
 </form>

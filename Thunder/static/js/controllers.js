@@ -26,6 +26,8 @@
 
         this.exercises = [{position: '1'}, {position: '2'}, {position: '3'}, {position: '4'}, {position: '5'}];
 
+        this.routine = {};
+
         this.addNewExercise = function() {
             var newExercisePosition = this.exercises.length + 1;
             this.exercises.push({'position': newExercisePosition});
@@ -34,6 +36,16 @@
         this.removeExercise = function() {
             var lastExercise = this.exercises.length - 1;
             this.exercises.splice(lastExercise);
+        };
+
+        this.saveExercises = function() {
+
+        };
+
+        this.submit = function($event) {
+            $event.preventDefault();
+            console.log(this.routine.name);
+            console.log(this.exercises);
         };
 
     });
