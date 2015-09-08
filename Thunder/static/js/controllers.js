@@ -44,16 +44,20 @@
 
         this.submit = function($event) {
             $event.preventDefault();
-            // console.log(this.routine.name);
+
             var routine = this.routine.name;
-            console.log(this.exercises);
+
             angular.forEach(this.exercises, function(exercise, index){
 
-                console.log(exercise.position);
-                console.log(exercise.name);
-                var completion_time = $filter('date')(exercise.completion_time, "HH:mm")
-                console.log(completion_time);
-                console.log(routine);
+                var exerciseObj = {};
+
+                exerciseObj.position = exercise.position;
+                exerciseObj.name = exercise.name;
+                exerciseObj.completion_time = $filter('date')(exercise.completion_time, "HH:mm");
+                exerciseObj.routine = routine;
+
+                exerciseJson = angular.toJson(exerciseObj);
+                console.log(exerciseJson);
 
             });
         };
