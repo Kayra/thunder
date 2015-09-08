@@ -22,7 +22,7 @@
         this.routines = routines;
     });
 
-    routineAppControllers.controller('RoutineAddController', function() {
+    routineAppControllers.controller('RoutineAddController', function($filter) {
 
         this.exercises = [{position: '1'}, {position: '2'}, {position: '3'}, {position: '4'}, {position: '5'}];
 
@@ -44,8 +44,18 @@
 
         this.submit = function($event) {
             $event.preventDefault();
-            console.log(this.routine.name);
+            // console.log(this.routine.name);
+            var routine = this.routine.name;
             console.log(this.exercises);
+            angular.forEach(this.exercises, function(exercise, index){
+
+                console.log(exercise.position);
+                console.log(exercise.name);
+                var completion_time = $filter('date')(exercise.completion_time, "HH:mm")
+                console.log(completion_time);
+                console.log(routine);
+
+            });
         };
 
     });
