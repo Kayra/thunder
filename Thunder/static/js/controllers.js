@@ -22,19 +22,19 @@
         this.routines = routines;
     });
 
-    routineAppControllers.controller('RoutineAddController', function($scope) {
+    routineAppControllers.controller('RoutineAddController', function() {
 
-        $scope.exercises = [{position: '1'}, {position: '2'}];
+        this.exercises = [{position: '1'}, {position: '2'}, {position: '3'}, {position: '4'}, {position: '5'}];
 
-        $scope.addNewExercise = function() {
-            var newExercisePosition = $scope.exercises.length + 1;
-            $scope.exercises.push({'position': newExercisePosition});
+        this.addNewExercise = function() {
+            var newExercisePosition = this.exercises.length + 1;
+            this.exercises.push({'position': newExercisePosition});
         };
 
-        $scope.removeExercise = function() {
-            var lastExercise = $scope.exercises.length - 1;
-            $scope.exercises.splice(lastExercise);
-        }
+        this.removeExercise = function() {
+            var lastExercise = this.exercises.length - 1;
+            this.exercises.splice(lastExercise);
+        };
 
     });
 

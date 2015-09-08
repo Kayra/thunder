@@ -1,11 +1,11 @@
-<form method="POST" action="" class="routine_add_edit">
+<form method="POST" action="" class="routine_add_edit" ng-controller="RoutineAddController as add">
 
     <fieldset>
         <label>Routine name</label>
         <input maxlength="255" name="name" type="text">
     </fieldset>
 
-    <fieldset ng-repeat="exercise in exercises">
+    <fieldset ng-repeat="exercise in add.exercises">
         <p>
         <label>Exercise name</label>
         <input maxlength="255" name="name" type="text" ng-model="exercise.name" >
@@ -14,11 +14,11 @@
         <input maxlength="255" name="completion_time" type="time" ng-model="exercise.completion_time">
 
         <input ng-model="exercise.position" value="[[exercise.position]]" name="position" type="hidden">
-        <button type='button' ng-show="$last" ng-click="removeExercise()"> - </button>
+        <button type='button' ng-show="$last" ng-click="add.removeExercise()"> - </button>
         </p>
     </fieldset>
 
-    <button type='button' ng-click="addNewExercise()">Add exercise</button>
+    <button type='button' ng-click="add.addNewExercise()">Add exercise</button>
 
     <input type="submit" text="Save routine">
 
