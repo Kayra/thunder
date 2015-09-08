@@ -18,8 +18,24 @@
     }
     ];
 
-    routineAppControllers.controller('RoutineListController', function(){
+    routineAppControllers.controller('RoutineListController', function() {
         this.routines = routines;
-    })
+    });
+
+    routineAppControllers.controller('RoutineAddController', function($scope) {
+
+        $scope.exercises = [{position: '1'}, {position: '2'}];
+
+        $scope.addNewExercise = function() {
+            var newExercisePosition = $scope.exercises.length + 1;
+            $scope.exercises.push({'position': newExercisePosition});
+        };
+
+        $scope.removeExercise = function() {
+            var lastExercise = $scope.exercises.length - 1;
+            $scope.exercises.splice(lastExercise);
+        }
+
+    });
 
 })();
