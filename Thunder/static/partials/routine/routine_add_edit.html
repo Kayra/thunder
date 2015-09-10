@@ -11,9 +11,9 @@
         <input maxlength="255" name="name" type="text" ng-model="exercise.name" >
 
         <label>Completion time</label>
-        <input maxlength="255" name="completion_time" type="time" ng-model="exercise.completion_time">
-        <select>
-            <option ng-repeat="n in [] | range:0:61" value="[[ $index ]]">[[ $index ]]</option>
+        <select ng-options="n for n in [] | range:0:61" ng-model="exercise.minutes" ng-init="exercise.minutes='00'" required="required">
+        </select>
+        <select ng-options="n for n in [] | range:0:61" ng-model="exercise.seconds" ng-init="exercise.seconds='00'" required="required">
         </select>
 
         <input ng-model="exercise.position" value="[[ exercise.position ]]" name="position" type="hidden">

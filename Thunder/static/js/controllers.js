@@ -58,7 +58,7 @@
 
                 exerciseObj.position = exercise.position;
                 exerciseObj.name = exercise.name;
-                exerciseObj.completion_time = $filter('date')(exercise.completion_time, "HH:mm");
+                exerciseObj.completion_time = exercise.minutes + ":" + exercise.seconds;
                 exerciseObj.routine = routine;
 
                 var exerciseJson = angular.toJson(exerciseObj);
