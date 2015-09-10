@@ -25,20 +25,32 @@
       enabled: true,
       requireBase: false
     });
-    $urlRouterProvider.otherwise('/');
 
     $stateProvider
         .state('list', {
-            url: '/',
+            url: '/routines',
             templateUrl: 'static/partials/routine/routine_add_edit.html',
             controller: 'RoutineAddController',
         })
         .state('add', {
-            url: '/add/',
+            url: '/routines/add',
             templateUrl: 'static/partials/routine/routine_add_edit.html',
             controller: 'RoutineAddController',
         });
 
+        $urlRouterProvider.otherwise('/routines');
+
+    })
+
+    // Filters
+    .filter('range', function() {
+        return function(input, min, max) {
+        min = parseInt(min); //Make string input int
+        max = parseInt(max);
+        for (var i=min; i<max; i++)
+            input.push(i);
+        return input;
+        };
     });
 
 })();

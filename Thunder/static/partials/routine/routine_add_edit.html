@@ -12,8 +12,11 @@
 
         <label>Completion time</label>
         <input maxlength="255" name="completion_time" type="time" ng-model="exercise.completion_time">
+        <select>
+            <option ng-repeat="n in [] | range:0:61" value="[[ $index ]]">[[ $index ]]</option>
+        </select>
 
-        <input ng-model="exercise.position" value="[[exercise.position]]" name="position" type="hidden">
+        <input ng-model="exercise.position" value="[[ exercise.position ]]" name="position" type="hidden">
         <button type='button' ng-show="$last" ng-click="add.removeExercise()"> - </button>
         </p>
     </fieldset>
