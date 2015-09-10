@@ -4,7 +4,7 @@
         <label>Routine name</label>
         <input maxlength="255" name="name" type="text" ng-model="add.routine.name">
     </fieldset>
-
+    <br>
     <fieldset ng-repeat="exercise in add.exercises">
         <p>
         <label>Exercise name</label>
@@ -13,15 +13,17 @@
         <label>Completion time</label>
         <select ng-options="n for n in [] | range:0:61" ng-model="exercise.minutes" ng-init="exercise.minutes='00'" required="required">
         </select>
+        Minutes
         <select ng-options="n for n in [] | range:0:61" ng-model="exercise.seconds" ng-init="exercise.seconds='00'" required="required">
         </select>
+        Seconds
 
         <input ng-model="exercise.position" value="[[ exercise.position ]]" name="position" type="hidden">
         <button type='button' ng-show="$last" ng-click="add.removeExercise()"> - </button>
         </p>
     </fieldset>
 
-    <button type='button' ng-click="add.addNewExercise()">Add exercise</button>
+    <button type='button' ng-click="add.addNewExercise()">Add exercise</button><br><br>
 
     <input type="submit" ng-click="add.submit($event)" text="Save routine">
 
