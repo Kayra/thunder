@@ -30,8 +30,8 @@
     $stateProvider
         .state('list', {
             url: '/routines',
-            templateUrl: 'static/partials/routine/routine_add_edit.html',
-            controller: 'RoutineAddController',
+            templateUrl: 'static/partials/routine/routine_add_exercises.html',
+            controller: 'RoutineAddExercisesController',
         })
         .state('add', {
             url: '/routines/add',
