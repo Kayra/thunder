@@ -1,11 +1,11 @@
 <div ng-controller="RoutineUseController as use">
-    <h3>[[ routine.name ]]</h3>
+    <h3>[[ use.routine.name ]]</h3>
 
-    <h1>[[ exercise.name ]]</h1>
+    <h1>[[ use.exercises[0].name ]]</h1>
 
-    <h1>[[ time_left ]]</h1>
+    <h1>[[ use.exercises[0].completion_time ]]</h1>
 
-    <h3>Exercise [[ exercise.position ]] out of [[ total_exercises ]]</h3>
+    <h3>Exercise [[ use.exercises[0].position ]] out of [[ use.total_exercises ]]</h3>
 
     <button>Start/Pause</button>
 

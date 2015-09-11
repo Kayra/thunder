@@ -27,7 +27,7 @@
     });
 
 
-    routineAppControllers.controller('RoutineAddRoutineController', function() {
+    routineAppControllers.controller('RoutineAddRoutineController', ['$cookies', function($cookies) {
 
         this.submit = function($event) {
 
@@ -38,16 +38,18 @@
             routineObj.name = this.routine.name;
             routineObj.user = 'nothingatm';
 
+            $cookies.put('routine', routineObj.name);
+
             var routineJson = angular.toJson(routineObj);
             console.log(routineJson);
 
 
         };
 
-    });
+    }]);
 
 
-    routineAppControllers.controller('RoutineAddExercisesController', function($filter) {
+    routineAppControllers.controller('RoutineAddExercisesController', ['$cookies', function($filter, $cookies) {
 
         this.exercises = [{position: '1'}, {position: '2'}, {position: '3'}, {position: '4'}, {position: '5'}];
 
@@ -72,7 +74,8 @@
                 exerciseObj.position = exercise.position;
                 exerciseObj.name = exercise.name;
                 exerciseObj.completion_time = exercise.minutes + ":" + exercise.seconds;
-                // exerciseObj.routine = routine;
+                //Need an if else
+                // exerciseObj.routine = $cookies.get('routine');
 
                 var exerciseJson = angular.toJson(exerciseObj);
                 console.log(exerciseJson);
@@ -80,7 +83,7 @@
             });
         };
 
-    });
+    }]);
 
 
     routineAppControllers.controller('RoutineUseController', function(){
@@ -117,7 +120,7 @@
 
         this.routine = routine;
         this.exercises = exercises;
-
+        this.total_exercises = exercises.length;
         var total_time;
 
         angular.forEach(exercises, function(exercise, index){
