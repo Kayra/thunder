@@ -1,6 +1,6 @@
 (function(){
 
-    var routineAppControllers = angular.module('routineApp.controllers', []);
+    var routineAppControllers = angular.module('routineApp.controllers', [        'routineApp.filters']);
 
 
     routineAppControllers.controller('RoutineListController', function() {

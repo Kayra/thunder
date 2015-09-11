@@ -5,7 +5,6 @@
         'ngResource',
         'routineApp.services',
         'routineApp.controllers',
-        'routineApp.filters',
     ])
 
     .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $locationProvider, $urlRouterProvider){
