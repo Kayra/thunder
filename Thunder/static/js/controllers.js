@@ -216,9 +216,19 @@
 
         // });
 
-        $interval(function(){
-            countDown(ctrl.exercise_time);
-        }, 1000);
+        var count_down;
+        ctrl.timerStartStop = function(){
+
+            if ( angular.isDefined(count_down) ) {
+                $interval.cancel(count_down);
+                count_down = undefined;
+            } else {
+                count_down = $interval(function(){
+                    countDown(ctrl.exercise_time);
+                }, 1000);
+            }
+
+        };
 
 
         function countDown(time){
@@ -234,7 +244,7 @@
                 console.log('done');
             }
 
-        }
+        };
 
         function completionTimeToObj(completion_time){
 
@@ -247,8 +257,7 @@
                 seconds: seconds
             }
 
-        }
-
+        };
 
 
     }]);
