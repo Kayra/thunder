@@ -86,7 +86,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineEditController', function($filter) {
+    routineAppControllers.controller('RoutineEditController', function() {
 
         var routine = {name:'insanity', total_time: '37:15'};
 
@@ -171,7 +171,9 @@
     });
 
 
-    routineAppControllers.controller('RoutineUseController', function(){
+    routineAppControllers.controller('RoutineUseController', ['$interval', function($interval){
+
+        var ctrl = this;
 
         var routine = {name:'insanity', total_time: '37:15'};
 
@@ -203,18 +205,46 @@
         ];
 
 
-        this.routine = routine;
-        this.exercises = exercises;
-        this.total_exercises = exercises.length;
-        var total_time;
+        ctrl.routine = routine;
+        ctrl.exercises = exercises;
+        ctrl.total_exercises = exercises.length;
 
-        angular.forEach(exercises, function(exercise, index){
+        ctrl.count_down = completionTimeToObj(exercises[0].completion_time);
+        ctrl.current_position = 1;
+
+        // angular.forEach(exercises, function(exercise, index){
+
+        // });
+
+        $interval(function(){
+            if (ctrl.count_down.seconds > 0 && ctrl.count_down.minutes > -1){
+                ctrl.count_down.seconds == ctrl.count_down.seconds--;
+            } else if (ctrl.count_down.minutes > 0) {
+                ctrl.count_down.minutes == ctrl.count_down.minutes--;
+                ctrl.count_down.seconds = 60;
+            } else {
+                console.log('done');
+            }
+        }, 1000);
 
 
 
-        });
+        function completionTimeToObj(completion_time){
 
-    });
+            var completionSplit = completion_time.split(":");
+            var minutes = parseInt(completionSplit[0]);
+            var seconds = parseInt(completionSplit[1]);
+
+            return {
+                minutes: minutes,
+                seconds: seconds
+            }
+
+        }
+
+
+
+    }]);
 
 
 })();

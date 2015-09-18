@@ -1,5 +1,5 @@
 (function(){
 
-    // var routineAppServices = angular.module('routineApp.services', ['ngResource']);
+    var routineAppServices = angular.module('routineApp.services', ['ngResource']);
 
 })();
