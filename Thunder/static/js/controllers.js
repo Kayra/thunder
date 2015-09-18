@@ -209,7 +209,7 @@
         ctrl.exercises = exercises;
         ctrl.total_exercises = exercises.length;
 
-        ctrl.count_down = completionTimeToObj(exercises[0].completion_time);
+        ctrl.exercise_time = completionTimeToObj(exercises[0].completion_time);
         ctrl.current_position = 1;
 
         // angular.forEach(exercises, function(exercise, index){
@@ -217,17 +217,24 @@
         // });
 
         $interval(function(){
-            if (ctrl.count_down.seconds > 0 && ctrl.count_down.minutes > -1){
-                ctrl.count_down.seconds == ctrl.count_down.seconds--;
-            } else if (ctrl.count_down.minutes > 0) {
-                ctrl.count_down.minutes == ctrl.count_down.minutes--;
-                ctrl.count_down.seconds = 60;
-            } else {
-                console.log('done');
-            }
+            countDown(ctrl.exercise_time);
         }, 1000);
 
 
+        function countDown(time){
+
+            if (time.seconds > 0 && time.minutes > -1){
+                time.seconds == time.seconds--;
+                return time;
+            } else if (time.minutes > 0) {
+                time.minutes == time.minutes--;
+                time.seconds = 60;
+                return time;
+            } else {
+                console.log('done');
+            }
+
+        }
 
         function completionTimeToObj(completion_time){
 
