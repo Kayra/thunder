@@ -171,7 +171,7 @@
     });
 
 
-    routineAppControllers.controller('RoutineUseController', ['$interval', function($interval){
+    routineAppControllers.controller('RoutineUseController', ['$interval', '$filter', function($interval, $filter){
 
         var ctrl = this;
 
@@ -198,7 +198,7 @@
         },
         {
             name:'Sitting jacks',
-            completion_time:'2:15',
+            completion_time:'0:15',
             position:'4',
             routine:'insanity'
         }
@@ -209,12 +209,10 @@
         ctrl.exercises = exercises;
         ctrl.total_exercises = exercises.length;
 
-        ctrl.exercise_time = completionTimeToObj(exercises[0].completion_time);
-        ctrl.current_position = 1;
+        ctrl.current_exercise = exercises[3];
 
-        // angular.forEach(exercises, function(exercise, index){
-
-        // });
+        ctrl.exercise_time = completionTimeToObj(ctrl.current_exercise.completion_time);
+        ctrl.current_position = 4;
 
         var count_down;
         ctrl.timerStartStop = function(){
@@ -224,12 +222,25 @@
                 count_down = undefined;
             } else {
                 count_down = $interval(function(){
-                    countDown(ctrl.exercise_time);
+                    if (ctrl.exercise_time.seconds == 0 && ctrl.exercise_time.minutes == 0) {
+                        ctrl.current_position == ctrl.current_position++;
+                        if (ctrl.current_position > ctrl.total_exercises) {
+                            $interval.cancel(count_down);
+                            count_down = undefined;
+                            ctrl.current_position == ctrl.current_position--;
+                        } else {
+                            ctrl.current_exercise = $filter('filter')(ctrl.exercises, {position: ctrl.current_position})[0];
+                            ctrl.exercise_time = completionTimeToObj(ctrl.current_exercise.completion_time);
+                        }
+                    } else {
+                        countDown(ctrl.exercise_time);
+                    }
+                    console.log(ctrl.current_position);
+                    console.log(ctrl.total_exercises);
                 }, 1000);
             }
 
         };
-
 
         function countDown(time){
 
@@ -240,8 +251,6 @@
                 time.minutes == time.minutes--;
                 time.seconds = 60;
                 return time;
-            } else {
-                console.log('done');
             }
 
         };
