@@ -209,10 +209,9 @@
         ctrl.exercises = exercises;
         ctrl.total_exercises = exercises.length;
 
-        ctrl.current_exercise = exercises[0];
-
-        ctrl.exercise_time = completionTimeToObj(ctrl.current_exercise.completion_time);
         ctrl.current_position = 1;
+
+        ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
 
         var count_down;
         ctrl.timerStartStop = function(){
@@ -222,23 +221,32 @@
                 count_down = undefined;
             } else {
                 count_down = $interval(function(){
-                    if (ctrl.exercise_time.seconds == 0 && ctrl.exercise_time.minutes == 0) {
+                    if (ctrl.current_exercise.completion_time.seconds == 0 && ctrl.current_exercise.completion_time.minutes == 0) {
                         ctrl.current_position == ctrl.current_position++;
                         if (ctrl.current_position > ctrl.total_exercises) {
                             $interval.cancel(count_down);
                             count_down = undefined;
                             ctrl.current_position == ctrl.current_position--;
                         } else {
-                            ctrl.current_exercise = $filter('filter')(ctrl.exercises, {position: ctrl.current_position})[0];
-                            ctrl.exercise_time = completionTimeToObj(ctrl.current_exercise.completion_time);
+                            ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
                         }
                     } else {
-                        countDown(ctrl.exercise_time);
+                        countDown(ctrl.current_exercise.completion_time);
                     }
                 }, 1000);
             }
 
         };
+
+        function setCurrentExercise(exercises, position){
+
+            var indexPosition = position - 1;
+            var current_exercise = exercises[indexPosition];
+
+            current_exercise.completion_time = completionTimeToObj(current_exercise.completion_time);
+
+            return current_exercise;
+        }
 
         function countDown(time){
 
