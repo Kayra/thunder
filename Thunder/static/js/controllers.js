@@ -209,10 +209,10 @@
         ctrl.exercises = exercises;
         ctrl.total_exercises = exercises.length;
 
-        ctrl.current_exercise = exercises[3];
+        ctrl.current_exercise = exercises[0];
 
         ctrl.exercise_time = completionTimeToObj(ctrl.current_exercise.completion_time);
-        ctrl.current_position = 4;
+        ctrl.current_position = 1;
 
         var count_down;
         ctrl.timerStartStop = function(){
@@ -235,8 +235,6 @@
                     } else {
                         countDown(ctrl.exercise_time);
                     }
-                    console.log(ctrl.current_position);
-                    console.log(ctrl.total_exercises);
                 }, 1000);
             }
 
