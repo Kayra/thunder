@@ -293,11 +293,11 @@
 
             if (time.seconds > 0 && time.minutes > -1){
                 time.seconds == time.seconds--;
-                return time;
+                // return time;
             } else if (time.minutes > 0) {
                 time.minutes == time.minutes--;
                 time.seconds = 60;
-                return time;
+                // return time;
             }
 
         };
