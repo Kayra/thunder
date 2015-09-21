@@ -219,12 +219,7 @@
 
             // If the timer has run through completely, reset it
             if (reset) {
-
-                ctrl.current_position = 1;
-                ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
-
-                reset = false;
-
+                exerciseReset();
             }
 
             // If already running, stop the timer
@@ -258,6 +253,26 @@
             }
 
         };
+
+        ctrl.timerReset = function(){
+
+            if (angular.isDefined(count_down)) {
+                $interval.cancel(count_down);
+                count_down = undefined;
+            }
+
+            exerciseReset();
+
+        };
+
+        function exerciseReset(){
+
+            ctrl.current_position = 1;
+            ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
+
+            reset = false;
+
+        }
 
         function exerciseHasEnded(time){
 
