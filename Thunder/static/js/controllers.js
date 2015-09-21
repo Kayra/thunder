@@ -216,13 +216,19 @@
         var count_down;
         ctrl.timerStartStop = function(){
 
-            if ( angular.isDefined(count_down) ) {
+            //If already running, stop the timer
+            if (angular.isDefined(count_down)) {
                 $interval.cancel(count_down);
                 count_down = undefined;
             } else {
+
                 count_down = $interval(function(){
+
                     if (exerciseHasEnded(ctrl.current_exercise.completion_time)) {
+
                         ctrl.current_position == ctrl.current_position++;
+
+                        //If the last exercise has finished, stop the timer
                         if (ctrl.current_position > ctrl.total_exercises) {
                             $interval.cancel(count_down);
                             count_down = undefined;
@@ -230,9 +236,11 @@
                         } else {
                             ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
                         }
+
                     } else {
                         countDown(ctrl.current_exercise.completion_time);
                     }
+
                 }, 1000);
             }
 
