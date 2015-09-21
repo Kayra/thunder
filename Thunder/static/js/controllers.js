@@ -214,9 +214,20 @@
         ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
 
         var count_down;
+        var reset = false;
         ctrl.timerStartStop = function(){
 
-            //If already running, stop the timer
+            // If the timer has run through completely, reset it
+            if (reset) {
+
+                ctrl.current_position = 1;
+                ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
+
+                reset = false;
+
+            }
+
+            // If already running, stop the timer
             if (angular.isDefined(count_down)) {
                 $interval.cancel(count_down);
                 count_down = undefined;
@@ -224,21 +235,23 @@
 
                 count_down = $interval(function(){
 
-                    if (exerciseHasEnded(ctrl.current_exercise.completion_time)) {
+                    if (exerciseHasEnded(ctrl.current_exercise.count_down_time)) {
 
                         ctrl.current_position == ctrl.current_position++;
 
-                        //If the last exercise has finished, stop the timer
+                        // If the last exercise has finished, stop the timer
+                        // Otherwise move on to the next exercise
                         if (ctrl.current_position > ctrl.total_exercises) {
                             $interval.cancel(count_down);
                             count_down = undefined;
                             ctrl.current_position == ctrl.current_position--;
+                            reset = true;
                         } else {
                             ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
                         }
 
                     } else {
-                        countDown(ctrl.current_exercise.completion_time);
+                        countDown(ctrl.current_exercise.count_down_time);
                     }
 
                 }, 1000);
@@ -256,7 +269,7 @@
             var indexPosition = position - 1;
             var current_exercise = exercises[indexPosition];
 
-            current_exercise.completion_time = completionTimeToObj(current_exercise.completion_time);
+            current_exercise.count_down_time = completionTimeToObj(current_exercise.completion_time);
 
             return current_exercise;
         }
