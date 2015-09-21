@@ -221,7 +221,7 @@
                 count_down = undefined;
             } else {
                 count_down = $interval(function(){
-                    if (ctrl.current_exercise.completion_time.seconds == 0 && ctrl.current_exercise.completion_time.minutes == 0) {
+                    if (exerciseHasEnded(ctrl.current_exercise.completion_time)) {
                         ctrl.current_position == ctrl.current_position++;
                         if (ctrl.current_position > ctrl.total_exercises) {
                             $interval.cancel(count_down);
@@ -237,6 +237,11 @@
             }
 
         };
+
+        function exerciseHasEnded(time){
+
+            return time.seconds == 0 && time.minutes == 00;
+        }
 
         function setCurrentExercise(exercises, position){
 
