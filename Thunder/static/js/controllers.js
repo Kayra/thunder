@@ -171,7 +171,7 @@
     });
 
 
-    routineAppControllers.controller('RoutineUseController', ['$interval', '$filter', function($interval, $filter){
+    routineAppControllers.controller('RoutineUseController', ['$interval', function($interval){
 
         var ctrl = this;
 
