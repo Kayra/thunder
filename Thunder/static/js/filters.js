@@ -16,4 +16,10 @@
         };
     });
 
+    routineAppFilters.filter('timerDisplay', function() {
+        return function(input){
+            return (input < 10) ? "0" + input.toString() : input;
+        }
+    });
+
 })();
