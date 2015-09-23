@@ -275,7 +275,6 @@
         }
 
         function exerciseHasEnded(time){
-
             return time.seconds == 0 && time.minutes == 00;
         }
 
