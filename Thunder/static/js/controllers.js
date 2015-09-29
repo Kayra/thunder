@@ -10,8 +10,8 @@
         var ctrl = this;
 
         ctrl.getRoutines = function() {
-            RoutineListService.getRoutines().then(function(data){
-                ctrl.routines = data.data;
+            RoutineListService.getRoutines().then(function(response){
+                ctrl.routines = response.data;
             })
         }
 

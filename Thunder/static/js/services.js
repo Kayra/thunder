@@ -17,18 +17,6 @@
 
         return routineList;
 
-
-
-        // var routines = $http.get('routines/api/get/routines', {params:{user:AuthUser['id']}}).success(function(data){
-
-        //     user = {user:AuthUser['id']};
-        //     routines = data;
-
-        // });
-        //     console.log(routines.$$state.data);
-
-        // return routines;
-
     }]);
 
 })();
