@@ -7,7 +7,7 @@ from Thunder.users.models import User
 
 class Routine(models.Model):
 
-    name                = models.CharField("Skill name", max_length=255)
+    name                = models.CharField(max_length=255)
     total_time          = models.DurationField(default=timedelta(), blank=True)
 
     user                = models.ForeignKey(User)
@@ -18,7 +18,7 @@ class Routine(models.Model):
 
 class Exercise(models.Model):
 
-    name                = models.CharField("Skill name", max_length=255)
+    name                = models.CharField(max_length=255)
     completion_time     = models.DurationField(default=timedelta())
     position            = models.IntegerField()
 

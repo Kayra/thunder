@@ -56,9 +56,18 @@ def routineGet(request):
 
 
 @api_view(['GET'])
-def routinesGet(request):
+def getRoutines(request):
 
-    routines = Routine.objects.get(user=request.user)
-    serializer = RoutineSerializer(routines, many=True)
+    routines = Routine.objects.all()
 
-    return Response(serializer.data)
+    user_pk = request.GET.get("user", None)
+
+    if user_pk:
+        routines = Routine.objects.filter(user__id=user_pk)
+
+        serializer = RoutineSerializer(routines, many=True)
+
+        return Response(serializer.data)
+
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

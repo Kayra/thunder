@@ -95,17 +95,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     {% block javascript %}
-      <!-- Allows access to the current user id in angular controllers -->
-      <script type="text/javascript">
-        angular
-            .module('routineApp.services', [])
-            .factory('AuthUser', function() {
-              return {
-                id: "{{ user.id|default:''}}",
-              }
-            });
-      </script>
-
       <!-- Latest JQuery -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
@@ -120,6 +109,17 @@
       <script src="{% static 'js/controllers.js' %}"></script>
       <script src="{% static 'js/services.js' %}"></script>
       <script src="{% static 'js/filters.js' %}"></script>
+
+      <!-- Allows access to the current user id in angular controllers -->
+      <script type="text/javascript">
+        angular
+            .module('routineApp.services')
+            .factory('AuthUser', function() {
+              return {
+                id: "{{ user.id|default:''}}",
+              }
+            });
+      </script>
     {% endblock javascript %}
   </body>
 </html>
