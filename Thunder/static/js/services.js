@@ -23,6 +23,10 @@
             });
         };
 
+        routine.postRoutine = function(routineJson) {
+            return $http.post('routines/api/post/routine', routineJson);
+        };
+
         return routine;
 
     }]);

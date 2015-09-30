@@ -20,7 +20,13 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineAddRoutineController', ['$cookies', function($cookies) {
+    routineAppControllers.controller('RoutineAddRoutineController', ['$cookies', 'AuthUser', 'RoutineService', function($cookies, AuthUser, RoutineService) {
+
+        this.postRoutine = function(routineJson){
+            RoutineService.postRoutine(routine.Json).then(function(response){
+                console.log(response);
+            })
+        };
 
         this.submit = function($event) {
 
@@ -29,12 +35,15 @@
             var routineObj = {};
 
             routineObj.name = this.routine.name;
-            routineObj.user = 'nothingatm';
+            routineObj.user = AuthUser['id'];
 
             $cookies.put('routine', routineObj.name);
 
             var routineJson = angular.toJson(routineObj);
+
+
             console.log(routineJson);
+            this.postRoutine();
 
 
         };
