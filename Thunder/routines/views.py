@@ -95,3 +95,16 @@ def getRoutine(request):
 
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def postRoutine(request):
+
+    routineSerializer = RoutineSerializer(data=request.data, partial=True)
+
+    if routineSerializer.is_valid():
+        routineSerializer.save()
+        return Response(routineSerializer.data, status=status.HTTP_201_CREATED)
+
+    else:
+        return Response(routineSerializer.errors, status=status.HTTP_400_BAD_REQUEST)

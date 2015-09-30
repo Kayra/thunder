@@ -20,6 +20,8 @@ urlpatterns = [
 
     url(r'^api/get/routine$', views.getRoutine, name='get_routine'),
 
+    url(r'^api/post/routine$', views.postRoutine, name='post_routine'),
+
     # (?P<user>[0-9]+)/
 
 ]

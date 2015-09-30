@@ -23,7 +23,7 @@
     routineAppControllers.controller('RoutineAddRoutineController', ['$cookies', 'AuthUser', 'RoutineService', function($cookies, AuthUser, RoutineService) {
 
         this.postRoutine = function(routineJson){
-            RoutineService.postRoutine(routine.Json).then(function(response){
+            RoutineService.postRoutine(routineJson).then(function(response){
                 console.log(response);
             })
         };
@@ -41,9 +41,8 @@
 
             var routineJson = angular.toJson(routineObj);
 
-
             console.log(routineJson);
-            this.postRoutine();
+            this.postRoutine(routineJson);
 
 
         };

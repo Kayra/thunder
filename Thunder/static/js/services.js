@@ -24,6 +24,7 @@
         };
 
         routine.postRoutine = function(routineJson) {
+            console.log(routineJson);
             return $http.post('routines/api/post/routine', routineJson);
         };
 
