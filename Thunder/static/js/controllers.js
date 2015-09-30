@@ -5,12 +5,12 @@
                 ]);
 
 
-    routineAppControllers.controller('RoutineListController', ['RoutineListService', function(RoutineListService) {
+    routineAppControllers.controller('RoutineListController', ['RoutineService', function(RoutineService) {
 
         var ctrl = this;
 
         ctrl.getRoutines = function() {
-            RoutineListService.getRoutines().then(function(response){
+            RoutineService.getRoutines().then(function(response){
                 ctrl.routines = response.data;
             })
         }
@@ -164,47 +164,27 @@
     });
 
 
-    routineAppControllers.controller('RoutineUseController', ['$interval', function($interval){
+    routineAppControllers.controller('RoutineUseController', ['$interval', 'RoutineService', function($interval, RoutineService){
 
         var ctrl = this;
 
         var routine = {name:'insanity', total_time: '37:15'};
 
-        var exercises = [
-        {
-            name:'Warm up',
-            completion_time:'1:30',
-            position:'1',
-            routine:'insanity'
-        },
-        {
-            name:'Jumping jacks',
-            completion_time:'2:15',
-            position:'2',
-            routine:'insanity'
-        },
-        {
-            name:'Standing jacks',
-            completion_time:'3:45',
-            position:'3',
-            routine:'insanity'
-        },
-        {
-            name:'Sitting jacks',
-            completion_time:'0:15',
-            position:'4',
-            routine:'insanity'
+        ctrl.getRoutine = function() {
+            RoutineService.getRoutine(routine.name).then(function(response){
+
+                ctrl.routine = response.data[0].routine;
+                ctrl.exercises = response.data;
+                ctrl.total_exercises = ctrl.exercises.length;
+                ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
+
+            })
         }
-        ];
 
-
-        ctrl.routine = routine;
-        ctrl.exercises = exercises;
-        ctrl.total_exercises = exercises.length;
+        ctrl.getRoutine();
 
         ctrl.current_position = 1;
 
-        ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
 
         var count_down;
         var reset = false;
@@ -296,9 +276,10 @@
 
         function completionTimeToObj(completion_time){
 
+            // Not starting at index of 0 because django stores times as 00:00:00
             var completionSplit = completion_time.split(":");
-            var minutes = parseInt(completionSplit[0]);
-            var seconds = parseInt(completionSplit[1]);
+            var minutes = parseInt(completionSplit[1]);
+            var seconds = parseInt(completionSplit[2]);
 
             return {
                 minutes: minutes,

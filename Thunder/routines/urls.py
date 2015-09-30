@@ -18,6 +18,8 @@ urlpatterns = [
 
     url(r'^api/get/routines$', views.getRoutines, name='get_routines'),
 
+    url(r'^api/get/routine$', views.getRoutine, name='get_routine'),
+
     # (?P<user>[0-9]+)/
 
 ]

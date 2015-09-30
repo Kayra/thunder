@@ -29,8 +29,8 @@
     $stateProvider
         .state('list', {
             url: '/routines',
-            templateUrl: 'static/partials/routine/routine_list.html',
-            controller: 'RoutineListController',
+            templateUrl: 'static/partials/routine/routine_use.html',
+            controller: 'RoutineUseController',
         })
         .state('add', {
             url: '/routines/add',

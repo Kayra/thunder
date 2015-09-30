@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+import json
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,7 @@ from rest_framework.response import Response
 
 from .models import Routine, Exercise
 
-from .serializers import RoutineSerializer, ExerciseSerializer
+from .serializers import RoutineSerializer, ExerciseSerializer,FullRoutineSerializer
 
 
 @login_required
@@ -60,14 +61,37 @@ def getRoutines(request):
 
     routines = Routine.objects.all()
 
-    user_pk = request.GET.get("user", None)
+    userPk = request.GET.get("user", None)
 
-    if user_pk:
-        routines = Routine.objects.filter(user__id=user_pk)
+    if userPk:
 
+        routines = Routine.objects.filter(user__id=userPk)
         serializer = RoutineSerializer(routines, many=True)
-
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def getRoutine(request):
+
+    routine = Routine.objects.all()
+    exercises = Exercise.objects.all()
+
+    userPk = request.GET.get("user", None)
+
+    routineName = request.GET.get("routine", None)
+
+    if userPk and routineName:
+
+        exercises = Exercise.objects.filter(routine=routine)
+
+        fullSerializer = FullRoutineSerializer(exercises, many=True)
+
+        print(fullSerializer.data)
+
+        return Response(fullSerializer.data, status=status.HTTP_200_OK)
+
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)

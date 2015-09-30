@@ -2,12 +2,11 @@
 
     var routineAppServices = angular.module('routineApp.services', []);
 
-    routineAppServices.factory("RoutineListService", ['$http', 'AuthUser', function($http, AuthUser){
+    routineAppServices.factory("RoutineService", ['$http', 'AuthUser', function($http, AuthUser){
 
+        var routine = {};
 
-        var routineList = {};
-
-        routineList.getRoutines = function() {
+        routine.getRoutines = function() {
             return $http.get('routines/api/get/routines', {
                 params: {
                     user: AuthUser['id']
@@ -15,7 +14,16 @@
             });
         };
 
-        return routineList;
+        routine.getRoutine = function(routineName) {
+            return $http.get('routines/api/get/routine', {
+                params: {
+                    user: AuthUser['id'],
+                    routine: routineName
+                }
+            });
+        };
+
+        return routine;
 
     }]);
 
