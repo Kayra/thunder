@@ -24,9 +24,12 @@
         };
 
         routine.postRoutine = function(routineJson) {
-            console.log(routineJson);
             return $http.post('routines/api/post/routine', routineJson);
         };
+
+        routine.postExercises = function(exercisesJson) {
+            return $http.post('routines/api/post/exercises', exercisesJson);
+        }
 
         return routine;
 

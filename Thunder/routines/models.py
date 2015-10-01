@@ -12,7 +12,7 @@ class Routine(models.Model):
 
     user                = models.ForeignKey(User)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -24,5 +24,5 @@ class Exercise(models.Model):
 
     routine             = models.ForeignKey(Routine)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 from .models import Routine, Exercise
 
-from .serializers import RoutineSerializer, ExerciseSerializer,FullRoutineSerializer
+from .serializers import RoutineSerializer, ExerciseSerializer, FullRoutineSerializer
 
 
 @login_required
@@ -89,8 +89,6 @@ def getRoutine(request):
 
         fullSerializer = FullRoutineSerializer(exercises, many=True)
 
-        print(fullSerializer.data)
-
         return Response(fullSerializer.data, status=status.HTTP_200_OK)
 
     else:
@@ -108,3 +106,19 @@ def postRoutine(request):
 
     else:
         return Response(routineSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def postExercises(request):
+
+    print(request.data)
+
+    exercisesSerializer = ExerciseSerializer(data=request.data, many=True)
+
+    if exercisesSerializer.is_valid():
+        exercisesSerializer.save()
+        return Response(exercisesSerializer.data, status=status.HTTP_201_CREATED)
+
+    else:
+        print(exercisesSerializer.errors)
+        return Response(exercisesSerializer.errors, status=status.HTTP_400_BAD_REQUEST)

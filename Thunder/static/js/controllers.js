@@ -25,7 +25,7 @@
         this.postRoutine = function(routineJson){
             RoutineService.postRoutine(routineJson).then(function(response){
                 console.log(response);
-            })
+            });
         };
 
         this.submit = function($event) {
@@ -50,38 +50,54 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineAddExercisesController', ['$cookies', function($filter, $cookies) {
+    routineAppControllers.controller('RoutineAddExercisesController', ['$cookies', 'RoutineService', function($cookies, RoutineService) {
 
-        this.exercises = [{position: '1'}, {position: '2'}, {position: '3'}, {position: '4'}, {position: '5'}];
+        var ctrl = this;
 
-        this.addNewExercise = function() {
+        ctrl.exercises = [{position: '1'}, {position: '2'}, {position: '3'}, {position: '4'}, {position: '5'}];
+
+        ctrl.addNewExercise = function() {
             var newExercisePosition = this.exercises.length + 1;
             this.exercises.push({'position': newExercisePosition});
         };
 
-        this.removeExercise = function() {
+        ctrl.removeExercise = function() {
             var lastExercise = this.exercises.length - 1;
             this.exercises.splice(lastExercise);
         };
 
-        this.submit = function($event) {
+        ctrl.postExercises = function(exercisesJson){
+            RoutineService.postExercises(exercisesJson).then(function(response){
+                console.log(response);
+            });
+        };
+
+        ctrl.submit = function($event) {
 
             $event.preventDefault();
 
+            var exerciseObjs = [];
+
             angular.forEach(this.exercises, function(exercise, index){
+                if (exercise.name) {
 
-                var exerciseObj = {};
+                    var exerciseObj = {};
+                    exerciseObj.position = exercise.position;
+                    exerciseObj.name = exercise.name;
+                    exerciseObj.completion_time = exercise.minutes + ":" + exercise.seconds;
+                    exerciseObj.routine = 'insanity';
+                    //Need an if else
+                    // exerciseObj.routine = $cookies.get('routine');
 
-                exerciseObj.position = exercise.position;
-                exerciseObj.name = exercise.name;
-                exerciseObj.completion_time = exercise.minutes + ":" + exercise.seconds;
-                //Need an if else
-                // exerciseObj.routine = $cookies.get('routine');
+                    exerciseObjs.push(exerciseObj);
 
-                var exerciseJson = angular.toJson(exerciseObj);
-                console.log(exerciseJson);
-
+                }
             });
+
+            var exercisesJson = angular.toJson(exerciseObjs);
+            console.log(exercisesJson);
+            ctrl.postExercises(exercisesJson);
+
         };
 
     }]);
