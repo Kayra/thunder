@@ -76,16 +76,13 @@ def getRoutines(request):
 @api_view(['GET'])
 def getRoutine(request):
 
-    routine = Routine.objects.all()
-    exercises = Exercise.objects.all()
-
     userPk = request.GET.get("user", None)
 
     routineName = request.GET.get("routine", None)
 
     if userPk and routineName:
 
-        exercises = Exercise.objects.filter(routine=routine)
+        exercises = Exercise.objects.filter(routine__name=routineName).order_by('position')
 
         fullSerializer = FullRoutineSerializer(exercises, many=True)
 

@@ -102,74 +102,53 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineEditController', function() {
+    routineAppControllers.controller('RoutineEditController', ['RoutineService', function(RoutineService) {
 
-        var routine = {name:'insanity', total_time: '37:15'};
+        var ctrl = this;
 
-        var exercises = [
-        {
-            name:'Warm up',
-            completion_time:'1:30',
-            position:'1',
-            routine:'insanity'
-        },
-        {
-            name:'Jumping jacks',
-            completion_time:'2:15',
-            position:'2',
-            routine:'insanity'
-        },
-        {
-            name:'Standing jacks',
-            completion_time:'3:45',
-            position:'3',
-            routine:'insanity'
-        },
-        {
-            name:'Sitting jacks',
-            completion_time:'2:15',
-            position:'4',
-            routine:'insanity'
-        }
-        ];
+        ctrl.routine = {name:'insanity', total_time: '37:15'};
+
+        ctrl.exercises = [];
+
+        this.getRoutine = function() {
+            RoutineService.getRoutine(ctrl.routine.name).then(function(response){
+                ctrl.exercises = response.data;
+                ctrl.formatCompletionTimes(ctrl.exercises);
+
+        console.log(ctrl.exercises);
+            });
+        };
+
+        this.getRoutine()
 
         // Format the completion time to fit in the form
-        angular.forEach(exercises, function(exercise, index){
+        ctrl.formatCompletionTimes = function(exercises){
+            angular.forEach(exercises, function(exercise, index){
 
-            var completion_time = exercise.completion_time.split(":");
+                var completion_time = exercise.completion_time.split(":");
 
-            if (parseInt(completion_time[0]) < 10) {
-                exercise.minutes = '0' + completion_time[0];
-            } else {
-                exercise.minutes = completion_time[0];
-            }
+                exercise.minutes = completion_time[1];
+                exercise.seconds = completion_time[2];
 
-            if (parseInt(completion_time[1]) < 10) {
-                exercise.seconds = completion_time[1] + 0;
-            } else {
-                exercise.seconds = completion_time[1];
-            }
+            });
+        }
 
-        });
 
-        this.routine = routine;
-        this.exercises = exercises;
-
-        this.addNewExercise = function() {
-            var newExercisePosition = this.exercises.length + 1;
-            this.exercises.push({'position': newExercisePosition});
+        ctrl.addNewExercise = function() {
+            var newExercisePosition = ctrl.exercises.length + 1;
+            ctrl.exercises.push({'position': newExercisePosition});
         };
 
-        this.removeExercise = function() {
-            var lastExercise = this.exercises.length - 1;
-            this.exercises.splice(lastExercise);
+        ctrl.removeExercise = function() {
+            var lastExercise = ctrl.exercises.length - 1;
+            ctrl.exercises.splice(lastExercise);
         };
 
-        this.submit = function($event) {
+        ctrl.submit = function($event) {
 
             $event.preventDefault();
 
-            angular.forEach(this.exercises, function(exercise, index){
+            angular.forEach(ctrl.exercises, function(exercise, index){
 
                 var exerciseObj = {};
 
@@ -184,7 +163,7 @@
             });
         };
 
-    });
+    }]);
 
 
     routineAppControllers.controller('RoutineUseController', ['$interval', 'RoutineService', function($interval, RoutineService){
