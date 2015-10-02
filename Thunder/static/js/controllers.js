@@ -85,7 +85,7 @@
                     exerciseObj.position = exercise.position;
                     exerciseObj.name = exercise.name;
                     exerciseObj.completion_time = exercise.minutes + ":" + exercise.seconds;
-                    exerciseObj.routine = 'insanity';
+                    exerciseObj.routine = 'hit';
                     //Need an if else
                     // exerciseObj.routine = $cookies.get('routine');
 
@@ -95,7 +95,6 @@
             });
 
             var exercisesJson = angular.toJson(exerciseObjs);
-            console.log(exercisesJson);
             ctrl.postExercises(exercisesJson);
 
         };

@@ -24,6 +24,4 @@ urlpatterns = [
 
     url(r'^api/post/exercises$', views.postExercises, name='post_exercises'),
 
-    # (?P<user>[0-9]+)/
-
 ]

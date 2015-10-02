@@ -111,7 +111,10 @@ def postRoutine(request):
 @api_view(['POST'])
 def postExercises(request):
 
-    print(request.data)
+    # Convert routine name to ID
+    for exercise in request.data:
+        routineID = Routine.objects.get(name=exercise['routine']).id
+        exercise['routine'] = routineID
 
     exercisesSerializer = ExerciseSerializer(data=request.data, many=True)
 
