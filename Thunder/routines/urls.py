@@ -24,4 +24,6 @@ urlpatterns = [
 
     url(r'^api/post/exercises$', views.postExercises, name='post_exercises'),
 
+    url(r'^api/post/exercise$', views.postExercise, name='post_exercise'),
+
 ]

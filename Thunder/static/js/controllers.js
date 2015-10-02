@@ -41,9 +41,7 @@
 
             var routineJson = angular.toJson(routineObj);
 
-            console.log(routineJson);
             this.postRoutine(routineJson);
-
 
         };
 
@@ -84,7 +82,7 @@
                     var exerciseObj = {};
                     exerciseObj.position = exercise.position;
                     exerciseObj.name = exercise.name;
-                    exerciseObj.completion_time = exercise.minutes + ":" + exercise.seconds;
+                    exerciseObj.completion_time = "00:" + exercise.minutes + ":" + exercise.seconds;
                     exerciseObj.routine = 'hit';
                     //Need an if else
                     // exerciseObj.routine = $cookies.get('routine');
@@ -110,16 +108,14 @@
 
         ctrl.exercises = [];
 
-        this.getRoutine = function() {
-            RoutineService.getRoutine(ctrl.routine.name).then(function(response){
+        this.getRoutine = function(routineName) {
+            RoutineService.getRoutine(routineName).then(function(response){
                 ctrl.exercises = response.data;
                 ctrl.formatCompletionTimes(ctrl.exercises);
-
-        console.log(ctrl.exercises);
             });
         };
 
-        this.getRoutine()
+        this.getRoutine(ctrl.routine.name)
 
         // Format the completion time to fit in the form
         ctrl.formatCompletionTimes = function(exercises){
@@ -144,9 +140,17 @@
             ctrl.exercises.splice(lastExercise);
         };
 
+        ctrl.postExercise = function(exercise) {
+            RoutineService.postExercise(exercise).then(function(response){
+                console.log(response);
+            });
+        };
+
         ctrl.submit = function($event) {
 
             $event.preventDefault();
+
+            var exerciseObjs = [];
 
             angular.forEach(ctrl.exercises, function(exercise, index){
 
@@ -154,13 +158,15 @@
 
                 exerciseObj.position = exercise.position;
                 exerciseObj.name = exercise.name;
-                exerciseObj.completion_time = exercise.minutes + ":" + exercise.seconds;
-                exerciseObj.routine = routine.name;
+                exerciseObj.completion_time = "00:" + exercise.minutes + ":" + exercise.seconds;
+                exerciseObj.routine = ctrl.routine.name;
 
                 var exerciseJson = angular.toJson(exerciseObj);
-                console.log(exerciseJson);
+
+                ctrl.postExercise(exerciseJson);
 
             });
+
         };
 
     }]);

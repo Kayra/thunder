@@ -122,3 +122,26 @@ def postExercises(request):
     else:
         print(exercisesSerializer.errors)
         return Response(exercisesSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def postExercise(request):
+
+    try:
+        exercise = Exercise.objects.get(name=request.data['name'], position=request.data['position'])
+        routineID = Routine.objects.get(name=request.data['routine']).id
+        request.data['routine'] = routineID
+        exerciseSerializer = ExerciseSerializer(exercise, data=request.data)
+
+    except Exercise.DoesNotExist:
+        routineID = Routine.objects.get(name=request.data['routine']).id
+        request.data['routine'] = routineID
+        exerciseSerializer = ExerciseSerializer(data=request.data)
+
+    if exerciseSerializer.is_valid():
+        exerciseSerializer.save()
+        return Response(exerciseSerializer.data, status=status.HTTP_201_CREATED)
+
+    else:
+        print(exerciseSerializer.errors)
+        return Response(exerciseSerializer.errors, status=status.HTTP_400_BAD_REQUEST)

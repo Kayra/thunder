@@ -35,8 +35,8 @@
             return $http.post('routines/api/post/routine-update', routineJson);
         };
 
-        routine.postExercisesUpdate = function(exercisesJson) {
-            return $http.post('routines/api/post/exercises-update', exercisesJson)
+        routine.postExercise = function(exerciseJson) {
+            return $http.post('routines/api/post/exercise', exerciseJson)
         };
 
         return routine;
