@@ -27,6 +27,10 @@
             return $http.post('routines/api/post/routine', routineJson);
         };
 
+        routine.postRoutineDelete = function(routineJson) {
+            return $http.post('routines/api/post/routine-delete', routineJson)
+        };
+
         routine.postExercises = function(exercisesJson) {
             return $http.post('routines/api/post/exercises', exercisesJson);
         };
@@ -35,8 +39,8 @@
             return $http.post('routines/api/post/exercise', exerciseJson)
         };
 
-        routine.postRoutineDelete = function(routineJson) {
-            return $http.post('routines/api/post/routine-delete', routineJson)
+        routine.postExerciseDelete = function(exerciseJson) {
+            return $http.post('routines/api/post/exercise-delete', exerciseJson)
         };
 
         return routine;

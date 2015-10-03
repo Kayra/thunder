@@ -1,7 +1,6 @@
 from __future__ import absolute_import
-import json
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from rest_framework import status
@@ -117,6 +116,7 @@ def postRoutineDelete(request):
         routine = Routine.objects.get(name=request.data['old_name'], user__id=request.data['user'])
         routine.delete()
         return Response(status=status.HTTP_202_ACCEPTED)
+
     except Routine.DoesNotExist:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -161,3 +161,15 @@ def postExercise(request):
     else:
         print(exerciseSerializer.errors)
         return Response(exerciseSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def postExerciseDelete(request):
+
+    try:
+        exercise = Exercise.objects.get(name=request.data['name'], position=request.data['position'], routine__name=request.data['routine'])
+        exercise.delete()
+        return Response(status=status.HTTP_202_ACCEPTED)
+
+    except Exercise.DoesNotExist:
+        return Response(status=status.HTTP_400_BAD_REQUEST)

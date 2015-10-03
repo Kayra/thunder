@@ -104,7 +104,7 @@
 
         var ctrl = this;
 
-        ctrl.routine = {name:'insan', total_time: '37:15'};
+        ctrl.routine = {name:'insanity', total_time: '37:15'};
 
         ctrl.routine.old_name = ctrl.routine.name;
 
@@ -139,6 +139,12 @@
 
         ctrl.removeExercise = function() {
             var lastExercise = ctrl.exercises.length - 1;
+
+            // delete exercise from the database
+            var exerciseToDelete = ctrl.exercises[lastExercise];
+            exerciseToDelete.routine = ctrl.routine.name;
+            ctrl.postExerciseDelete(exerciseToDelete);
+
             ctrl.exercises.splice(lastExercise);
         };
 
@@ -156,6 +162,12 @@
 
         ctrl.postRoutineDelete = function(routine) {
             RoutineService.postRoutineDelete(routine).then(function(response){
+                console.log(response);
+            });
+        };
+
+        ctrl.postExerciseDelete = function(exercise) {
+            RoutineService.postExerciseDelete(exercise).then(function(response){
                 console.log(response);
             });
         };
@@ -186,7 +198,7 @@
 
             });
 
-            // If the routine name has changed then hit delete the old routine
+            // If the routine name has changed then delete the old routine
             if (ctrl.routine.name != ctrl.routine.old_name) {
                 ctrl.postRoutineDelete(ctrl.routine);
             }
