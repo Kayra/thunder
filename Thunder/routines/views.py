@@ -95,14 +95,30 @@ def getRoutine(request):
 @api_view(['POST'])
 def postRoutine(request):
 
-    routineSerializer = RoutineSerializer(data=request.data, partial=True)
+    try:
+        routine = Routine.objects.get(name=request.data['name'], user__id=request.data['user'])
+        routineSerializer = RoutineSerializer(routine, data=request.data)
+
+    except Routine.DoesNotExist:
+        routineSerializer = RoutineSerializer(data=request.data)
 
     if routineSerializer.is_valid():
         routineSerializer.save()
-        return Response(routineSerializer.data, status=status.HTTP_201_CREATED)
+        return Response(routineSerializer.data, status=status.HTTP_202_ACCEPTED)
 
     else:
         return Response(routineSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def postRoutineDelete(request):
+
+    try:
+        routine = Routine.objects.get(name=request.data['old_name'], user__id=request.data['user'])
+        routine.delete()
+        return Response(status=status.HTTP_202_ACCEPTED)
+    except Routine.DoesNotExist:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -117,7 +133,7 @@ def postExercises(request):
 
     if exercisesSerializer.is_valid():
         exercisesSerializer.save()
-        return Response(exercisesSerializer.data, status=status.HTTP_201_CREATED)
+        return Response(exercisesSerializer.data, status=status.HTTP_202_ACCEPTED)
 
     else:
         print(exercisesSerializer.errors)
@@ -140,7 +156,7 @@ def postExercise(request):
 
     if exerciseSerializer.is_valid():
         exerciseSerializer.save()
-        return Response(exerciseSerializer.data, status=status.HTTP_201_CREATED)
+        return Response(exerciseSerializer.data, status=status.HTTP_202_ACCEPTED)
 
     else:
         print(exerciseSerializer.errors)

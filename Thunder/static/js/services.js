@@ -31,12 +31,12 @@
             return $http.post('routines/api/post/exercises', exercisesJson);
         };
 
-        routine.postRoutineUpdate = function(routineJson) {
-            return $http.post('routines/api/post/routine-update', routineJson);
-        };
-
         routine.postExercise = function(exerciseJson) {
             return $http.post('routines/api/post/exercise', exerciseJson)
+        };
+
+        routine.postRoutineDelete = function(routineJson) {
+            return $http.post('routines/api/post/routine-delete', routineJson)
         };
 
         return routine;

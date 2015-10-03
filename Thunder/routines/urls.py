@@ -22,6 +22,8 @@ urlpatterns = [
 
     url(r'^api/post/routine$', views.postRoutine, name='post_routine'),
 
+    url(r'^api/post/routine-delete$', views.postRoutineDelete, name='post_routine_delete'),
+
     url(r'^api/post/exercises$', views.postExercises, name='post_exercises'),
 
     url(r'^api/post/exercise$', views.postExercise, name='post_exercise'),

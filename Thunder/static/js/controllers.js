@@ -100,11 +100,13 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineEditController', ['RoutineService', function(RoutineService) {
+    routineAppControllers.controller('RoutineEditController', ['RoutineService', 'AuthUser', function(RoutineService, AuthUser) {
 
         var ctrl = this;
 
-        ctrl.routine = {name:'insanity', total_time: '37:15'};
+        ctrl.routine = {name:'insan', total_time: '37:15'};
+
+        ctrl.routine.old_name = ctrl.routine.name;
 
         ctrl.exercises = [];
 
@@ -146,9 +148,26 @@
             });
         };
 
+        ctrl.postRoutine = function(routine) {
+            RoutineService.postRoutine(routine).then(function(response){
+                console.log(response);
+            });
+        };
+
+        ctrl.postRoutineDelete = function(routine) {
+            RoutineService.postRoutineDelete(routine).then(function(response){
+                console.log(response);
+            });
+        };
+
         ctrl.submit = function($event) {
 
             $event.preventDefault();
+
+            // Prepare and post the routine
+            ctrl.routine.user = AuthUser['id'];
+            var routineJson = angular.toJson(ctrl.routine);
+            ctrl.postRoutine(routineJson);
 
             var exerciseObjs = [];
 
@@ -166,6 +185,11 @@
                 ctrl.postExercise(exerciseJson);
 
             });
+
+            // If the routine name has changed then hit delete the old routine
+            if (ctrl.routine.name != ctrl.routine.old_name) {
+                ctrl.postRoutineDelete(ctrl.routine);
+            }
 
         };
 
