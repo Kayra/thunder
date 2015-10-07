@@ -20,6 +20,9 @@ urlpatterns = [
     # Routines application
     url(r'^routines/', include("Thunder.routines.urls", namespace="routines")),
 
+    # API
+    url(r'^api/', include("Thunder.api.urls", namespace="api")),
+
     # Rest Framework
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 

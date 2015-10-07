@@ -83,7 +83,7 @@
                     exerciseObj.position = exercise.position;
                     exerciseObj.name = exercise.name;
                     exerciseObj.completion_time = "00:" + exercise.minutes + ":" + exercise.seconds;
-                    exerciseObj.routine = 'hit';
+                    exerciseObj.routine = 'insanity';
                     //Need an if else
                     // exerciseObj.routine = $cookies.get('routine');
 

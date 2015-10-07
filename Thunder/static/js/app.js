@@ -34,11 +34,11 @@
         })
         .state('add', {
             url: '/routines/add',
-            templateUrl: 'static/partials/routine/routine_add_edit.html',
-            controller: 'RoutineAddController',
+            templateUrl: 'static/partials/routine/routine_add_routine.html',
+            controller: 'RoutineAddRoutineController',
         });
 
-        $urlRouterProvider.otherwise('/routines');
+    $urlRouterProvider.otherwise('/routines');
 
     });
 

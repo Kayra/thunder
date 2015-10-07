@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'Thunder.users',  # custom users app
     'Thunder.routines',
+    'Thunder.api',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
