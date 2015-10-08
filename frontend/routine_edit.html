@@ -1,0 +1,30 @@
+<form method="POST" action="" class="routine_edit" ng-controller="RoutineEditController as edit">
+
+    <fieldset>
+        <label>Routine name</label>
+        <input maxlength="255" name="name" type="text" ng-model="edit.routine.name">
+    </fieldset>
+    <br>
+    <fieldset ng-repeat="exercise in edit.exercises">
+        <p>
+        <label>Exercise name</label>
+        <input maxlength="255" name="name" type="text" ng-model="exercise.name" >
+
+        <label>Completion time</label>
+        <select ng-options="n for n in [] | range:0:61" ng-model="exercise.minutes" required="required">
+        </select>
+        Minutes
+        <select ng-options="n for n in [] | range:0:61" ng-model="exercise.seconds" required="required">
+        </select>
+        Seconds
+
+        <input ng-model="exercise.position" value="[[ exercise.position ]]" name="position" type="hidden">
+        <button type='button' ng-show="$last" ng-click="edit.removeExercise()"> - </button>
+        </p>
+    </fieldset>
+
+    <button type='button' ng-click="edit.addNewExercise()">Add exercise</button><br><br>
+
+    <input type="submit" ng-click="edit.submit($event)" text="Save routine">
+
+</form>
