@@ -18,7 +18,7 @@
 
     // This only works in angular 3!
     // It makes dealing with Django slashes at the end of everything easier.
-    $resourceProvider.defaults.stripTrailingSlashes = false;
+    // $resourceProvider.defaults.stripTrailingSlashes = false;
 
     // Routing
     $locationProvider.html5Mode({
@@ -28,17 +28,17 @@
 
     $stateProvider
         .state('list', {
-            url: '/routines',
-            templateUrl: 'static/partials/routine/routine_edit.html',
-            controller: 'RoutineEditController',
+            url: '/',
+            templateUrl: 'partials/list.html',
+            controller: 'RoutineListController',
         })
         .state('add', {
-            url: '/routines/add',
+            url: '/add',
             templateUrl: 'static/partials/routine/routine_add_routine.html',
             controller: 'RoutineAddRoutineController',
         });
 
-    $urlRouterProvider.otherwise('/routines');
+    $urlRouterProvider.otherwise('/');
 
     });
 
