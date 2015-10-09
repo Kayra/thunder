@@ -10,28 +10,23 @@ from .serializers import RoutineSerializer, ExerciseSerializer, FullRoutineSeria
 @api_view(['GET'])
 def getRoutines(request):
 
-    routines = Routine.objects.all()
-
-    userPk = request.GET.get("user", None)
-
-    if userPk:
-
-        routines = Routine.objects.filter(user__id=userPk)
+    try:
+        routines = Routine.objects.all()
         serializer = RoutineSerializer(routines, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as error:
+        print('Couldn\'t get routines because:')
+        print(error)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
 def getRoutine(request):
 
-    userPk = request.GET.get("user", None)
-
     routineName = request.GET.get("routine", None)
 
-    if userPk and routineName:
+    if routineName:
 
         exercises = Exercise.objects.filter(routine__name=routineName).order_by('position')
 
@@ -47,7 +42,7 @@ def getRoutine(request):
 def postRoutine(request):
 
     try:
-        routine = Routine.objects.get(name=request.data['name'], user__id=request.data['user'])
+        routine = Routine.objects.get(name=request.data['name'])
         routineSerializer = RoutineSerializer(routine, data=request.data)
 
     except Routine.DoesNotExist:
@@ -65,7 +60,7 @@ def postRoutine(request):
 def postRoutineDelete(request):
 
     try:
-        routine = Routine.objects.get(name=request.data['old_name'], user__id=request.data['user'])
+        routine = Routine.objects.get(name=request.data['old_name'])
         routine.delete()
         return Response(status=status.HTTP_202_ACCEPTED)
 
