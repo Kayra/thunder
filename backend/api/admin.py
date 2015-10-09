@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import Routine, Exercise
 
-# Register your models here.
+admin.register(Routine, Exercise)(admin.ModelAdmin)
