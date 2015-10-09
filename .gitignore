@@ -54,3 +54,6 @@ frontend/node_modules/
 
 # virtual environments
 .env
+
+# django settings (yeah not the best solution)
+settings.py
