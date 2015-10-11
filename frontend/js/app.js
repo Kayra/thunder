@@ -5,6 +5,7 @@
         'ngResource',
         'routineApp.services',
         'routineApp.controllers',
+        'ngCookies'
     ])
 
     .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $locationProvider, $urlRouterProvider){

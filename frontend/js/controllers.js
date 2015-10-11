@@ -20,7 +20,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineAddRoutineController', ['$cookies', 'RoutineService', function($cookies, RoutineService) {
+    routineAppControllers.controller('RoutineAddRoutineController', ['$cookies', 'RoutineService', '$state', function($cookies, RoutineService, $state) {
 
         this.postRoutine = function(routineJson){
             RoutineService.postRoutine(routineJson).then(function(response){
@@ -41,6 +41,8 @@
             var routineJson = angular.toJson(routineObj);
 
             this.postRoutine(routineJson);
+
+            $state.go('add_exercises');
 
         };
 
@@ -84,7 +86,7 @@
                     exerciseObj.completion_time = "00:" + exercise.minutes + ":" + exercise.seconds;
                     exerciseObj.routine = 'insanity';
                     //Need an if else
-                    // exerciseObj.routine = $cookies.get('routine');
+                    exerciseObj.routine = $cookies.get('routine');
 
                     exerciseObjs.push(exerciseObj);
 

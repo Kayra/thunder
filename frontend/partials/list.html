@@ -10,12 +10,12 @@
         <tr ng-repeat="routine in list.routines">
             <td>[[ routine.name ]]</td>
             <td>[[ routine.total_time ]]</td>
-            <td><button>Use</button></td>
-            <td><button>Edit</button></td>
+            <td><a href="/use"><button>Use</button></a></td>
+            <td><a href="/edit"><button>Edit</button></a></td>
         </tr>
     </tbody>
 
 </table>
 
-<button>Add new routine</button>
+<a href="/add_routine"><button>Add new routine</button></a>
 </div>
