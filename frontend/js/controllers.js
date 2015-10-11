@@ -20,7 +20,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineAddRoutineController', ['$cookies', 'AuthUser', 'RoutineService', function($cookies, AuthUser, RoutineService) {
+    routineAppControllers.controller('RoutineAddRoutineController', ['$cookies', 'RoutineService', function($cookies, RoutineService) {
 
         this.postRoutine = function(routineJson){
             RoutineService.postRoutine(routineJson).then(function(response){
@@ -35,7 +35,6 @@
             var routineObj = {};
 
             routineObj.name = this.routine.name;
-            routineObj.user = AuthUser['id'];
 
             $cookies.put('routine', routineObj.name);
 
@@ -100,7 +99,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineEditController', ['RoutineService', 'AuthUser', function(RoutineService, AuthUser) {
+    routineAppControllers.controller('RoutineEditController', ['RoutineService', function(RoutineService) {
 
         var ctrl = this;
 
@@ -177,7 +176,6 @@
             $event.preventDefault();
 
             // Prepare and post the routine
-            ctrl.routine.user = AuthUser['id'];
             var routineJson = angular.toJson(ctrl.routine);
             ctrl.postRoutine(routineJson);
 
