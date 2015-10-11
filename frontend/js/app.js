@@ -34,7 +34,7 @@
         })
         .state('add', {
             url: '/add',
-            templateUrl: 'static/partials/routine/routine_add_routine.html',
+            templateUrl: 'partials/add_routine.html',
             controller: 'RoutineAddRoutineController',
         });
 

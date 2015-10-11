@@ -1,5 +1,8 @@
 
 module.exports = function(grunt) {
+
+    var modRewrite = require('connect-modrewrite');
+
     grunt.initConfig({
         // Watch task config
         watch: {
@@ -29,7 +32,10 @@ module.exports = function(grunt) {
                 options: {
                     watchTask: true,
                     server: {
-                        baseDir: "./"
+                        baseDir: "./",
+                        middleware: [
+                            modRewrite(['!\.html|\.js|\.css|\.png$ /index.html [L]'])
+                        ]
                     }
                 }
             }
