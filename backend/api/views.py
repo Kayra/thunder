@@ -85,8 +85,9 @@ def postExercises(request):
         exercisesSerializer.save()
 
         # Update the total time. This needs to change
-        totalTime = updateTotalTime(request.data)
-        routine = Routine.objects.get(name=request.data[0]['routine'])
+        routine = Routine.objects.get(id=request.data[0]['routine'])
+        exercises = Exercise.objects.filter(routine=request.data[0]['routine'])
+        totalTime = updateTotalTime(exercises)
         routine.total_time = totalTime
         routine.save()
 
