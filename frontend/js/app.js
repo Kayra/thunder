@@ -30,27 +30,27 @@
     $stateProvider
         .state('list', {
             url: '/',
-            templateUrl: 'partials/list.html',
+            templateUrl: '/partials/list.html',
             controller: 'RoutineListController',
         })
         .state('add_routine', {
             url: '/add_routine',
-            templateUrl: 'partials/add_routine.html',
+            templateUrl: '/partials/add_routine.html',
             controller: 'RoutineAddRoutineController',
         })
         .state('add_exercises', {
             url: '/add_exercises',
-            templateUrl: 'partials/add_exercises.html',
+            templateUrl: '/partials/add_exercises.html',
             controller: 'RoutineAddExercisesController',
         })
         .state('edit', {
-            url: '/edit',
-            templateUrl: 'partials/edit.html',
+            url: '/edit/:routineName',
+            templateUrl: '/partials/edit.html',
             controller: 'RoutineEditController',
         })
         .state('use', {
-            url: '/use',
-            templateUrl: 'partials/use.html',
+            url: '/use/:routineName',
+            templateUrl: '/partials/use.html',
             controller: 'RoutineUseController',
         });
 
