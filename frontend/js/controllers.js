@@ -100,24 +100,26 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineEditController', ['RoutineService', function(RoutineService) {
+    routineAppControllers.controller('RoutineEditController', ['RoutineService', '$location', function(RoutineService, $location) {
 
         var ctrl = this;
 
-        ctrl.routine = {name:'insanity', total_time: '37:15'};
+        var routineName = $location.url().split('/')[2];
+
+        ctrl.routine = {name:routineName, total_time: '00:00:00'};
 
         ctrl.routine.old_name = ctrl.routine.name;
 
         ctrl.exercises = [];
 
-        this.getRoutine = function(routineName) {
+        ctrl.getRoutine = function(routineName) {
             RoutineService.getRoutine(routineName).then(function(response){
                 ctrl.exercises = response.data;
                 ctrl.formatCompletionTimes(ctrl.exercises);
             });
         };
 
-        this.getRoutine(ctrl.routine.name)
+        ctrl.getRoutine(ctrl.routine.name)
 
         // Format the completion time to fit in the form
         ctrl.formatCompletionTimes = function(exercises){
@@ -207,14 +209,18 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineUseController', ['$interval', 'RoutineService', function($interval, RoutineService){
+    routineAppControllers.controller('RoutineUseController', ['$interval', 'RoutineService', '$location', function($interval, RoutineService, $location){
 
         var ctrl = this;
 
-        var routine = {name:'insanity', total_time: '37:15'};
+        var routineName = $location.url().split('/')[2];
+
+        ctrl.routine = {name:routineName, total_time: '00:00:00'};
+
+        console.log(ctrl.routine);
 
         ctrl.getRoutine = function() {
-            RoutineService.getRoutine(routine.name).then(function(response){
+            RoutineService.getRoutine(ctrl.routine.name).then(function(response){
 
                 ctrl.routine = response.data[0].routine;
                 ctrl.exercises = response.data;
