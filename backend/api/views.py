@@ -6,6 +6,8 @@ from .models import Routine, Exercise
 
 from .serializers import RoutineSerializer, ExerciseSerializer, FullRoutineSerializer
 
+from .utilities import updateTotalTime
+
 
 @api_view(['GET'])
 def getRoutines(request):
@@ -79,7 +81,15 @@ def postExercises(request):
     exercisesSerializer = ExerciseSerializer(data=request.data, many=True)
 
     if exercisesSerializer.is_valid():
+
         exercisesSerializer.save()
+
+        # Update the total time. This needs to change
+        totalTime = updateTotalTime(request.data)
+        routine = Routine.objects.get(name=request.data[0]['routine'])
+        routine.total_time = totalTime
+        routine.save()
+
         return Response(exercisesSerializer.data, status=status.HTTP_202_ACCEPTED)
 
     else:
@@ -102,7 +112,17 @@ def postExercise(request):
         exerciseSerializer = ExerciseSerializer(data=request.data)
 
     if exerciseSerializer.is_valid():
+
         exerciseSerializer.save()
+
+        # Update the total time. This needs to change
+        routine = Routine.objects.get(id=request.data['routine'])
+        exercises = Exercise.objects.filter(routine=routine)
+        totalTime = updateTotalTime(exercises)
+        routine.total_time = totalTime
+        print(totalTime)
+        routine.save()
+
         return Response(exerciseSerializer.data, status=status.HTTP_202_ACCEPTED)
 
     else:
@@ -116,6 +136,14 @@ def postExerciseDelete(request):
     try:
         exercise = Exercise.objects.get(name=request.data['name'], position=request.data['position'], routine__name=request.data['routine'])
         exercise.delete()
+
+        # Update the total time. This needs to change
+        routine = Routine.objects.get(name=request.data['routine'])
+        exercises = Exercise.objects.filter(routine=routine)
+        totalTime = updateTotalTime(exercises)
+        routine.total_time = totalTime
+        routine.save()
+
         return Response(status=status.HTTP_202_ACCEPTED)
 
     except Exercise.DoesNotExist:
