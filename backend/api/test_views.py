@@ -114,7 +114,7 @@ class RoutineAPITests(TestCase):
     def test_createExercises(self):
 
         """
-            Exercises created with the API should be in the database
+            All exercises created with the API should be in the database
         """
 
         url = reverse('routines:create_exercises')
@@ -137,7 +137,7 @@ class RoutineAPITests(TestCase):
     def test_createExercise(self):
 
         """
-            Exercise created with the API should be in the database
+            An exercise created with the API should be in the database
         """
 
         url = reverse('routines:create_exercise')
