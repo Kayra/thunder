@@ -29,14 +29,13 @@ class RoutineAPITests(TestCase):
             All routines should be returned
         """
 
-        routinesFromDb = Routine.objects.all()
-
         url = reverse('routines:get_routines')
 
         response = self.client.get(url)
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
-        self.assertEquals(routinesFromDb, response.data)  # Make sure routines from API match routines in routinesFromDbS
+        routinesFromDB = Routine.objects.all()
+        self.assertEquals(routinesFromDB, response.data)  # Make sure routines from API match routines in routinesFromDbS
 
     def test_getRoutine(self):
 
@@ -44,21 +43,40 @@ class RoutineAPITests(TestCase):
             A routine and associated exercises should be returned when a correct id is passed as a parameter
         """
 
-        routineFromDb = Routine.objects.all()[:1].get()
-
         url = reverse('routines:get_routine')
 
         response = self.client.post(url, {'wrong': 'wrong'})
         self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
 
-        response = self.client.get(url, {'id': routineFromDb.id})
+        routineFromDB = Routine.objects.all()[:1].get()
+        response = self.client.get(url, {'id': routineFromDB.id})
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         data = json.loads(response.content.decode())
-        self.assertEquals(routineFromDb, data)  # Make sure the correct routine was returned
+        self.assertEquals(routineFromDB, data)  # Make sure the correct routine was returned
 
-    def test_createRoutines(self):
-        pass
+    def test_createRoutine(self):
+
+        """
+            A routine created with the API should be in the database
+        """
+
+        routineToCreate = {}
+        routineToCreate['name'] = 'test3'
+
+        url = reverse('females:create_routine')
+
+        response = self.client.post(url)
+        self.assertEquals(response.status_code, 400)  # Make sure no params return error response
+
+        response = self.client.post(url, {'wrong': 'wrong'})
+        self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
+
+        response = self.client.post(url, routineToCreate)
+        self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
+
+        routineFromDB = Routine.objects.get(pk=response.data['id'])
+        self.assertEquals(routineFromDB.name, response.data['name'])  # Make sure the routine created via the API is in the DB
 
     def test_deleteRoutine(self):
         pass
