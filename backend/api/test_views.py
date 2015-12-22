@@ -64,7 +64,7 @@ class RoutineAPITests(TestCase):
         routineToCreate = {}
         routineToCreate['name'] = 'test3'
 
-        url = reverse('females:create_routine')
+        url = reverse('routines:create_routine')
 
         response = self.client.post(url)
         self.assertEquals(response.status_code, 400)  # Make sure no params return error response
@@ -84,7 +84,7 @@ class RoutineAPITests(TestCase):
             A routine deleted with the API should not be in the database
         """
 
-        url = reverse('females:delete_routine')
+        url = reverse('routines:delete_routine')
 
         response = self.client.delete(url, {'wrong': 'wrong'})
         self.assertEquals(response.status_code, 400)  # Make sure bad parameters return error response
