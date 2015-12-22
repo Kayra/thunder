@@ -156,4 +156,23 @@ class RoutineAPITests(TestCase):
         self.assertEquals(exerciseFromDB, response.data)  # Make sure the exercise created via the API is in the DB
 
     def test_deleteExercise(self):
-        pass
+
+        """
+            An exercise deleted with the API should not be in the database
+        """
+
+        url = reverse('routines:delete_exercise')
+
+        response = self.client.post(url)
+        self.assertEquals(response.status_code, 400)  # Make sure no params return error response
+
+        response = self.client.delete(url, {'wrong': 'wrong'})
+        self.assertEquals(response.status_code, 400)  # Make sure bad parameters return error response
+
+        exerciseToDelete = Exercise.objects.all()[:1].get()
+        exerciseToDeleteJson = json.dumps({'id': exerciseToDelete.id})
+        response = self.client.delete(url, exerciseToDeleteJson)
+        self.assertEquals(response.status_code, 204)  # Make sure valid request returns success response
+
+        with self.assertRaises(Exercise.DoesNotExist):
+            Exercise.objects.get(pk=exerciseToDelete.id)  # Make sure the exercise no longer exists in the DB
