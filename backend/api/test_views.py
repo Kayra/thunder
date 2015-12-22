@@ -79,7 +79,23 @@ class RoutineAPITests(TestCase):
         self.assertEquals(routineFromDB.name, response.data['name'])  # Make sure the routine created via the API is in the DB
 
     def test_deleteRoutine(self):
-        pass
+
+        """
+            A routine deleted with the API should not be in the database
+        """
+
+        url = reverse('females:delete_routine')
+
+        response = self.client.delete(url, {'wrong': 'wrong'})
+        self.assertEquals(response.status_code, 400)  # Make sure bad parameters return error response
+
+        routineToDelete = Routine.objects.all()[:1].get()
+        routineToDeleteJson = json.dumps({'id': routineToDelete.id})
+        response = self.client.delete(url, routineToDeleteJson)
+        self.assertEquals(response.status_code, 204)  # Make sure valid request returns success response
+
+        with self.assertRaises(Routine.DoesNotExist):
+            Routine.objects.get(pk=routineToDelete.id)  # Make sure the routine no longer exists in the DB
 
     def test_createExercises(self):
         pass
@@ -89,29 +105,3 @@ class RoutineAPITests(TestCase):
 
     def test_deleteExercise(self):
         pass
-
-
- # def test_getFemale(self):
-
- #        """
- #            A female should be returned when a correct id is passed as a parameter
- #        """
-
- #        testFemale = Female.objects.all()[:1].get()
- #        testIdentifier = testFemale.id
-
- #        url = reverse('females:get_female')
-
- #        response = self.client.get(url)
- #        self.assertEquals(response.status_code, 400)  # Make sure no params return error response
-
- #        response = self.client.get(url, {'wrong': 'wrong'}, content_type='application/json')
- #        self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
-
- #        response = self.client.get(url, {'identifier': testIdentifier})
- #        self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
-
- #        data = json.loads(response.content.decode())
- #        self.assertEquals(len(data), 6)  # Make sure all fields are present
-
- #        self.assertEquals(testIdentifier, data['id'])  # Make sure the correct female was returned
