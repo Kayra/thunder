@@ -4,8 +4,8 @@ from datetime import timedelta
 
 class Routine(models.Model):
 
-    name                = models.CharField(max_length=255)
-    total_time          = models.DurationField(default=timedelta(), blank=True)
+    name = models.CharField(max_length=255)
+    total_time = models.DurationField(default=timedelta(), blank=True)
 
     def __str__(self):
         return self.name
@@ -13,11 +13,11 @@ class Routine(models.Model):
 
 class Exercise(models.Model):
 
-    name                = models.CharField(max_length=255)
-    completion_time     = models.DurationField(default=timedelta())
-    position            = models.IntegerField()
+    name = models.CharField(max_length=255)
+    completion_time = models.DurationField(default=timedelta())
+    position = models.IntegerField()
 
-    routine             = models.ForeignKey(Routine)
+    routine = models.ForeignKey(Routine)
 
     def __str__(self):
         return self.name
