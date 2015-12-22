@@ -6,6 +6,21 @@ from django.core.urlresolvers import reverse
 from .models import Routine, Exercise
 
 
+def createExerciseForAPI(number=1):
+
+    """
+        Convinience function to create a test exercise
+    """
+
+    exerciseToCreate = {}
+    exerciseToCreate['name'] = 'textExercise' + str(number)
+    exerciseToCreate['completion_time'] = '00:01:00'
+    exerciseToCreate['position'] = str(number)
+    exerciseToCreate['routine'] = 'test2'
+
+    return exerciseToCreate
+
+
 class RoutineAPITests(TestCase):
 
     def setUp(self):
@@ -61,9 +76,6 @@ class RoutineAPITests(TestCase):
             A routine created with the API should be in the database
         """
 
-        routineToCreate = {}
-        routineToCreate['name'] = 'test3'
-
         url = reverse('routines:create_routine')
 
         response = self.client.post(url)
@@ -72,6 +84,8 @@ class RoutineAPITests(TestCase):
         response = self.client.post(url, {'wrong': 'wrong'})
         self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
 
+        routineToCreate = {}
+        routineToCreate['name'] = 'test3'
         response = self.client.post(url, routineToCreate)
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
@@ -98,7 +112,27 @@ class RoutineAPITests(TestCase):
             Routine.objects.get(pk=routineToDelete.id)  # Make sure the routine no longer exists in the DB
 
     def test_createExercises(self):
-        pass
+
+        """
+            Exercises created with the API should be in the database
+        """
+
+        url = reverse('routines:create_exercises')
+
+        response = self.client.post(url)
+        self.assertEquals(response.status_code, 400)  # Make sure no params return error response
+
+        response = self.client.post(url, {'wrong': 'wrong'})
+        self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
+
+        exercisesToCreate = []
+        for index in range(0, 3):
+            exercisesToCreate.append(createExerciseForAPI(index))
+        response = self.client.post(url, exercisesToCreate)
+        self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
+
+        exercisesFromDB = Exercise.objects.get(routine=response.data[0]['routine'])
+        self.assertEquals(exercisesFromDB, response.data)  # Make sure the exercises created via the API are in the DB
 
     def test_createExercise(self):
         pass
