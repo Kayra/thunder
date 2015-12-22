@@ -135,7 +135,25 @@ class RoutineAPITests(TestCase):
         self.assertEquals(exercisesFromDB, response.data)  # Make sure the exercises created via the API are in the DB
 
     def test_createExercise(self):
-        pass
+
+        """
+            Exercise created with the API should be in the database
+        """
+
+        url = reverse('routines:create_exercise')
+
+        response = self.client.post(url)
+        self.assertEquals(response.status_code, 400)  # Make sure no params return error response
+
+        response = self.client.post(url, {'wrong': 'wrong'})
+        self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
+
+        exerciseToCreate = createExerciseForAPI()
+        response = self.client.post(url, exerciseToCreate)
+        self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
+
+        exerciseFromDB = Exercise.objects.get(routine=response.data['routine'])
+        self.assertEquals(exerciseFromDB, response.data)  # Make sure the exercise created via the API is in the DB
 
     def test_deleteExercise(self):
         pass
