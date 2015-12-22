@@ -1,3 +1,5 @@
+import json
+
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
@@ -34,14 +36,26 @@ class RoutineAPITests(TestCase):
         response = self.client.get(url)
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
-        self.assertEquals(routinesFromDb, response.data)  # Make sure routines from API match routines in DB
+        self.assertEquals(routinesFromDb, response.data)  # Make sure routines from API match routines in routinesFromDbS
 
     def test_getRoutine(self):
 
         """
-            A routine should be returned when a correct id is passed as a parameter
+            A routine and associated exercises should be returned when a correct id is passed as a parameter
         """
-        pass
+
+        routineFromDb = Routine.objects.all()[:1].get()
+
+        url = reverse('routines:get_routine')
+
+        response = self.client.post(url, {'wrong': 'wrong'})
+        self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
+
+        response = self.client.get(url, {'id': routineFromDb.id})
+        self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
+
+        data = json.loads(response.content.decode())
+        self.assertEquals(routineFromDb, data)  # Make sure the correct routine was returned
 
     def test_createRoutines(self):
         pass
