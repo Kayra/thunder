@@ -47,7 +47,7 @@ nosetests.xml
 *.swo
 
 # npm
-frontend/node_modules/
+client/node_modules/
 
 # Compass
 .sass-cache
