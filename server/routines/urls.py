@@ -8,14 +8,14 @@ urlpatterns = [
 
     url(r'^get-routine', views.getRoutine, name='get_routine'),
 
-    url(r'^create-routine', views.postRoutine, name='create_routine'),
+    url(r'^create-routine', views.createRoutine, name='create_routine'),
 
-    url(r'^delete-routine', views.postRoutineDelete, name='delete_routine'),
+    url(r'^delete-routine', views.deleteRoutine, name='delete_routine'),
 
-    url(r'^create-exercises', views.postExercises, name='create_exercises'),
+    url(r'^create-exercises', views.createExercises, name='create_exercises'),
 
-    url(r'^create-exercise', views.postExercise, name='create_exercise'),
+    url(r'^create-exercise', views.createExercise, name='create_exercise'),
 
-    url(r'^delete-exercise', views.postExerciseDelete, name='delete_exercise'),
+    url(r'^delete-exercise', views.deleteExercise, name='delete_exercise'),
 
 ]

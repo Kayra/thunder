@@ -41,7 +41,7 @@ def getRoutine(request):
 
 
 @api_view(['POST'])
-def postRoutine(request):
+def createRoutine(request):
 
     try:
         routine = Routine.objects.get(name=request.data['name'])
@@ -58,8 +58,8 @@ def postRoutine(request):
         return Response(routineSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
-def postRoutineDelete(request):
+@api_view(['DELETE'])
+def deleteRoutine(request):
 
     try:
         routine = Routine.objects.get(name=request.data['old_name'])
@@ -71,7 +71,7 @@ def postRoutineDelete(request):
 
 
 @api_view(['POST'])
-def postExercises(request):
+def createExercises(request):
 
     # Convert routine name to ID
     for exercise in request.data:
@@ -99,7 +99,7 @@ def postExercises(request):
 
 
 @api_view(['POST'])
-def postExercise(request):
+def createExercise(request):
 
     try:
         exercise = Exercise.objects.get(name=request.data['name'], position=request.data['position'])
@@ -131,8 +131,8 @@ def postExercise(request):
         return Response(exerciseSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
-def postExerciseDelete(request):
+@api_view(['DELETE'])
+def deleteExercise(request):
 
     try:
         exercise = Exercise.objects.get(name=request.data['name'], position=request.data['position'], routine__name=request.data['routine'])
