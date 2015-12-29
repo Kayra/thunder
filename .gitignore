@@ -54,3 +54,5 @@ client/node_modules/
 
 # virtual environments
 .env
+
+settings.py
