@@ -6,7 +6,6 @@ from .models import Routine, Exercise
 class RoutineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Routine
-        fields = ('name', 'total_time')
 
 
 class ExerciseSerializer(serializers.ModelSerializer):

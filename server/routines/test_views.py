@@ -82,10 +82,11 @@ class RoutineAPITests(TestCase):
         self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
 
         routineToCreate = {}
-        routineToCreate['name'] = 'test3'
+        routineToCreate['name'] = "test3"
         response = self.client.post(url, routineToCreate)
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
+        print('HIT', response.data)
         routineFromDB = Routine.objects.get(pk=response.data['id'])
         self.assertEquals(routineFromDB.name, response.data['name'])  # Make sure the routine created via the API is in the DB
 

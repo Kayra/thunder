@@ -1,3 +1,5 @@
+from django.utils.datastructures import MultiValueDictKeyError
+
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -50,9 +52,12 @@ def createRoutine(request):
     except Routine.DoesNotExist:
         routineSerializer = RoutineSerializer(data=request.data)
 
+    except MultiValueDictKeyError:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
     if routineSerializer.is_valid():
         routineSerializer.save()
-        return Response(routineSerializer.data, status=status.HTTP_202_ACCEPTED)
+        return Response(routineSerializer.data)
 
     else:
         return Response(routineSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
