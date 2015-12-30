@@ -82,22 +82,26 @@ def createExercises(request):
         exercisesSerializer = ExerciseSerializer(data=request.data, many=True)
     except MultiValueDictKeyError:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    except TypeError:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
     if exercisesSerializer.is_valid():
 
         exercisesSerializer.save()
 
         # Update the total time. This needs to change
-        routine = Routine.objects.get(id=request.data[0]['routine'])
-        exercises = Exercise.objects.filter(routine=request.data[0]['routine'])
-        totalTime = updateTotalTime(exercises)
-        routine.total_time = totalTime
-        routine.save()
+        try:
+            routine = Routine.objects.get(id=request.data[0]['routine'])
+            exercises = Exercise.objects.filter(routine=request.data[0]['routine'])
+            totalTime = updateTotalTime(exercises)
+            routine.total_time = totalTime
+            routine.save()
+        except MultiValueDictKeyError:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        return Response(exercisesSerializer.data, status=status.HTTP_202_ACCEPTED)
+        return Response(exercisesSerializer.data)
 
     else:
-        print(exercisesSerializer.errors)
         return Response(exercisesSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
