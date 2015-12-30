@@ -28,18 +28,15 @@ def getRoutines(request):
 @api_view(['GET'])
 def getRoutine(request):
 
-    routineName = request.GET.get("routine", None)
-
-    if routineName:
-
-        exercises = Exercise.objects.filter(routine__name=routineName).order_by('position')
-
-        fullSerializer = FullRoutineSerializer(exercises, many=True)
-
-        return Response(fullSerializer.data, status=status.HTTP_200_OK)
-
-    else:
+    try:
+        identifier = request.query_params['id']
+    except MultiValueDictKeyError:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    exercises = Exercise.objects.filter(routine__id=identifier).order_by('position')
+    fullSerializer = FullRoutineSerializer(exercises, many=True)
+    return Response(fullSerializer.data, status=status.HTTP_200_OK)
+
 
 
 @api_view(['POST'])

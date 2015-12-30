@@ -57,15 +57,15 @@ class RoutineAPITests(TestCase):
 
         url = reverse('routines:get_routine')
 
-        response = self.client.post(url, {'wrong': 'wrong'})
+        response = self.client.get(url, {'wrong': 'wrong'})
         self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
 
         routineFromDB = Routine.objects.all()[:1].get()
         response = self.client.get(url, {'id': routineFromDB.id})
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
-        data = json.loads(response.content.decode())
-        self.assertEquals(routineFromDB, data)  # Make sure the correct routine was returned
+        routineId = response.data[0]['routine']['id']
+        self.assertEquals(routineFromDB.id, routineId)  # Make sure the correct routine was returned
 
     def test_createRoutine(self):
 
@@ -86,7 +86,6 @@ class RoutineAPITests(TestCase):
         response = self.client.post(url, routineToCreate)
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
-        print('HIT', response.data)
         routineFromDB = Routine.objects.get(pk=response.data['id'])
         self.assertEquals(routineFromDB.name, response.data['name'])  # Make sure the routine created via the API is in the DB
 
