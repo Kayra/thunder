@@ -24,19 +24,16 @@ def createExerciseForAPI(number=1):
 class RoutineAPITests(TestCase):
 
     def setUp(self):
-        Routine.objects.create(name='test1', total_time='0:05:00')
-        Exercise.objects.create(name='warm up', completion_time='0:01:00', position=1, routine__name='test1')
-        Exercise.objects.create(name='jog', completion_time='0:01:00', position=2, routine__name='test1')
-        Exercise.objects.create(name='run', completion_time='0:01:00', position=3, routine__name='test1')
-        Exercise.objects.create(name='jog', completion_time='0:01:00', position=4, routine__name='test1')
-        Exercise.objects.create(name='run', completion_time='0:01:00', position=5, routine__name='test1')
 
-        Routine.objects.create(name='test2', total_time='0:05:00')
-        Exercise.objects.create(name='warm up', completion_time='0:01:00', position=1, routine__name='test2')
-        Exercise.objects.create(name='jog', completion_time='0:01:00', position=2, routine__name='test2')
-        Exercise.objects.create(name='run', completion_time='0:01:00', position=3, routine__name='test2')
-        Exercise.objects.create(name='jog', completion_time='0:01:00', position=4, routine__name='test2')
-        Exercise.objects.create(name='run', completion_time='0:01:00', position=5, routine__name='test2')
+        exerciseNames = ['warm up', 'jog', 'run', 'jog', 'run']
+
+        testRoutine1 = Routine.objects.create(name='test1', total_time='00:05:00')
+        for index, exerciseName in enumerate(exerciseNames, start=1):
+            Exercise.objects.create(name=exerciseName, completion_time='00:01:00', position=index, routine=testRoutine1)
+
+        testRoutine2 = Routine.objects.create(name='test2', total_time='00:05:00')
+        for index, exerciseName in enumerate(exerciseNames, start=1):
+            Exercise.objects.create(name=exerciseName, completion_time='00:01:00', position=index, routine=testRoutine2)
 
     def test_getRoutines(self):
 
