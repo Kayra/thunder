@@ -38,7 +38,6 @@ def getRoutine(request):
     return Response(fullSerializer.data, status=status.HTTP_200_OK)
 
 
-
 @api_view(['POST'])
 def createRoutine(request):
 
@@ -75,12 +74,14 @@ def deleteRoutine(request):
 @api_view(['POST'])
 def createExercises(request):
 
-    # Convert routine name to ID
-    for exercise in request.data:
-        routineID = Routine.objects.get(name=exercise['routine']).id
-        exercise['routine'] = routineID
-
-    exercisesSerializer = ExerciseSerializer(data=request.data, many=True)
+    try:
+        # Convert routine name to ID
+        for exercise in request.data:
+            routineID = Routine.objects.get(name=exercise['routine']).id
+            exercise['routine'] = routineID
+        exercisesSerializer = ExerciseSerializer(data=request.data, many=True)
+    except MultiValueDictKeyError:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
     if exercisesSerializer.is_valid():
 
@@ -114,6 +115,9 @@ def createExercise(request):
         request.data['routine'] = routineID
         exerciseSerializer = ExerciseSerializer(data=request.data)
 
+    except MultiValueDictKeyError:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
     if exerciseSerializer.is_valid():
 
         exerciseSerializer.save()
@@ -126,7 +130,7 @@ def createExercise(request):
         print(totalTime)
         routine.save()
 
-        return Response(exerciseSerializer.data, status=status.HTTP_202_ACCEPTED)
+        return Response(exerciseSerializer.data)
 
     else:
         print(exerciseSerializer.errors)

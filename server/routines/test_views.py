@@ -149,8 +149,8 @@ class RoutineAPITests(TestCase):
         response = self.client.post(url, exerciseToCreate)
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
-        exerciseFromDB = Exercise.objects.get(routine=response.data['routine'])
-        self.assertEquals(exerciseFromDB, response.data)  # Make sure the exercise created via the API is in the DB
+        exerciseFromDB = Exercise.objects.get(name=exerciseToCreate['name'], routine__name=exerciseToCreate['routine'], position=exerciseToCreate['position'])
+        self.assertEquals(exerciseFromDB.id, response.data['id'])  # Make sure the exercise created via the API is in the DB
 
     def test_deleteExercise(self):
 
