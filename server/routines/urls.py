@@ -6,7 +6,7 @@ urlpatterns = [
 
     url(r'^get-routines', views.getRoutines, name='get_routines'),
 
-    url(r'^get-routine', views.getRoutine, name='get_routine'),
+    url(r'^get-full-routine', views.getFullRoutine, name='get_full_routine'),
 
     url(r'^create-routine', views.createRoutine, name='create_routine'),
 

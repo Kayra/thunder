@@ -16,17 +16,15 @@ def getRoutines(request):
 
     try:
         routines = Routine.objects.all()
-        serializer = RoutineSerializer(routines, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    except Exception as error:
-        print('Couldn\'t get routines because:')
-        print(error)
+    except Routine.DoesNotExist:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    serializer = RoutineSerializer(routines, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getRoutine(request):
+def getFullRoutine(request):
 
     try:
         identifier = request.query_params['id']
@@ -35,21 +33,13 @@ def getRoutine(request):
 
     exercises = Exercise.objects.filter(routine__id=identifier).order_by('position')
     fullSerializer = FullRoutineSerializer(exercises, many=True)
-    return Response(fullSerializer.data, status=status.HTTP_200_OK)
+    return Response(fullSerializer.data)
 
 
 @api_view(['POST'])
 def createRoutine(request):
 
-    try:
-        routine = Routine.objects.get(name=request.data['name'])
-        routineSerializer = RoutineSerializer(routine, data=request.data)
-
-    except Routine.DoesNotExist:
-        routineSerializer = RoutineSerializer(data=request.data)
-
-    except MultiValueDictKeyError:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+    routineSerializer = RoutineSerializer(data=request.data)
 
     if routineSerializer.is_valid():
         routineSerializer.save()
@@ -62,28 +52,25 @@ def createRoutine(request):
 @api_view(['DELETE'])
 def deleteRoutine(request):
 
+    #  Handle both query params and data to satisfy the lack of query params in test client
     try:
-        routine = Routine.objects.get(name=request.data['old_name'])
-        routine.delete()
-        return Response(status=status.HTTP_202_ACCEPTED)
+        identifier = request.query_params['id']
+    except MultiValueDictKeyError:
+        identifier = request.data['id']
 
+    try:
+        routine = Routine.objects.get(pk=identifier)
     except Routine.DoesNotExist:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    routine.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['POST'])
 def createExercises(request):
 
-    try:
-        # Convert routine name to ID
-        for exercise in request.data:
-            routineID = Routine.objects.get(name=exercise['routine']).id
-            exercise['routine'] = routineID
-        exercisesSerializer = ExerciseSerializer(data=request.data, many=True)
-    except MultiValueDictKeyError:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-    except TypeError:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    exercisesSerializer = ExerciseSerializer(data=request.data, many=True)
 
     if exercisesSerializer.is_valid():
 
@@ -105,6 +92,7 @@ def createExercises(request):
         return Response(exercisesSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+#  NEEDS WORK
 @api_view(['POST'])
 def createExercise(request):
 
@@ -131,13 +119,11 @@ def createExercise(request):
         exercises = Exercise.objects.filter(routine=routine)
         totalTime = updateTotalTime(exercises)
         routine.total_time = totalTime
-        print(totalTime)
         routine.save()
 
         return Response(exerciseSerializer.data)
 
     else:
-        print(exerciseSerializer.errors)
         return Response(exerciseSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -145,7 +131,7 @@ def createExercise(request):
 def deleteExercise(request):
 
     try:
-        exercise = Exercise.objects.get(name=request.data['name'], position=request.data['position'], routine__name=request.data['routine'])
+        exercise = Exercise.objects.get(pk=request.data['id'])
         exercise.delete()
 
         # Update the total time. This needs to change
