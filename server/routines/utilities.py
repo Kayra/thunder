@@ -10,10 +10,3 @@ def updateTotalTime(exercises):
         totalTime += exercise.completion_time
 
     return totalTime
-
-
-def returnRoutineObject(pk):
-
-    routine = Routine.objects.get(pk=pk)
-
-    return routine

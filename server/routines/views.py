@@ -8,7 +8,7 @@ from .models import Routine, Exercise
 
 from .serializers import RoutineSerializer, ExerciseSerializer, FullRoutineSerializer
 
-from .utilities import updateTotalTime, returnRoutineObject
+from .utilities import updateTotalTime
 
 
 @api_view(['GET'])
@@ -94,14 +94,6 @@ def createExercises(request):
 
 @api_view(['POST'])
 def createExercise(request):
-
-    # try:
-    #     routine = returnRoutineObject(request.data['routine'])
-    # except MultiValueDictKeyError:
-    #     return Response(status=status.HTTP_400_BAD_REQUEST)
-
-    # exerciseSerializer = ExerciseSerializer(data=request.data, partial=True)
-    # exerciseSerializer.routine = routine
 
     exerciseSerializer = ExerciseSerializer(data=request.data)
 
