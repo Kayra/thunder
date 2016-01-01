@@ -1,5 +1,4 @@
 from datetime import timedelta
-from .models import Routine
 
 
 def updateTotalTime(exercises):
