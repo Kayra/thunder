@@ -11,12 +11,13 @@ def createExerciseForAPI(number=1):
     """
         Convinience function to create a test exercise
     """
+    routine = Routine.objects.get(name='test2')
 
     exerciseToCreate = {}
     exerciseToCreate['name'] = 'textExercise' + str(number)
     exerciseToCreate['completion_time'] = '00:01:00'
     exerciseToCreate['position'] = str(number)
-    exerciseToCreate['routine'] = 'test2'
+    exerciseToCreate['routine'] = routine.id
 
     return exerciseToCreate
 
@@ -149,7 +150,7 @@ class RoutineAPITests(TestCase):
         response = self.client.post(url, exerciseToCreate)
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
-        exerciseFromDB = Exercise.objects.get(name=exerciseToCreate['name'], routine__name=exerciseToCreate['routine'], position=exerciseToCreate['position'])
+        exerciseFromDB = Exercise.objects.get(name=exerciseToCreate['name'], routine__id=exerciseToCreate['routine'], position=exerciseToCreate['position'])
         self.assertEquals(exerciseFromDB.id, response.data['id'])  # Make sure the exercise created via the API is in the DB
 
     def test_deleteExercise(self):

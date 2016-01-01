@@ -64,7 +64,7 @@ def deleteRoutine(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     routine.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)
+    return Response(status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(['POST'])
@@ -95,9 +95,15 @@ def createExercises(request):
 @api_view(['POST'])
 def createExercise(request):
 
-    routine = returnRoutineObject(request.data['routineId'])
+    # try:
+    #     routine = returnRoutineObject(request.data['routine'])
+    # except MultiValueDictKeyError:
+    #     return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    exerciseSerializer = ExerciseSerializer(data=request.data, routine=routine)
+    # exerciseSerializer = ExerciseSerializer(data=request.data, partial=True)
+    # exerciseSerializer.routine = routine
+
+    exerciseSerializer = ExerciseSerializer(data=request.data)
 
     if exerciseSerializer.is_valid():
 
