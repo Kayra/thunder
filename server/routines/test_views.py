@@ -126,11 +126,12 @@ class RoutineAPITests(TestCase):
         exercisesToCreate = []
         for index in range(0, 3):
             exercisesToCreate.append(createExerciseForAPI(index))
-        response = self.client.post(url, exercisesToCreate)
+        exercisesToCreateJson = json.dumps(exercisesToCreate)
+        response = self.client.post(url, exercisesToCreateJson, content_type='application/json')
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
-        exercisesFromDB = Exercise.objects.get(routine=response.data[0]['routine'])
-        self.assertEquals(exercisesFromDB, response.data)  # Make sure the exercises created via the API are in the DB
+        for exercise in response.data:
+            self.assertEquals(Exercise.objects.filter(pk=exercise['id']).count(), 1)  # Make sure the exercises created via the API are in the DB
 
     def test_createExercise(self):
 
