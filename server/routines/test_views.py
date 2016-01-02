@@ -56,7 +56,7 @@ class RoutineAPITests(TestCase):
             A routine and associated exercises should be returned when a correct id is passed as a parameter
         """
 
-        url = reverse('routines:get_routine')
+        url = reverse('routines:get_full_routine')
 
         response = self.client.get(url, {'wrong': 'wrong'})
         self.assertEquals(response.status_code, 400)  # Make sure bad params return error response
