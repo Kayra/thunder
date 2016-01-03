@@ -50,7 +50,7 @@
 
             vm.createRoutine(routineJson);
 
-            $state.go('add_exercises');
+            $state.go('create_exercises');
 
         };
 
