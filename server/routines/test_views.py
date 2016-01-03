@@ -48,7 +48,8 @@ class RoutineAPITests(TestCase):
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         routinesFromDB = Routine.objects.all()
-        self.assertEquals(routinesFromDB, response.data)  # Make sure routines from API match routines in routinesFromDb
+        for routine in response.data:
+            self.assertTrue(routinesFromDB.filter(pk=routine['id']).exists())  # Make sure routines from API match routines in routinesFromDb
 
     def test_getRoutine(self):
 
