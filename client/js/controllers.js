@@ -1,21 +1,25 @@
 (function(){
 
-    var routineAppControllers = angular.module('routineApp.controllers', [        'routineApp.filters',
+    var routineAppControllers = angular.module('routineApp.controllers', ['routineApp.filters',
                 'ngCookies',
                 ]);
 
 
     routineAppControllers.controller('RoutineListController', ['RoutineService', function(RoutineService) {
 
-        var ctrl = this;
+        var vm = this;
 
-        ctrl.getRoutines = function() {
-            RoutineService.getRoutines().then(function(response){
-                ctrl.routines = response.data;
+        vm.getRoutines = function() {
+            RoutineService.getRoutines()
+            .success(function(response){
+                vm.routines = response.data;
             })
+            .error(function() {
+                // Need error handling
+            });
         }
 
-        ctrl.getRoutines();
+        vm.getRoutines();
 
     }]);
 

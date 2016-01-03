@@ -9,7 +9,7 @@
         var routine = {};
 
         routine.getRoutines = function() {
-            return $http.get(domain + 'api/get/routines');
+            return $http.get(domain + 'routines/get-routines');
         };
 
         routine.getRoutine = function(routineName) {
