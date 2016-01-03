@@ -98,12 +98,12 @@ class RoutineAPITests(TestCase):
 
         url = reverse('routines:delete_routine')
 
-        response = self.client.delete(url, {'wrong': 'wrong'})
+        response = self.client.delete(url, {'wrong': 'wrong'}, content_type='application/json')
         self.assertEquals(response.status_code, 400)  # Make sure bad parameters return error response
 
         routineToDelete = Routine.objects.all()[:1].get()
         routineToDeleteJson = json.dumps({'id': routineToDelete.id})
-        response = self.client.delete(url, routineToDeleteJson)
+        response = self.client.delete(url, routineToDeleteJson, content_type='application/json')
         self.assertEquals(response.status_code, 204)  # Make sure valid request returns success response
 
         with self.assertRaises(Routine.DoesNotExist):

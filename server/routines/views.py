@@ -64,7 +64,7 @@ def deleteRoutine(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     routine.delete()
-    return Response(status=status.HTTP_202_ACCEPTED)
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['POST'])
@@ -138,8 +138,3 @@ def deleteExercise(request):
     routine.save()
 
     return Response(status=status.HTTP_202_ACCEPTED)
-
-
-
-
-
