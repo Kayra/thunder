@@ -48,7 +48,7 @@ class RoutineAPITests(TestCase):
         self.assertEquals(response.status_code, 200)  # Make sure valid request returns success response
 
         routinesFromDB = Routine.objects.all()
-        self.assertEquals(routinesFromDB, response.data)  # Make sure routines from API match routines in routinesFromDbS
+        self.assertEquals(routinesFromDB, response.data)  # Make sure routines from API match routines in routinesFromDb
 
     def test_getRoutine(self):
 
@@ -162,16 +162,16 @@ class RoutineAPITests(TestCase):
 
         url = reverse('routines:delete_exercise')
 
-        response = self.client.post(url)
+        response = self.client.delete(url)
         self.assertEquals(response.status_code, 400)  # Make sure no params return error response
 
-        response = self.client.delete(url, {'wrong': 'wrong'})
+        response = self.client.delete(url, {'wrong': 'wrong'}, content_type='application/json')
         self.assertEquals(response.status_code, 400)  # Make sure bad parameters return error response
 
         exerciseToDelete = Exercise.objects.all()[:1].get()
-        exerciseToDeleteJson = json.dumps({'id': exerciseToDelete.id})
-        response = self.client.delete(url, exerciseToDeleteJson)
-        self.assertEquals(response.status_code, 204)  # Make sure valid request returns success response
+        exerciseToDeleteJson = json.dumps({'id': exerciseToDelete.id, 'routine': exerciseToDelete.routine.id})
+        response = self.client.delete(url, exerciseToDeleteJson, content_type='application/json')
+        self.assertEquals(response.status_code, 202)  # Make sure valid request returns success response
 
         with self.assertRaises(Exercise.DoesNotExist):
             Exercise.objects.get(pk=exerciseToDelete.id)  # Make sure the exercise no longer exists in the DB

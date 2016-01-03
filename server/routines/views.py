@@ -117,18 +117,29 @@ def createExercise(request):
 @api_view(['DELETE'])
 def deleteExercise(request):
 
+    #  Handle both query params and data to satisfy the lack of query params in test client
     try:
-        exercise = Exercise.objects.get(pk=request.data['id'])
-        exercise.delete()
-
-        # Update the total time. This needs to change
-        routine = Routine.objects.get(name=request.data['routine'])
-        exercises = Exercise.objects.filter(routine=routine)
-        totalTime = updateTotalTime(exercises)
-        routine.total_time = totalTime
-        routine.save()
-
-        return Response(status=status.HTTP_202_ACCEPTED)
-
+        exercise = Exercise.objects.get(pk=request.query_params['id'])
+    except MultiValueDictKeyError:
+        try:
+            exercise = Exercise.objects.get(pk=request.data['id'])
+        except MultiValueDictKeyError:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
     except Exercise.DoesNotExist:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    exercise.delete()
+
+    # Update the total time. This needs to change
+    routine = Routine.objects.get(pk=request.data['routine'])
+    exercises = Exercise.objects.filter(routine=routine)
+    totalTime = updateTotalTime(exercises)
+    routine.total_time = totalTime
+    routine.save()
+
+    return Response(status=status.HTTP_202_ACCEPTED)
+
+
+
+
+
