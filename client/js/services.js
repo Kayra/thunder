@@ -20,8 +20,8 @@
             });
         };
 
-        routine.postRoutine = function(routineJson) {
-            return $http.post(domain + 'api/post/routine', routineJson);
+        routine.createRoutine = function(routineJson) {
+            return $http.post(domain + 'routines/create-routine', routineJson);
         };
 
         routine.postRoutineDelete = function(routineJson) {

@@ -8,11 +8,10 @@
     routineAppControllers.controller('RoutineListController', ['RoutineService', function(RoutineService) {
 
         var vm = this;
-
+        console.log('HIT');
         vm.getRoutines = function() {
             RoutineService.getRoutines()
             .success(function(response){
-                console.log(response);
                 vm.routines = response;
             })
             .error(function() {
@@ -25,27 +24,31 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineAddRoutineController', ['$cookies', 'RoutineService', '$state', function($cookies, RoutineService, $state) {
+    routineAppControllers.controller('RoutineAddRoutineController', ['RoutineService', '$cookies', '$state', function(RoutineService, $cookies, $state) {
 
-        this.postRoutine = function(routineJson){
-            RoutineService.postRoutine(routineJson).then(function(response){
-                console.log(response);
+        var vm = this;
+
+        vm.createRoutine = function(routineJson){
+            RoutineService.createRoutine(routineJson)
+            .success(function(response){
+
+            })
+            .error(function(){
+                // Need error handling
             });
         };
 
-        this.submit = function($event) {
-
-            $event.preventDefault();
+        vm.submit = function() {
 
             var routineObj = {};
 
-            routineObj.name = this.routine.name;
+            routineObj.name = vm.routine.name;
 
             $cookies.put('routine', routineObj.name);
 
             var routineJson = angular.toJson(routineObj);
 
-            this.postRoutine(routineJson);
+            vm.createRoutine(routineJson);
 
             $state.go('add_exercises');
 

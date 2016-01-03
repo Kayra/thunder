@@ -1,4 +1,4 @@
-<div ng-controller="RoutineListController as list">
+<div>
 <table class="routine_list">
     <thead>
         <tr>
@@ -7,15 +7,15 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="routine in list.routines">
-            <td>[[ routine.name ]]</td>
-            <td>[[ routine.total_time ]]</td>
-            <td><a href="/use/[[ routine.name ]]"><button>Use</button></a></td>
-            <td><a href="/edit/[[ routine.name ]]"><button>Edit</button></a></td>
+        <tr ng-repeat="routine in vm.routines">
+            <td>{{ routine.name }}</td>
+            <td>{{ routine.total_time }}</td>
+            <td><a href="/use/{{ routine.name }}"><button>Use</button></a></td>
+            <td><a href="/edit/{{ routine.name }}"><button>Edit</button></a></td>
         </tr>
     </tbody>
 
 </table>
 
-<a href="/add_routine"><button>Add new routine</button></a>
+<a href="/create_routine"><button>Add new routine</button></a>
 </div>

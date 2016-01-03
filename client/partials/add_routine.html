@@ -1,9 +1,26 @@
-<h2>Please enter the name of your routine</h2>
+<form name="routineCreate" novalidate ng-submit='vm.submit()'>
 
-<form method="POST" action="" class="routine_add_routine" ng-controller="RoutineAddRoutineController as add">
+    <label for="routine-name">Please enter the name of your new routine</label>
 
-    <input maxlength="255" name="name" type="text" ng-model="add.routine.name">
+    <div class="form-group">
+        <input name="name"
+        ng-model="vm.routine.name"
+        id="routine-name"
+        required
+        ng-maxlength="255"
+        ng-focus
+        type="text"
+        placeholder="Routine name"
+        class="form-control">
+    </div>
 
-    <input type="submit" ng-click="add.submit($event)" value="Continue">
+    <div class="error"
+    ng-show="vm.routine.name.$dirty && vm.routine.name.$invalid && !vm.routine.name.$focused"
+    ng-messages="vm.routine.$error">
+        <p ng-message="required">Please enter a name.</p>
+        <p ng-message="maxlength">Please keep the routine name shorter than 255 characters.</p>
+    </div>
+
+    <button type="submit" ng-disabled="routineCreate.$invalid" class="btn btn-primary">Continue</button>
 
 </form>
