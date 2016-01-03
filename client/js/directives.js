@@ -1,6 +1,6 @@
 (function(){
 
-    var routineAppDirectives = angular.module('routineApp', []);
+    var routineAppDirectives = angular.module('routineApp.directives', []);
 
     routineAppDirectives.directive('ngFocus', [function() {
 

@@ -7,7 +7,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="routine in vm.routines">
+        <tr ng-repeat="routine in list.routines">
             <td>{{ routine.name }}</td>
             <td>{{ routine.total_time }}</td>
             <td><a href="/use/{{ routine.name }}"><button>Use</button></a></td>
