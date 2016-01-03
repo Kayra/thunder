@@ -12,7 +12,8 @@
         vm.getRoutines = function() {
             RoutineService.getRoutines()
             .success(function(response){
-                vm.routines = response.data;
+                console.log(response);
+                vm.routines = response;
             })
             .error(function() {
                 // Need error handling
