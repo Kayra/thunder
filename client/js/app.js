@@ -31,12 +31,12 @@
             .state('create_routine', {
                 url: '/create_routine',
                 templateUrl: '/partials/create_routine.html',
-                controller: 'RoutineAddRoutineController as create',
+                controller: 'RoutineCreateRoutineController as create',
             })
             .state('create_exercises', {
                 url: '/create_exercises',
                 templateUrl: '/partials/create_exercises.html',
-                controller: 'RoutineAddExercisesController as create',
+                controller: 'RoutineCreateExercisesController as create',
             })
             .state('edit_routine', {
                 url: '/edit/:routineName',

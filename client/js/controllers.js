@@ -24,7 +24,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineAddRoutineController', ['RoutineService', '$cookies', '$state', function(RoutineService, $cookies, $state) {
+    routineAppControllers.controller('RoutineCreateRoutineController', ['RoutineService', '$cookies', '$state', function(RoutineService, $cookies, $state) {
 
         var vm = this;
 
@@ -57,7 +57,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineAddExercisesController', ['$cookies', 'RoutineService', '$state', function($cookies, RoutineService, $state) {
+    routineAppControllers.controller('RoutineCreateExercisesController', ['$cookies', 'RoutineService', '$state', function($cookies, RoutineService, $state) {
 
         var ctrl = this;
 
