@@ -28,8 +28,8 @@
             return $http.post(domain + 'api/post/routine-delete', routineJson)
         };
 
-        routine.postExercises = function(exercisesJson) {
-            return $http.post(domain + 'api/post/exercises', exercisesJson);
+        routine.createExercises = function(exercisesJson) {
+            return $http.post(domain + 'routines/create-exercises', exercisesJson);
         };
 
         routine.postExercise = function(exerciseJson) {
@@ -43,5 +43,23 @@
         return routine;
 
     }]);
+
+    routineAppServices.factory("SharedProperties", function() {
+
+        var property = {};
+
+        var value;
+
+        property.getProperty = function() {
+            return value;
+        };
+
+        property.setProperty = function(newValue) {
+            value = newValue;
+        };
+
+        return property;
+
+    });
 
 })();

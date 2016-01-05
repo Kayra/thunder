@@ -8,7 +8,7 @@
     routineAppControllers.controller('RoutineListController', ['RoutineService', function(RoutineService) {
 
         var vm = this;
-        console.log('HIT');
+
         vm.getRoutines = function() {
             RoutineService.getRoutines()
             .success(function(response){
@@ -24,14 +24,14 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineCreateRoutineController', ['RoutineService', '$cookies', '$state', function(RoutineService, $cookies, $state) {
+    routineAppControllers.controller('RoutineCreateRoutineController', ['RoutineService', 'SharedProperties', '$cookies', '$state', function(RoutineService, SharedProperties, $cookies, $state) {
 
         var vm = this;
 
-        vm.createRoutine = function(routineJson){
+        vm.createRoutine = function(routineJson) {
             RoutineService.createRoutine(routineJson)
-            .success(function(response){
-
+            .success(function(response) {
+                SharedProperties.setProperty(response.id);
             })
             .error(function(){
                 // Need error handling
@@ -57,42 +57,46 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineCreateExercisesController', ['$cookies', 'RoutineService', '$state', function($cookies, RoutineService, $state) {
+    routineAppControllers.controller('RoutineCreateExercisesController', ['$cookies', 'RoutineService', 'SharedProperties', '$state', function($cookies, RoutineService, SharedProperties, $state) {
 
-        var ctrl = this;
+        var vm = this;
 
-        ctrl.exercises = [{position: '1'}, {position: '2'}, {position: '3'}, {position: '4'}, {position: '5'}];
+        vm.exercises = [{position: '1'}, {position: '2'}, {position: '3'}, {position: '4'}, {position: '5'}];
 
-        ctrl.addNewExercise = function() {
-            var newExercisePosition = ctrl.exercises.length + 1;
-            ctrl.exercises.push({'position': newExercisePosition});
+        vm.addNewExercise = function() {
+            var newExercisePosition = vm.exercises.length + 1;
+            vm.exercises.push({'position': newExercisePosition});
         };
 
-        ctrl.removeExercise = function() {
-            var lastExercise = ctrl.exercises.length - 1;
-            ctrl.exercises.splice(lastExercise);
+        vm.removeExercise = function() {
+            var lastExercise = vm.exercises.length - 1;
+            vm.exercises.splice(lastExercise);
         };
 
-        ctrl.postExercises = function(exercisesJson){
-            RoutineService.postExercises(exercisesJson).then(function(response){
-                console.log(response);
+        vm.createExercises = function(exercisesJson){
+            RoutineService.createExercises(exercisesJson)
+            .success(function(response) {
+
+            })
+            .error(function() {
+                // Need error handling
             });
         };
 
-        ctrl.submit = function($event) {
-
-            $event.preventDefault();
+        vm.submit = function() {
 
             var exerciseObjs = [];
 
-            angular.forEach(ctrl.exercises, function(exercise, index){
+            var routineId = SharedProperties.getProperty();
+
+            angular.forEach(vm.exercises, function(exercise, index){
                 if (exercise.name) {
 
                     var exerciseObj = {};
                     exerciseObj.position = exercise.position;
                     exerciseObj.name = exercise.name;
                     exerciseObj.completion_time = "00:" + exercise.minutes + ":" + exercise.seconds;
-                    exerciseObj.routine = $cookies.get('routine');
+                    exerciseObj.routine = routineId;
 
                     exerciseObjs.push(exerciseObj);
 
@@ -100,9 +104,9 @@
             });
 
             var exercisesJson = angular.toJson(exerciseObjs);
-            ctrl.postExercises(exercisesJson);
+            vm.createExercises(exercisesJson);
 
-            $state.go('list');
+            $state.go('list_routines');
         };
 
     }]);
