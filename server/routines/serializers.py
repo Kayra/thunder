@@ -19,4 +19,3 @@ class FullRoutineSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exercise
-        fields = ('name', 'completion_time', 'position', 'routine')

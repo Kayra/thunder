@@ -1,64 +1,64 @@
-<form method="POST" action="" class="routine_edit" ng-controller="RoutineEditController as edit">
+<form name="createRoutine" novalidate ng-submit='edit.submit()'>
 
     <fieldset>
         <label>Routine name</label>
-        <input maxlength="255" name="name" type="text" ng-model="edit.routine.name">
+        <div class="form-group">
+            <input name="name"
+            ng-model="edit.routine.name"
+            id="routine-name"
+            required
+            ng-maxlength="255"
+            ng-focus
+            type="text"
+            placeholder="Routine name"
+            class="form-control">
+        </div>
+
+        <div class="error"
+        ng-show="create.routine.name.$dirty && create.routine.name.$invalid && !create.routine.name.$focused"
+        ng-messages="create.routine.$error">
+            <p ng-message="required">Please enter a name.</p>
+            <p ng-message="maxlength">Please keep the routine name shorter than 255 characters.</p>
+        </div>
     </fieldset>
+
     <br>
+
     <fieldset ng-repeat="exercise in edit.exercises">
         <p>
         <label>Exercise name</label>
-        <input maxlength="255" name="name" type="text" ng-model="exercise.name" >
+         <input maxlength="255"
+                name="name"
+                type="text"
+                ng-model="exercise.name"
+                class="form-control">
 
         <label>Completion time</label>
-        <select ng-options="n for n in [] | range:0:61" ng-model="exercise.minutes" required="required">
+        <select ng-options="n for n in [] | range:0:61"
+                ng-model="exercise.minutes"
+                ng-init="exercise.minutes='00'"
+                required="required">
         </select>
         Minutes
-        <select ng-options="n for n in [] | range:0:61" ng-model="exercise.seconds" required="required">
+
+        <select ng-options="n for n in [] | range:0:61"
+                ng-model="exercise.seconds"
+                ng-init="exercise.seconds='00'"
+                required="required">
         </select>
         Seconds
 
-        <input ng-model="exercise.position" value="[[ exercise.position ]]" name="position" type="hidden">
-        <button type='button' ng-show="$last" ng-click="edit.removeExercise()"> - </button>
+        <input ng-model="exercise.position" value="{{ exercise.position }}" name="position" type="hidden">
+
+        <button type='button' ng-show="$last" ng-click="edit.removeExercise()" class="btn btn-primary"> - </button>
         </p>
     </fieldset>
 
-    <button type='button' ng-click="edit.addNewExercise()">Add exercise</button><br><br>
+    <button type='button' ng-click="edit.addNewExercise()" class="btn btn-primary">Add exercise</button><br><br>
 
-    <input type="submit" ng-click="edit.submit($event)" value="Save routine">
+    <button type="submit" ng-disabled="createRoutine.$invalid" class="btn btn-primary">Save routine</button>
 
     <br>
-    <a href="/"><button>Return to routine list</button></a>
-
-</form>
-
-<form name="createExercises">
-
-</form>
-
-<form name="createRoutine" novalidate ng-submit='create.submit()'>
-
-    <label for="routine-name">Please enter the name of your new routine</label>
-
-    <div class="form-group">
-        <input name="name"
-        ng-model="create.routine.name"
-        id="routine-name"
-        required
-        ng-maxlength="255"
-        ng-focus
-        type="text"
-        placeholder="Routine name"
-        class="form-control">
-    </div>
-
-    <div class="error"
-    ng-show="create.routine.name.$dirty && create.routine.name.$invalid && !create.routine.name.$focused"
-    ng-messages="create.routine.$error">
-        <p ng-message="required">Please enter a name.</p>
-        <p ng-message="maxlength">Please keep the routine name shorter than 255 characters.</p>
-    </div>
-
-    <button type="submit" ng-disabled="createRoutine.$invalid" class="btn btn-primary">Continue</button>
+    <a href="/"><button class="btn btn-primary">Return to routine list</button></a>
 
 </form>

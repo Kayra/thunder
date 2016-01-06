@@ -5,9 +5,13 @@
                 ]);
 
 
-    routineAppControllers.controller('RoutineListController', ['RoutineService', function(RoutineService) {
+    routineAppControllers.controller('RoutineListController', ['RoutineService', 'SharedProperties', function(RoutineService, SharedProperties) {
 
         var vm = this;
+
+        vm.setId = function(id) {
+            SharedProperties.setProperty(id);
+        };
 
         vm.getRoutines = function() {
             RoutineService.getRoutines()
@@ -85,9 +89,9 @@
 
         vm.submit = function() {
 
-            var exerciseObjs = [];
-
             var routineId = SharedProperties.getProperty();
+
+            var exerciseObjs = [];
 
             angular.forEach(vm.exercises, function(exercise, index){
                 if (exercise.name) {
@@ -112,109 +116,117 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineEditController', ['RoutineService', '$location', function(RoutineService, $location) {
+    routineAppControllers.controller('RoutineEditController', ['RoutineService', 'SharedProperties', '$location', function(RoutineService, SharedProperties, $location) {
 
-        var ctrl = this;
+        var vm = this;
 
-        var routineName = $location.url().split('/')[2];
+        var routineId = SharedProperties.getProperty();
 
-        ctrl.routine = {name:routineName, total_time: '00:00:00'};
+        vm.getRoutine = function(routineId) {
+            RoutineService.getRoutine(routineId)
+            .success(function(response){
+                vm.routine = response;
+            })
+            .error(function(){
 
-        ctrl.routine.old_name = ctrl.routine.name;
-
-        ctrl.exercises = [];
-
-        ctrl.getRoutine = function(routineName) {
-            RoutineService.getRoutine(routineName).then(function(response){
-                ctrl.exercises = response.data;
-                ctrl.formatCompletionTimes(ctrl.exercises);
             });
         };
 
-        ctrl.getRoutine(ctrl.routine.name)
+        vm.getRoutine(routineId);
+
+        vm.getFullRoutine = function(routineId) {
+            RoutineService.getFullRoutine(routineId)
+            .success(function(response){
+                console.log(response);
+                vm.exercises = response;
+                vm.formatCompletionTimes(vm.exercises);
+            })
+            .error(function(){
+
+            });
+        };
+
+        vm.getFullRoutine(routineId);
 
         // Format the completion time to fit in the form
-        ctrl.formatCompletionTimes = function(exercises){
+        vm.formatCompletionTimes = function(exercises){
             angular.forEach(exercises, function(exercise, index){
 
                 var completion_time = exercise.completion_time.split(":");
 
                 exercise.minutes = completion_time[1];
                 exercise.seconds = completion_time[2];
-
+                console.log(exercise);
             });
         }
 
 
-        ctrl.addNewExercise = function() {
-            var newExercisePosition = ctrl.exercises.length + 1;
-            ctrl.exercises.push({'position': newExercisePosition});
+        vm.addNewExercise = function() {
+            var newExercisePosition = vm.exercises.length + 1;
+            vm.exercises.push({'position': newExercisePosition});
         };
 
-        ctrl.removeExercise = function() {
-            var lastExercise = ctrl.exercises.length - 1;
+        vm.removeExercise = function() {
+            var lastExercise = vm.exercises.length - 1;
 
             // delete exercise from the database
-            var exerciseToDelete = ctrl.exercises[lastExercise];
-            exerciseToDelete.routine = ctrl.routine.name;
-            ctrl.postExerciseDelete(exerciseToDelete);
+            vm.deleteExercise(vm.exercises[lastExercise].id);
 
-            ctrl.exercises.splice(lastExercise);
+            vm.exercises.splice(lastExercise);
         };
 
-        ctrl.postExercise = function(exercise) {
-            RoutineService.postExercise(exercise).then(function(response){
-                console.log(response);
+        vm.editExercise = function(exerciseJson) {
+            RoutineService.editExercise(exerciseJson)
+            .success(function(response){
+
+            })
+            .error(function(){
+
             });
         };
 
-        ctrl.postRoutine = function(routine) {
-            RoutineService.postRoutine(routine).then(function(response){
-                console.log(response);
+        vm.editRoutine = function(routineJson) {
+            RoutineService.editRoutine(routineJson)
+            .success(function(response){
+
+            })
+            .error(function(){
+
             });
         };
 
-        ctrl.postRoutineDelete = function(routine) {
-            RoutineService.postRoutineDelete(routine).then(function(response){
+        vm.deleteExercise = function(exercise) {
+            RoutineService.postExerciseDelete(exerciseId)
+            .success(function(response){
                 console.log(response);
+            })
+            .error(function(){
+
             });
         };
 
-        ctrl.postExerciseDelete = function(exercise) {
-            RoutineService.postExerciseDelete(exercise).then(function(response){
-                console.log(response);
-            });
-        };
+        vm.submit = function() {
 
-        ctrl.submit = function($event) {
-
-            $event.preventDefault();
-
-            // Prepare and post the routine
-            var routineJson = angular.toJson(ctrl.routine);
-            ctrl.postRoutine(routineJson);
+            var routineJson = angular.toJson(vm.routine);
+            vm.editRoutine(routineJson);
 
             var exerciseObjs = [];
 
-            angular.forEach(ctrl.exercises, function(exercise, index){
+            angular.forEach(vm.exercises, function(exercise, index){
 
                 var exerciseObj = {};
 
+                exerciseObj.id = exercise.id;
                 exerciseObj.position = exercise.position;
                 exerciseObj.name = exercise.name;
                 exerciseObj.completion_time = "00:" + exercise.minutes + ":" + exercise.seconds;
-                exerciseObj.routine = ctrl.routine.name;
+                exerciseObj.routine = vm.routine.id;
 
                 var exerciseJson = angular.toJson(exerciseObj);
-
-                ctrl.postExercise(exerciseJson);
+                // console.log(exerciseJson);
+                vm.editExercise(exerciseJson);
 
             });
-
-            // If the routine name has changed then delete the old routine
-            if (ctrl.routine.name != ctrl.routine.old_name) {
-                ctrl.postRoutineDelete(ctrl.routine);
-            }
 
         };
 

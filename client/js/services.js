@@ -12,10 +12,18 @@
             return $http.get(domain + 'routines/get-routines');
         };
 
-        routine.getRoutine = function(routineName) {
-            return $http.get(domain + 'api/get/routine', {
+        routine.getRoutine = function(routineId) {
+            return $http.get(domain + 'routines/get-routine', {
                 params: {
-                    routine: routineName
+                    id: routineId
+                }
+            });
+        };
+
+        routine.getFullRoutine = function(routineId) {
+            return $http.get(domain + 'routines/get-full-routine', {
+                params: {
+                    id: routineId
                 }
             });
         };
@@ -24,20 +32,28 @@
             return $http.post(domain + 'routines/create-routine', routineJson);
         };
 
-        routine.postRoutineDelete = function(routineJson) {
-            return $http.post(domain + 'api/post/routine-delete', routineJson)
+        routine.editRoutine = function(routineJson) {
+            return $http.put(domain + 'routines/edit-routine', routineJson)
+        };
+
+        routine.deleteRoutine = function(routineId) {
+            return $http.post(domain + 'routines/delete-routine', routineId)
         };
 
         routine.createExercises = function(exercisesJson) {
             return $http.post(domain + 'routines/create-exercises', exercisesJson);
         };
 
-        routine.postExercise = function(exerciseJson) {
-            return $http.post(domain + 'api/post/exercise', exerciseJson)
+        routine.createExercise = function(exerciseJson) {
+            return $http.post(domain + 'routines/create-exercise', exerciseJson)
         };
 
-        routine.postExerciseDelete = function(exerciseJson) {
-            return $http.post(domain + 'api/post/exercise-delete', exerciseJson)
+        routine.editExercise = function(exerciseJson) {
+            return $http.put(domain + 'routines/edit-exercise', exerciseJson)
+        };
+
+        routine.deleteExercise = function(exerciseId) {
+            return $http.post(domain + 'routines/delete-exercise', exerciseId)
         };
 
         return routine;

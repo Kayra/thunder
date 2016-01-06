@@ -24,6 +24,25 @@ def getRoutines(request):
 
 
 @api_view(['GET'])
+def getRoutine(request):
+
+    try:
+        identifier = request.query_params['id']
+    except MultiValueDictKeyError:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        routine = Routine.objects.get(pk=identifier)
+    except Routine.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    except TypeError:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializedRoutine = RoutineSerializer(routine)
+    return Response(serializedRoutine.data)
+
+
+@api_view(['GET'])
 def getFullRoutine(request):
 
     try:
@@ -47,6 +66,24 @@ def createRoutine(request):
 
     else:
         return Response(routineSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def editRoutine(request):
+
+    try:
+        routine = Routine.objects.get(pk=request.data['id'])
+        serializedRoutine = RoutineSerializer(routine, data=request.data)
+    except MultiValueDictKeyError:
+        serializedRoutine = RoutineSerializer(data=request.data)
+    except Routine.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if serializedRoutine.is_valid():
+        serializedRoutine.save()
+        return Response(status=status.HTTP_200_OK)
+    else:
+        return Response(serializedRoutine.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])
@@ -112,6 +149,24 @@ def createExercise(request):
 
     else:
         return Response(exerciseSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def editExercise(request):
+
+    try:
+        exercise = Exercise.objects.get(pk=request.data['id'])
+        serializedExercise = ExerciseSerializer(exercise, data=request.data)
+    except MultiValueDictKeyError:
+        serializedExercise = ExerciseSerializer(data=request.data)
+    except Exercise.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if serializedExercise.is_valid():
+        serializedExercise.save()
+        return Response(status=status.HTTP_200_OK)
+    else:
+        return Response(serializedExercise.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])
