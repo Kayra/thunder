@@ -69,6 +69,9 @@ class RoutineAPITests(TestCase):
         routineId = response.data[0]['routine']['id']
         self.assertEquals(routineFromDB.id, routineId)  # Make sure the correct routine was returned
 
+    def test_getFullRoutine(self):
+        pass
+
     def test_createRoutine(self):
 
         """
@@ -90,6 +93,9 @@ class RoutineAPITests(TestCase):
 
         routineFromDB = Routine.objects.get(pk=response.data['id'])
         self.assertEquals(routineFromDB.name, response.data['name'])  # Make sure the routine created via the API is in the DB
+
+    def test_editRoutine(self):
+        pass
 
     def test_deleteRoutine(self):
 
@@ -154,6 +160,9 @@ class RoutineAPITests(TestCase):
 
         exerciseFromDB = Exercise.objects.get(name=exerciseToCreate['name'], routine__id=exerciseToCreate['routine'], position=exerciseToCreate['position'])
         self.assertEquals(exerciseFromDB.id, response.data['id'])  # Make sure the exercise created via the API is in the DB
+
+    def text_editExercise(self):
+        pass
 
     def test_deleteExercise(self):
 
