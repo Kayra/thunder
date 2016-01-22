@@ -115,11 +115,7 @@ def createExercises(request):
 
         # Update the total time. This needs to change
         try:
-            routine = Routine.objects.get(id=request.data[0]['routine'])
-            exercises = Exercise.objects.filter(routine=request.data[0]['routine'])
-            totalTime = updateTotalTime(exercises)
-            routine.total_time = totalTime
-            routine.save()
+            updateTotalTime(id=request.data[0]['routine'])
         except MultiValueDictKeyError:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -139,11 +135,7 @@ def createExercise(request):
         exerciseSerializer.save()
 
         # Update the total time. This needs to change
-        routine = Routine.objects.get(id=request.data['routine'])
-        exercises = Exercise.objects.filter(routine=routine)
-        totalTime = updateTotalTime(exercises)
-        routine.total_time = totalTime
-        routine.save()
+        updateTotalTime(request.data['routine'])
 
         return Response(exerciseSerializer.data)
 
@@ -185,11 +177,6 @@ def deleteExercise(request):
 
     exercise.delete()
 
-    # Update the total time. This needs to change
-    routine = Routine.objects.get(pk=request.data['routine'])
-    exercises = Exercise.objects.filter(routine=routine)
-    totalTime = updateTotalTime(exercises)
-    routine.total_time = totalTime
-    routine.save()
+    updateTotalTime(request.data['routine'])
 
     return Response(status=status.HTTP_202_ACCEPTED)
