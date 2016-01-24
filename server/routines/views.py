@@ -113,11 +113,7 @@ def createExercises(request):
 
         exercisesSerializer.save()
 
-        # Update the total time. This needs to change
-        try:
-            updateTotalTime(id=request.data[0]['routine'])
-        except MultiValueDictKeyError:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+        updateTotalTime(id=request.data[0]['routine'])
 
         return Response(exercisesSerializer.data)
 
@@ -134,7 +130,6 @@ def createExercise(request):
 
         exerciseSerializer.save()
 
-        # Update the total time. This needs to change
         updateTotalTime(request.data['routine'])
 
         return Response(exerciseSerializer.data)
