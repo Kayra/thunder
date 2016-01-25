@@ -137,7 +137,6 @@
         vm.getFullRoutine = function(routineId) {
             RoutineService.getFullRoutine(routineId)
             .success(function(response){
-                console.log(response);
                 vm.exercises = response;
                 vm.formatCompletionTimes(vm.exercises);
             })
@@ -156,7 +155,6 @@
 
                 exercise.minutes = completion_time[1];
                 exercise.seconds = completion_time[2];
-                console.log(exercise);
             });
         }
 
@@ -166,7 +164,7 @@
             vm.exercises.push({'position': newExercisePosition});
         };
 
-        vm.removeExercise = function() {
+        vm.deleteExerciseClick = function() {
             var lastExercise = vm.exercises.length - 1;
 
             // delete exercise from the database
@@ -195,10 +193,10 @@
             });
         };
 
-        vm.deleteExercise = function(exercise) {
-            RoutineService.postExerciseDelete(exerciseId)
+        vm.deleteExercise = function(exerciseId) {
+            RoutineService.deleteExercise(exerciseId)
             .success(function(response){
-                console.log(response);
+
             })
             .error(function(){
 
@@ -223,7 +221,6 @@
                 exerciseObj.routine = vm.routine.id;
 
                 var exerciseJson = angular.toJson(exerciseObj);
-                // console.log(exerciseJson);
                 vm.editExercise(exerciseJson);
 
             });

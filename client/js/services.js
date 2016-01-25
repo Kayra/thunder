@@ -37,7 +37,11 @@
         };
 
         routine.deleteRoutine = function(routineId) {
-            return $http.post(domain + 'routines/delete-routine', routineId)
+            return $http.post(domain + 'routines/delete-routine', {
+                params: {
+                    id: routineId
+                }
+            });
         };
 
         routine.createExercises = function(exercisesJson) {
@@ -53,7 +57,11 @@
         };
 
         routine.deleteExercise = function(exerciseId) {
-            return $http.post(domain + 'routines/delete-exercise', exerciseId)
+            return $http.delete(domain + 'routines/delete-exercise', {
+                params: {
+                    id: exerciseId
+                }
+            });
         };
 
         return routine;

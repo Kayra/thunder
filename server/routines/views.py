@@ -170,8 +170,6 @@ def deleteExercise(request):
     except Exercise.DoesNotExist:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    exercise.delete()
-
-    updateTotalTime(request.data['routine'])
+    updateTotalTime(exercise.routine.id)
 
     return Response(status=status.HTTP_202_ACCEPTED)
