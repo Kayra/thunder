@@ -132,8 +132,6 @@
             });
         };
 
-        vm.getRoutine(routineId);
-
         vm.getFullRoutine = function(routineId) {
             RoutineService.getFullRoutine(routineId)
             .success(function(response){
@@ -144,8 +142,6 @@
 
             });
         };
-
-        vm.getFullRoutine(routineId);
 
         // Format the completion time to fit in the form
         vm.formatCompletionTimes = function(exercises){
@@ -162,6 +158,16 @@
         vm.addNewExercise = function() {
             var newExercisePosition = vm.exercises.length + 1;
             vm.exercises.push({'position': newExercisePosition});
+        };
+
+        vm.createExercise = function(exerciseJson) {
+            RoutineService.createExercise(exerciseJson)
+            .success(function(response){
+
+            })
+            .error(function(){
+
+            });
         };
 
         vm.deleteExerciseClick = function() {
@@ -203,6 +209,19 @@
             });
         };
 
+        vm.findNewExercises = function(exercises) {
+
+            newExercises = [];
+
+            exercises.forEach(function(exercise){
+                if (typeof exercise.id == 'undefined') {
+                    newExercises.push(exercise);
+                }
+            });
+
+            return newExercises;
+        };
+
         vm.submit = function() {
 
             var routineJson = angular.toJson(vm.routine);
@@ -212,20 +231,42 @@
 
             angular.forEach(vm.exercises, function(exercise, index){
 
-                var exerciseObj = {};
+                if (typeof exercise.id !== 'undefined') {
 
-                exerciseObj.id = exercise.id;
-                exerciseObj.position = exercise.position;
-                exerciseObj.name = exercise.name;
-                exerciseObj.completion_time = "00:" + exercise.minutes + ":" + exercise.seconds;
-                exerciseObj.routine = vm.routine.id;
+                    var exerciseObj = {};
 
-                var exerciseJson = angular.toJson(exerciseObj);
-                vm.editExercise(exerciseJson);
+                    exerciseObj.id = exercise.id;
+                    exerciseObj.position = exercise.position;
+                    exerciseObj.name = exercise.name;
+                    exerciseObj.completion_time = "00:" + exercise.minutes + ":" + exercise.seconds;
+                    exerciseObj.routine = vm.routine.id;
+
+                    var exerciseJson = angular.toJson(exerciseObj);
+
+                    vm.editExercise(exerciseJson);
+
+                } else if (typeof exercise.id == 'undefined') {
+
+                    var exerciseObj = {};
+
+                    exerciseObj.position = exercise.position;
+                    exerciseObj.name = exercise.name;
+                    exerciseObj.completion_time = "00:" + exercise.minutes + ":" + exercise.seconds;
+                    exerciseObj.routine = vm.routine.id;
+
+                    var exerciseJson = angular.toJson(exerciseObj);
+
+                    vm.createExercise(exerciseJson);
+
+                };
 
             });
 
         };
+
+        vm.getRoutine(routineId);
+
+        vm.getFullRoutine(routineId);
 
     }]);
 
