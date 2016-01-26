@@ -145,19 +145,19 @@
 
         // Format the completion time to fit in the form
         vm.formatCompletionTimes = function(exercises){
-            angular.forEach(exercises, function(exercise, index){
+            exercises.forEach(function(exercise){
 
                 var completion_time = exercise.completion_time.split(":");
 
                 exercise.minutes = completion_time[1];
                 exercise.seconds = completion_time[2];
-            });
-        }
 
+            });
+        };
 
         vm.addNewExercise = function() {
             var newExercisePosition = vm.exercises.length + 1;
-            vm.exercises.push({'position': newExercisePosition});
+            vm.exercises.push({'position': newExercisePosition, 'minutes': '00', 'seconds': '00'});
         };
 
         vm.createExercise = function(exerciseJson) {
@@ -265,7 +265,6 @@
         };
 
         vm.getRoutine(routineId);
-
         vm.getFullRoutine(routineId);
 
     }]);

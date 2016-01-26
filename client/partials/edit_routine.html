@@ -36,14 +36,12 @@
         <label>Completion time</label>
         <select ng-options="n for n in [] | range:0:61"
                 ng-model="exercise.minutes"
-                ng-init="exercise.minutes='00'"
                 required="required">
         </select>
         Minutes
 
         <select ng-options="n for n in [] | range:0:61"
                 ng-model="exercise.seconds"
-                ng-init="exercise.seconds='00'"
                 required="required">
         </select>
         Seconds
