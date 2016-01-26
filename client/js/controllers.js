@@ -270,35 +270,42 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineUseController', ['$interval', 'RoutineService', '$location', function($interval, RoutineService, $location){
+    routineAppControllers.controller('RoutineUseController', ['RoutineService', 'SharedProperties', '$interval', '$location', function( RoutineService, SharedProperties, $interval, $location){
 
-        var ctrl = this;
+        var vm = this;
 
-        var routineName = $location.url().split('/')[2];
+        var routineId = SharedProperties.getProperty();
+        console.log(routineId);
 
-        ctrl.routine = {name:routineName, total_time: '00:00:00'};
-
-        console.log(ctrl.routine);
-
-        ctrl.getRoutine = function() {
-            RoutineService.getRoutine(ctrl.routine.name).then(function(response){
-
-                ctrl.routine = response.data[0].routine;
-                ctrl.exercises = response.data;
-                ctrl.total_exercises = ctrl.exercises.length;
-                ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
-
+        vm.getRoutine = function(routineId) {
+            RoutineService.getRoutine(routineId)
+            .success(function(response){
+                vm.routine = response;
             })
-        }
+            .error(function(){
 
-        ctrl.getRoutine();
+            });
+        };
 
-        ctrl.current_position = 1;
+        vm.getFullRoutine = function(routineId) {
+            RoutineService.getFullRoutine(routineId)
+            .success(function(response){
+                vm.exercises = response;
+                vm.total_exercises = vm.exercises.length;
+                vm.current_position = 1;
+                vm.current_exercise = setCurrentExercise(vm.exercises, vm.current_position);
+            })
+            .error(function(){
 
+            });
+        };
+
+        vm.getRoutine(routineId);
+        vm.getFullRoutine(routineId);
 
         var count_down;
         var reset = false;
-        ctrl.timerStartStop = function(){
+        vm.timerStartStop = function(){
 
             // If the timer has run through completely, reset it
             if (reset) {
@@ -313,23 +320,23 @@
 
                 count_down = $interval(function(){
 
-                    if (exerciseHasEnded(ctrl.current_exercise.count_down_time)) {
+                    if (exerciseHasEnded(vm.current_exercise.count_down_time)) {
 
-                        ctrl.current_position == ctrl.current_position++;
+                        vm.current_position == vm.current_position++;
 
                         // If the last exercise has finished, stop the timer
                         // Otherwise move on to the next exercise
-                        if (ctrl.current_position > ctrl.total_exercises) {
+                        if (vm.current_position > vm.total_exercises) {
                             $interval.cancel(count_down);
                             count_down = undefined;
-                            ctrl.current_position == ctrl.current_position--;
+                            vm.current_position == vm.current_position--;
                             reset = true;
                         } else {
-                            ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
+                            vm.current_exercise = setCurrentExercise(vm.exercises, vm.current_position);
                         }
 
                     } else {
-                        countDown(ctrl.current_exercise.count_down_time);
+                        countDown(vm.current_exercise.count_down_time);
                     }
 
                 }, 1000);
@@ -337,7 +344,7 @@
 
         };
 
-        ctrl.timerReset = function(){
+        vm.timerReset = function(){
 
             if (angular.isDefined(count_down)) {
                 $interval.cancel(count_down);
@@ -350,8 +357,8 @@
 
         function exerciseReset(){
 
-            ctrl.current_position = 1;
-            ctrl.current_exercise = setCurrentExercise(ctrl.exercises, ctrl.current_position);
+            vm.current_position = 1;
+            vm.current_exercise = setCurrentExercise(vm.exercises, vm.current_position);
 
             reset = false;
 
