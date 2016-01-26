@@ -275,7 +275,6 @@
         var vm = this;
 
         var routineId = SharedProperties.getProperty();
-        console.log(routineId);
 
         vm.getRoutine = function(routineId) {
             RoutineService.getRoutine(routineId)
