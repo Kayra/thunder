@@ -151,6 +151,7 @@ def editExercise(request):
 
     if serializedExercise.is_valid():
         serializedExercise.save()
+        updateTotalTime(exercise.routine.id)
         return Response(status=status.HTTP_200_OK)
     else:
         return Response(serializedExercise.errors, status=status.HTTP_400_BAD_REQUEST)
