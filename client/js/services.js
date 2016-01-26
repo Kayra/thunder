@@ -37,7 +37,7 @@
         };
 
         routine.deleteRoutine = function(routineId) {
-            return $http.post(domain + 'routines/delete-routine', {
+            return $http.delete(domain + 'routines/delete-routine', {
                 params: {
                     id: routineId
                 }

@@ -116,7 +116,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineEditController', ['RoutineService', 'SharedProperties', '$location', function(RoutineService, SharedProperties, $location) {
+    routineAppControllers.controller('RoutineEditController', ['RoutineService', 'SharedProperties', '$location', '$state', function(RoutineService, SharedProperties, $location, $state) {
 
         var vm = this;
 
@@ -208,6 +208,16 @@
 
             });
         };
+
+        vm.deleteRoutine = function(routineId) {
+            RoutineService.deleteRoutine(routineId)
+            .success(function(response){
+                $state.go('list_routines');
+            })
+            .error(function(){
+
+            });
+        }
 
         vm.findNewExercises = function(exercises) {
 
