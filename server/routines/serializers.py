@@ -11,11 +11,3 @@ class RoutineSerializer(serializers.ModelSerializer):
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exercise
-
-
-class FullRoutineSerializer(serializers.ModelSerializer):
-
-    routine = RoutineSerializer()
-
-    class Meta:
-        model = Exercise
