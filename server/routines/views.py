@@ -3,12 +3,23 @@ from django.utils.datastructures import MultiValueDictKeyError
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import generics
 
 from .models import Routine, Exercise
 
 from .serializers import RoutineSerializer, ExerciseSerializer, FullRoutineSerializer
 
 from .utilities import updateTotalTime
+
+
+class RoutineList(generics.ListCreateAPIView):
+    queryset = Routine.objects.all()
+    serializer_class = RoutineSerializer
+
+
+class RoutineDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Routine.objects.all()
+    serializer_class = RoutineSerializer
 
 
 @api_view(['GET'])

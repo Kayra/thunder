@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from . import views
+from routines import views
 
 urlpatterns = [
 
@@ -23,5 +23,9 @@ urlpatterns = [
     url(r'^edit-exercise', views.editExercise, name='edit_exercise'),
 
     url(r'^delete-exercise', views.deleteExercise, name='delete_exercise'),
+
+    url(r'^routines/$', views.RoutineList.as_view()),
+
+    url(r'^routines/(?P<pk>[0-9]+)/$', views.RoutineDetail.as_view()),
 
 ]
