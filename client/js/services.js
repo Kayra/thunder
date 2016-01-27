@@ -37,7 +37,7 @@
         }
 
         routine.createExercises = function(exercisesJson) {
-            return $http.post(domain + 'routines/exercises/', exercisesJson);
+            return $http.post(domain + 'routines/exercises/create-many/', exercisesJson);
         };
 
         routine.createExercise = function(exerciseJson) {

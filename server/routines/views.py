@@ -1,9 +1,8 @@
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
 
 from routines.models import Routine, Exercise
-
 from routines.serializers import RoutineSerializer, ExerciseSerializer
-
 from routines.utilities import updateTotalTime
 
 
@@ -28,6 +27,21 @@ class ExerciseList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save()
         updateTotalTime(serializer.data['routine'])
+
+
+class ExerciseCreateMany(generics.CreateAPIView):
+    serializer_class = ExerciseSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, many=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        serializer.save()
+        updateTotalTime(serializer.data[0]['routine'])
 
 
 class ExerciseDetail(generics.RetrieveUpdateDestroyAPIView):

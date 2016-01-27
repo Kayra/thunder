@@ -10,6 +10,8 @@ urlpatterns = [
 
     url(r'^exercises/$', views.ExerciseList.as_view()),
 
+    url(r'^exercises/create-many/$', views.ExerciseCreateMany.as_view()),
+
     url(r'^exercises/(?P<pk>[0-9]+)/$', views.ExerciseDetail.as_view()),
 
 ]
