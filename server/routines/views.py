@@ -26,6 +26,10 @@ class ExerciseList(generics.ListCreateAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
+    def get_queryset(self):
+        routineId = self.request.query_params['routineId']
+        return Exercise.objects.filter(routine__id=routineId)
+
 
 class ExerciseDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exercise.objects.all()

@@ -16,14 +16,6 @@
             return $http.get(domain + 'routines/routines/' + routineId);
         };
 
-        routine.getFullRoutine = function(routineId) {
-            return $http.get(domain + 'routines/get-full-routine', {
-                params: {
-                    id: routineId
-                }
-            });
-        };
-
         routine.createRoutine = function(routineJson) {
             return $http.post(domain + 'routines/routines/', routineJson);
         };
@@ -36,24 +28,28 @@
             return $http.delete(domain + 'routines/routines/' + routineId + '/');
         };
 
+        routine.getExercises = function(routineId) {
+            return $http.get(domain + 'routines/exercises/', {
+                params: {
+                    routineId: routineId
+                }
+            });
+        }
+
         routine.createExercises = function(exercisesJson) {
-            return $http.post(domain + 'routines/create-exercises', exercisesJson);
+            return $http.post(domain + 'routines/exercises/', exercisesJson);
         };
 
         routine.createExercise = function(exerciseJson) {
-            return $http.post(domain + 'routines/create-exercise', exerciseJson)
+            return $http.post(domain + 'routines/exercises/', exerciseJson)
         };
 
-        routine.editExercise = function(exerciseJson) {
-            return $http.put(domain + 'routines/edit-exercise', exerciseJson)
+        routine.editExercise = function(exerciseJson, exerciseId) {
+            return $http.put(domain + 'routines/exercises/' + exerciseId + '/', exerciseJson)
         };
 
         routine.deleteExercise = function(exerciseId) {
-            return $http.delete(domain + 'routines/delete-exercise', {
-                params: {
-                    id: exerciseId
-                }
-            });
+            return $http.delete(domain + 'routines/exercises/' + exerciseId + '/');
         };
 
         return routine;

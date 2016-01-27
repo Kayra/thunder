@@ -132,8 +132,8 @@
             });
         };
 
-        vm.getFullRoutine = function(routineId) {
-            RoutineService.getFullRoutine(routineId)
+        vm.getExercises = function(routineId) {
+            RoutineService.getExercises(routineId)
             .success(function(response){
                 vm.exercises = response;
                 vm.formatCompletionTimes(vm.exercises);
@@ -141,7 +141,7 @@
             .error(function(){
 
             });
-        };
+        }
 
         // Format the completion time to fit in the form
         vm.formatCompletionTimes = function(exercises){
@@ -179,8 +179,8 @@
             vm.exercises.splice(lastExercise);
         };
 
-        vm.editExercise = function(exerciseJson) {
-            RoutineService.editExercise(exerciseJson)
+        vm.editExercise = function(exerciseJson, exerciseId) {
+            RoutineService.editExercise(exerciseJson, exerciseId)
             .success(function(response){
 
             })
@@ -253,7 +253,7 @@
 
                     var exerciseJson = angular.toJson(exerciseObj);
 
-                    vm.editExercise(exerciseJson);
+                    vm.editExercise(exerciseJson, exercise.id);
 
                 } else if (typeof exercise.id == 'undefined') {
 
@@ -275,7 +275,7 @@
         };
 
         vm.getRoutine(routineId);
-        vm.getFullRoutine(routineId);
+        vm.getExercises(routineId);
 
     }]);
 
