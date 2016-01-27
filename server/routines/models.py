@@ -10,6 +10,9 @@ class Routine(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 
 class Exercise(models.Model):
 
@@ -21,3 +24,6 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['position']
