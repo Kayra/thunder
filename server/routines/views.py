@@ -5,11 +5,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
 
-from .models import Routine, Exercise
+from routines.models import Routine, Exercise
 
-from .serializers import RoutineSerializer, ExerciseSerializer, FullRoutineSerializer
+from routines.serializers import RoutineSerializer, ExerciseSerializer, FullRoutineSerializer
 
-from .utilities import updateTotalTime
+from routines.utilities import updateTotalTime
 
 
 class RoutineList(generics.ListCreateAPIView):
@@ -20,6 +20,16 @@ class RoutineList(generics.ListCreateAPIView):
 class RoutineDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Routine.objects.all()
     serializer_class = RoutineSerializer
+
+
+class ExerciseList(generics.ListCreateAPIView):
+    queryset = Exercise.objects.all()
+    serializer_class = ExerciseSerializer
+
+
+class ExerciseDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Exercise.objects.all()
+    serializer_class = ExerciseSerializer
 
 
 @api_view(['GET'])

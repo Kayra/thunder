@@ -18,4 +18,8 @@ urlpatterns = [
 
     url(r'^routines/(?P<pk>[0-9]+)/$', views.RoutineDetail.as_view()),
 
+    url(r'^exercises/$', views.ExerciseList.as_view()),
+
+    url(r'^exercises/(?P<pk>[0-9]+)/$', views.ExerciseDetail.as_view()),
+
 ]
