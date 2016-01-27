@@ -296,8 +296,8 @@
             });
         };
 
-        vm.getFullRoutine = function(routineId) {
-            RoutineService.getFullRoutine(routineId)
+        vm.getExercises = function(routineId) {
+            RoutineService.getExercises(routineId)
             .success(function(response){
                 vm.exercises = response;
                 vm.total_exercises = vm.exercises.length;
@@ -310,7 +310,7 @@
         };
 
         vm.getRoutine(routineId);
-        vm.getFullRoutine(routineId);
+        vm.getExercises(routineId);
 
         var count_down;
         var reset = false;
