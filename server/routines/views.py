@@ -25,7 +25,19 @@ class ExerciseList(generics.ListCreateAPIView):
         routineId = self.request.query_params['routineId']
         return Exercise.objects.filter(routine__id=routineId)
 
+    def perform_create(self, serializer):
+        serializer.save()
+        updateTotalTime(serializer.data['routine'])
+
 
 class ExerciseDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
+
+    def perform_update(self, serializer):
+        serializer.save()
+        updateTotalTime(serializer.data['routine'])
+
+    def perform_destroy(self, instance):
+        instance.delete()
+        updateTotalTime(instance.routine.id)
