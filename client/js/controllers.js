@@ -189,8 +189,8 @@
             });
         };
 
-        vm.editRoutine = function(routineJson) {
-            RoutineService.editRoutine(routineJson)
+        vm.editRoutine = function(routineJson, routineId) {
+            RoutineService.editRoutine(routineJson, routineId)
             .success(function(response){
 
             })
@@ -235,7 +235,7 @@
         vm.submit = function() {
 
             var routineJson = angular.toJson(vm.routine);
-            vm.editRoutine(routineJson);
+            vm.editRoutine(routineJson, vm.routine.id);
 
             var exerciseObjs = [];
 

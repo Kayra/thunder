@@ -9,15 +9,11 @@
         var routine = {};
 
         routine.getRoutines = function() {
-            return $http.get(domain + 'routines/get-routines');
+            return $http.get(domain + 'routines/routines/');
         };
 
         routine.getRoutine = function(routineId) {
-            return $http.get(domain + 'routines/get-routine', {
-                params: {
-                    id: routineId
-                }
-            });
+            return $http.get(domain + 'routines/routines/' + routineId);
         };
 
         routine.getFullRoutine = function(routineId) {
@@ -29,19 +25,15 @@
         };
 
         routine.createRoutine = function(routineJson) {
-            return $http.post(domain + 'routines/create-routine', routineJson);
+            return $http.post(domain + 'routines/routines/', routineJson);
         };
 
-        routine.editRoutine = function(routineJson) {
-            return $http.put(domain + 'routines/edit-routine', routineJson)
+        routine.editRoutine = function(routineJson, routineId) {
+            return $http.put(domain + 'routines/routines/' + routineId +'/', routineJson);
         };
 
         routine.deleteRoutine = function(routineId) {
-            return $http.delete(domain + 'routines/delete-routine', {
-                params: {
-                    id: routineId
-                }
-            });
+            return $http.delete(domain + 'routines/routines/' + routineId + '/');
         };
 
         routine.createExercises = function(exercisesJson) {
