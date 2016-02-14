@@ -1,0 +1,48 @@
+<h1>Log in</h1>
+
+<form name="loginUser" novalidate ng-submit='login.submit()'>
+
+    <fieldset>
+        <label>Username</label>
+        <div class="form-group">
+            <input name="name"
+            ng-model="login.user.name"
+            id="username"
+            required
+            ng-focus
+            type="text"
+            placeholder="Username"
+            class="form-control">
+        </div>
+
+        <div class="error"
+        ng-show="login.user.name.$dirty && login.user.name.$invalid && !login.user.name.$focused"
+        ng-messages="login.user.$error">
+            <p ng-message="required">Please enter a username.</p>
+        </div>
+    </fieldset>
+
+
+    <fieldset>
+        <label>Password</label>
+        <div class="form-group">
+            <input name="pass"
+            ng-model="login.user.pass"
+            id="pass"
+            required
+            ng-focus
+            type="text"
+            placeholder="Password"
+            class="form-control">
+        </div>
+
+        <div class="error"
+        ng-show="login.user.pass.$dirty && login.user.pass.$invalid && !login.user.pass.$focused"
+        ng-messages="login.user.$error">
+            <p ng-message="required">Please enter a password.</p>
+        </div>
+    </fieldset>
+
+    <button type="submit" ng-disabled="loginUser.$invalid" class="btn btn-primary">Log in</button>
+
+</form>

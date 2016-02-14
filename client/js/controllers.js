@@ -418,4 +418,8 @@
     }]);
 
 
+    routineAppControllers.controller('UserLoginController', function(){
+
+    });
+
 })();

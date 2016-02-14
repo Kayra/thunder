@@ -47,7 +47,12 @@
                 url: '/use/:routineName',
                 templateUrl: '/partials/use_routine.html',
                 controller: 'RoutineUseController as use',
-            });
+            })
+            .state('login_user', {
+                url: '/login',
+                templateUrl: '/partials/login_user.html',
+                controller: 'UserLoginController as login',
+            });;
 
         $urlRouterProvider.otherwise('/');
 
