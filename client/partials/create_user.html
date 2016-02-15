@@ -1,0 +1,92 @@
+<h1>Sign up</h1>
+
+<form name="createUser" novalidate ng-submit='create.submit()'>
+
+    <fieldset>
+        <label>Username</label>
+        <div class="form-group">
+            <input name="name"
+            ng-model="create.user.name"
+            id="username"
+            required
+            ng-focus
+            type="text"
+            placeholder="Username"
+            class="form-control">
+        </div>
+
+        <div class="error"
+        ng-show="create.user.name.$dirty && create.user.name.$invalid && !create.user.name.$focused"
+        ng-messages="create.user.$error">
+            <p ng-message="required">Please enter a username.</p>
+            <p ng-message="maxlength">Please keep the username shorter than 255 characters.</p>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <label>Email address</label>
+        <div class="form-group">
+            <input name="email"
+            ng-model="create.user.email"
+            id="email"
+            required
+            ng-focus
+            type="text"
+            placeholder="Email address"
+            class="form-control">
+        </div>
+
+        <div class="error"
+        ng-show="create.user.email.$dirty && create.user.email.$invalid && !create.user.email.$focused"
+        ng-messages="create.user.$error">
+            <p ng-message="required">Please enter an email address.</p>
+            <p ng-message="maxlength">Please keep the email address shorter than 255 characters.</p>
+        </div>
+    </fieldset>
+
+
+    <fieldset>
+        <label>Password</label>
+        <div class="form-group">
+            <input name="pass"
+            ng-model="create.user.pass"
+            id="pass"
+            required
+            ng-focus
+            type="text"
+            placeholder="Password"
+            class="form-control">
+        </div>
+
+        <div class="error"
+        ng-show="create.user.pass.$dirty && create.user.pass.$invalid && !create.user.pass.$focused"
+        ng-messages="create.user.$error">
+            <p ng-message="required">Please enter a password.</p>
+            <p ng-message="maxlength">Please keep the password shorter than 255 characters.</p>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <label>Password confirmation</label>
+        <div class="form-group">
+            <input name="pass"
+            ng-model="create.user.pass_confirm"
+            id="pass_confirm"
+            required
+            ng-focus
+            type="text"
+            placeholder="Password"
+            class="form-control">
+        </div>
+
+        <div class="error"
+        ng-show="create.user.pass_confirm.$dirty && create.user.pass_confirm.$invalid && !create.user.pass_confirm.$focused"
+        ng-messages="create.user.$error">
+            <p ng-message="required">Please enter a password.</p>
+            <p ng-message="maxlength">Please keep the password shorter than 255 characters.</p>
+        </div>
+    </fieldset>
+
+    <button type="submit" ng-disabled="loginUser.$invalid" class="btn btn-primary">Log in</button>
+
+</form>

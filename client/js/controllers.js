@@ -422,4 +422,9 @@
 
     });
 
+    routineAppControllers.controller('UserCreateController', function(){
+
+    });
+
+
 })();

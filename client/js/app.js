@@ -52,7 +52,12 @@
                 url: '/login',
                 templateUrl: '/partials/login_user.html',
                 controller: 'UserLoginController as login',
-            });;
+            })
+            .state('create_user', {
+                url: '/signup',
+                templateUrl: '/partials/create_user.html',
+                controller: 'UserCreateController as create',
+            });
 
         $urlRouterProvider.otherwise('/');
 
