@@ -10,6 +10,9 @@ class RoutineList(generics.ListCreateAPIView):
     queryset = Routine.objects.all()
     serializer_class = RoutineSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class RoutineDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Routine.objects.all()
