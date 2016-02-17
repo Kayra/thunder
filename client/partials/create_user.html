@@ -48,13 +48,12 @@
     <fieldset>
         <label>Password</label>
         <div class="form-group">
-            <input name="pass"
-            ng-model="create.user.pass"
-            id="pass"
-            required
+            <input name="password"
+            ng-model="create.user.password"
+            id="password"
+            ng-required
             ng-focus
-            type="text"
-            placeholder="Password"
+            type="password"
             class="form-control">
         </div>
 
@@ -69,21 +68,22 @@
     <fieldset>
         <label>Password confirmation</label>
         <div class="form-group">
-            <input name="pass"
-            ng-model="create.user.pass_confirm"
-            id="pass_confirm"
-            required
+            <input name="confirmPassword"
+            ng-model="create.user.confirmPassword"
+            id="confirmPassword"
+            ng-required
+            compare-to="create.user.password"
             ng-focus
-            type="text"
-            placeholder="Password"
+            type="password"
             class="form-control">
         </div>
 
         <div class="error"
-        ng-show="create.user.pass_confirm.$dirty && create.user.pass_confirm.$invalid && !create.user.pass_confirm.$focused"
+        ng-show="create.user.confirmPassword.$dirty && create.user.confirmPassword.$invalid && !create.user.confirmPassword.$focused && create.user.confirmPassword.$error"
         ng-messages="create.user.$error">
             <p ng-message="required">Please enter a password.</p>
             <p ng-message="maxlength">Please keep the password shorter than 255 characters.</p>
+            <p ng-message="compareTo">Please ensure the passwords match.</p>
         </div>
     </fieldset>
 
