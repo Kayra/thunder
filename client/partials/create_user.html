@@ -1,13 +1,13 @@
 <h1>Sign up</h1>
 
-<form name="createUser" novalidate ng-submit='create.submit()'>
+<form name="createUser" novalidate ng-submit="create.submit()">
 
     <fieldset>
         <label>Username</label>
         <div class="form-group">
-            <input name="name"
-            ng-model="create.user.name"
-            id="name"
+            <input name="username"
+            ng-model="create.user.username"
+            id="username"
             required
             ng-maxlength="255"
             ng-focus
@@ -17,8 +17,8 @@
         </div>
 
         <div class="error"
-        ng-show="createUser.name.$dirty && createUser.name.$invalid && !createUser.name.$focused"
-        ng-messages="createUser.name.$error">
+        ng-show="createUser.username.$dirty && createUser.username.$invalid && !createUser.username.$focused"
+        ng-messages="createUser.username.$error">
             <p ng-message="required">Please enter a username.</p>
             <p ng-message="maxlength">Please keep the username shorter than 255 characters.</p>
         </div>

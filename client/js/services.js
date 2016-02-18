@@ -41,11 +41,11 @@
         };
 
         routine.createExercise = function(exerciseJson) {
-            return $http.post(domain + 'routines/exercises/', exerciseJson)
+            return $http.post(domain + 'routines/exercises/', exerciseJson);
         };
 
         routine.editExercise = function(exerciseJson, exerciseId) {
-            return $http.put(domain + 'routines/exercises/' + exerciseId + '/', exerciseJson)
+            return $http.put(domain + 'routines/exercises/' + exerciseId + '/', exerciseJson);
         };
 
         routine.deleteExercise = function(exerciseId) {
@@ -53,6 +53,18 @@
         };
 
         return routine;
+
+    }]);
+
+    routineAppServices.factory("UserService", ['$http', function($http) {
+
+        var user = {};
+
+        user.createUser = function(userJson) {
+            return $http.post(domain + 'users/users/', userJson);
+        };
+
+        return user;
 
     }]);
 

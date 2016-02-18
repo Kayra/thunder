@@ -420,11 +420,26 @@
 
     routineAppControllers.controller('UserLoginController', function(){
 
-    });
-
-    routineAppControllers.controller('UserCreateController', function(){
 
     });
 
+    routineAppControllers.controller('UserCreateController', ['UserService', function(UserService){
+
+        var vm = this;
+
+        vm.submit = function() {
+            console.log(vm.user);
+            var userJson = angular.toJson(vm.user);
+
+            UserService.createUser(userJson)
+            .success(function(response){
+                console.log(response);
+            })
+            .error(function(){
+
+            });
+        };
+
+    }]);
 
 })();
