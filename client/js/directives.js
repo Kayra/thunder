@@ -10,7 +10,9 @@
             restrict: 'A',
             require: 'ngModel',
             link: function(scope, element, attrs, ctrl) {
+
                 ctrl.$focused = false;
+
                 element.bind('focus', function(evt) {
                     element.addClass(focusClass);
                     scope.$apply(function() {ctrl.$focused = true;});
@@ -26,6 +28,9 @@
     routineAppDirectives.directive('compareTo', [function () {
         return {
             require: 'ngModel',
+            scope: {
+                otherModelValue: "=compareTo"
+            },
             link: function(scope, element, attrs, ngModel) {
 
                 ngModel.$validators.compareTo = function(modelValue) {
