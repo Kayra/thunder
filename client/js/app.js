@@ -5,6 +5,7 @@
         'ngResource',
         'ngMessages',
         'ngCookies',
+        'angular-jwt',
         'routineApp.services',
         'routineApp.controllers',
         'routineApp.directives'
