@@ -418,10 +418,24 @@
     }]);
 
 
-    routineAppControllers.controller('UserLoginController', function(){
+    routineAppControllers.controller('UserLoginController', ['UserService', function(UserService){
 
+        var vm = this;
 
-    });
+        vm.submit = function() {
+            console.log(vm.user);
+            var userJson = angular.toJson(vm.user);
+
+            UserService.authenticateUser(userJson)
+            .success(function(response){
+
+            })
+            .error(function(response){
+
+            });
+        };
+
+    }]);
 
     routineAppControllers.controller('UserCreateController', ['UserService', function(UserService){
 
@@ -433,6 +447,7 @@
 
             UserService.createUser(userJson)
             .success(function(response){
+                console.log('hit');
                 console.log(response);
             })
             .error(function(){
