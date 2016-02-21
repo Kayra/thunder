@@ -423,15 +423,15 @@
         var vm = this;
 
         vm.submit = function() {
-            console.log(vm.user);
+
             var userJson = angular.toJson(vm.user);
 
             UserService.authenticateUser(userJson)
             .success(function(response){
-
+                console.log(response);
             })
             .error(function(response){
-
+                console.log(response);
             });
         };
 

@@ -65,7 +65,6 @@
         };
 
         user.authenticateUser = function(userJson) {
-            console.log(userJson);
             return $http.post(domain + 'users/user-auth/', userJson);
         };
 
