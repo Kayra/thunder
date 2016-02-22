@@ -11,11 +11,15 @@
         'routineApp.directives'
     ])
 
-    .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $locationProvider, $urlRouterProvider){
+    .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $locationProvider, $urlRouterProvider, jwtInterceptorProvider){
 
         // CSRF Support
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+        // jwtInterceptorProvider.tokenGetter = ['UserService', function(UserService) {
+        //     UserService.
+        // }]
 
         // Routing
         $locationProvider.html5Mode({

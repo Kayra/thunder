@@ -418,7 +418,7 @@
     }]);
 
 
-    routineAppControllers.controller('UserLoginController', ['UserService', function(UserService){
+    routineAppControllers.controller('UserLoginController', ['UserService', 'jwtHelper', function(UserService, jwtHelper){
 
         var vm = this;
 
@@ -429,6 +429,8 @@
             UserService.authenticateUser(userJson)
             .success(function(response){
                 console.log(response);
+                var tokenPayload = jwtHelper.decodeToken(response['token']);
+                console.log(tokenPayload);
             })
             .error(function(response){
                 console.log(response);
