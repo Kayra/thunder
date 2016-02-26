@@ -430,7 +430,7 @@
             .success(function(response){
                 console.log(response);
                 var tokenPayload = jwtHelper.decodeToken(response['token']);
-                console.log(tokenPayload);
+                localStorage.setItem('token', 'JWT ' + response['token']);
             })
             .error(function(response){
                 console.log(response);
