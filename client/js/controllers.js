@@ -28,7 +28,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineCreateRoutineController', ['RoutineService', 'SharedProperties', '$cookies', '$state', function(RoutineService, SharedProperties, $cookies, $state) {
+    routineAppControllers.controller('RoutineCreateRoutineController', ['RoutineService', 'SharedProperties', '$state', function(RoutineService, SharedProperties, $state) {
 
         var vm = this;
 
@@ -48,8 +48,6 @@
 
             routineObj.name = vm.routine.name;
 
-            $cookies.put('routine', routineObj.name);
-
             var routineJson = angular.toJson(routineObj);
 
             vm.createRoutine(routineJson);
@@ -61,7 +59,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineCreateExercisesController', ['$cookies', 'RoutineService', 'SharedProperties', '$state', function($cookies, RoutineService, SharedProperties, $state) {
+    routineAppControllers.controller('RoutineCreateExercisesController', ['RoutineService', 'SharedProperties', '$state', function(RoutineService, SharedProperties, $state) {
 
         var vm = this;
 
