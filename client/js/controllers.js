@@ -428,9 +428,10 @@
 
             UserService.authenticateUser(userJson)
             .success(function(response){
-                console.log(response);
                 var tokenPayload = jwtHelper.decodeToken(response['token']);
+                console.log(tokenPayload);
                 localStorage.setItem('token', 'JWT ' + response['token']);
+                localStorage.setItem('user', tokenPayload['user_id']);
             })
             .error(function(response){
                 console.log(response);

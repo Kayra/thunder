@@ -17,13 +17,11 @@
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-        jwtInterceptorProvider.tokenGetter = ['UserService', function(UserService) {
-            var token = localStorage.getItem('token');
+        jwtInterceptorProvider.authPrefix = '';
 
-            console.log(localStorage.getItem('token'));
-
+        jwtInterceptorProvider.tokenGetter = function() {
             return localStorage.getItem('token');
-        }]
+        }
 
         $httpProvider.interceptors.push('jwtInterceptor');
 
