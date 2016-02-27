@@ -4,7 +4,7 @@ from .models import Routine, Exercise
 
 
 class RoutineSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    user = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = Routine
