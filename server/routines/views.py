@@ -13,6 +13,10 @@ class RoutineList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def get_queryset(self):
+        user = self.request.user
+        return Routine.objects.filter(user=user)
+
 
 class RoutineDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Routine.objects.all()
