@@ -68,6 +68,12 @@
             return $http.post(domain + 'users/user-auth/', userJson);
         };
 
+        user.refreshToken = function(token) {
+            return $http.post(domain + 'users/token-refresh/', token, {
+                skipAuthorization: true
+            });
+        };
+
         return user;
 
     }]);

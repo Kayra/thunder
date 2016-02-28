@@ -19,8 +19,24 @@
 
         jwtInterceptorProvider.authPrefix = '';
 
-        jwtInterceptorProvider.tokenGetter = function() {
-            return localStorage.getItem('token');
+        jwtInterceptorProvider.tokenGetter = function(jwtHelper, UserService) {
+
+            var token = localStorage.getItem('token');
+
+            if (token && !jwtHelper.isTokenExpired(token)) {
+
+                var tokenJson = (angular.toJson({'token': token}));
+
+                UserService.refreshToken(tokenJson)
+                .success(function(response){
+                    localStorage.setItem('token', response['token']);
+                });
+                // .error(function(){
+
+                // });
+            }
+
+            return "JWT " + localStorage.getItem('token');
         }
 
         $httpProvider.interceptors.push('jwtInterceptor');

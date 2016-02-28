@@ -10,4 +10,6 @@ urlpatterns = [
 
     url(r'^user-auth/', 'rest_framework_jwt.views.obtain_jwt_token'),
 
+    url(r'^token-refresh/', 'rest_framework_jwt.views.refresh_jwt_token'),
+
 ]
