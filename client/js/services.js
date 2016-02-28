@@ -13,7 +13,7 @@
         };
 
         routine.getRoutine = function(routineId) {
-            return $http.get(domain + 'routines/routines/' + routineId);
+            return $http.get(domain + 'routines/routines/' + routineId + '/');
         };
 
         routine.createRoutine = function(routineJson) {
