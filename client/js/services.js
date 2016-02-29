@@ -56,7 +56,7 @@
 
     }]);
 
-    routineAppServices.factory("UserService", ['$http', function($http) {
+    routineAppServices.factory("UserService", ['$http', 'jwtHelper', function($http, jwtHelper) {
 
         var user = {};
 
@@ -73,6 +73,16 @@
                 skipAuthorization: true
             });
         };
+
+        user.isLoggedIn = function() {
+            var token = localStorage.getItem('token');
+
+            if (token && !jwtHelper.isTokenExpired(token)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         return user;
 

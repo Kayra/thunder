@@ -30,10 +30,10 @@
                 UserService.refreshToken(tokenJson)
                 .success(function(response){
                     localStorage.setItem('token', response['token']);
-                });
-                // .error(function(){
+                })
+                .error(function(){
 
-                // });
+                });
             }
 
             return "JWT " + localStorage.getItem('token');
@@ -52,39 +52,67 @@
                 url: '/',
                 templateUrl: '/partials/list_routines.html',
                 controller: 'RoutineListController as list',
+                authenticate: true
             })
             .state('create_routine', {
                 url: '/create_routine',
                 templateUrl: '/partials/create_routine.html',
                 controller: 'RoutineCreateRoutineController as create',
+                authenticate: true
             })
             .state('create_exercises', {
                 url: '/create_exercises',
                 templateUrl: '/partials/create_exercises.html',
                 controller: 'RoutineCreateExercisesController as create',
+                authenticate: true
             })
             .state('edit_routine', {
                 url: '/edit/:routineName',
                 templateUrl: '/partials/edit_routine.html',
                 controller: 'RoutineEditController as edit',
+                authenticate: true
             })
             .state('use_routine', {
                 url: '/use/:routineName',
                 templateUrl: '/partials/use_routine.html',
                 controller: 'RoutineUseController as use',
+                authenticate: true
             })
             .state('login_user', {
                 url: '/login',
                 templateUrl: '/partials/login_user.html',
                 controller: 'UserLoginController as login',
+                authenticate: false
             })
             .state('create_user', {
                 url: '/signup',
                 templateUrl: '/partials/create_user.html',
                 controller: 'UserCreateController as create',
+                authenticate: false
             });
 
         $urlRouterProvider.otherwise('/');
+
+    })
+
+    .run(function($rootScope, $location, UserService, $state) {
+
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+            if (!UserService.isLoggedIn()) {
+
+                $rootScope.returnTo = new Object();
+
+                if (toState.url.indexOf(":") != -1) {
+                    $rootScope.returnTo.State = toState.url.split(":")[0];
+                } else {
+                    $rootScope.returnTo.State = toState.url;
+                }
+                $rootScope.returnTo.StateParams = toParams.Id;
+
+                // $state.go('login_user');
+                $location.path('/login');
+            }
+        });
 
     });
 

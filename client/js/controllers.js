@@ -416,7 +416,7 @@
     }]);
 
 
-    routineAppControllers.controller('UserLoginController', ['UserService', 'jwtHelper', function(UserService, jwtHelper){
+    routineAppControllers.controller('UserLoginController', ['UserService', 'jwtHelper', '$state', '$rootScope', function(UserService, jwtHelper, $state, $rootScope){
 
         var vm = this;
 
@@ -427,9 +427,16 @@
             UserService.authenticateUser(userJson)
             .success(function(response){
                 var tokenPayload = jwtHelper.decodeToken(response['token']);
-                console.log(tokenPayload);
                 localStorage.setItem('token', response['token']);
                 localStorage.setItem('user', tokenPayload['user_id']);
+
+                if ($rootScope.returnTo.State && $rootScope.returnTo.StateParams && $rootScope.returnTo.State != '/login') {
+                    $location.path($rootScope.returnTo.State + $rootScope.returnToStateParams);
+                } else if ($rootScope.returnTo.State && $rootScope.returnTo.State != '/login') {
+                    $location.path($rootScope.returnTo.State);
+                } else {
+                    $state.go('list_routines');
+                }
             })
             .error(function(response){
                 console.log(response);
