@@ -97,8 +97,9 @@
 
     .run(function($rootScope, $location, UserService, $state) {
 
-        $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
-            if (!UserService.isLoggedIn()) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
+
+            if (!UserService.isLoggedIn() && toState.name!="login_user") {
 
                 $rootScope.returnTo = new Object();
 
@@ -109,12 +110,13 @@
                 }
                 $rootScope.returnTo.StateParams = toParams.Id;
 
-                // $state.go('login_user');
-                $location.path('/login');
+                $state.go('login_user');
+                event.preventDefault();
             }
-        });
 
+        });
     });
+
 
 })();
 
