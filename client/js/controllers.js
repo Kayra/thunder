@@ -416,7 +416,7 @@
     }]);
 
 
-    routineAppControllers.controller('UserLoginController', ['UserService', 'jwtHelper', '$state', '$rootScope', function(UserService, jwtHelper, $state, $rootScope){
+    routineAppControllers.controller('UserLoginController', ['UserService', 'jwtHelper', '$state', '$rootScope', '$location', function(UserService, jwtHelper, $state, $rootScope, $location){
 
         var vm = this;
 
