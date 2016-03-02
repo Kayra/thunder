@@ -28,7 +28,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineCreateRoutineController', ['RoutineService', 'SharedProperties', '$cookies', '$state', function(RoutineService, SharedProperties, $cookies, $state) {
+    routineAppControllers.controller('RoutineCreateRoutineController', ['RoutineService', 'SharedProperties', '$state', function(RoutineService, SharedProperties, $state) {
 
         var vm = this;
 
@@ -48,8 +48,6 @@
 
             routineObj.name = vm.routine.name;
 
-            $cookies.put('routine', routineObj.name);
-
             var routineJson = angular.toJson(routineObj);
 
             vm.createRoutine(routineJson);
@@ -61,7 +59,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineCreateExercisesController', ['$cookies', 'RoutineService', 'SharedProperties', '$state', function($cookies, RoutineService, SharedProperties, $state) {
+    routineAppControllers.controller('RoutineCreateExercisesController', ['RoutineService', 'SharedProperties', '$state', function(RoutineService, SharedProperties, $state) {
 
         var vm = this;
 
@@ -417,5 +415,54 @@
 
     }]);
 
+
+    routineAppControllers.controller('UserLoginController', ['UserService', 'jwtHelper', '$state', '$rootScope', function(UserService, jwtHelper, $state, $rootScope){
+
+        var vm = this;
+
+        vm.submit = function() {
+
+            var userJson = angular.toJson(vm.user);
+
+            UserService.authenticateUser(userJson)
+            .success(function(response){
+                var tokenPayload = jwtHelper.decodeToken(response['token']);
+                localStorage.setItem('token', response['token']);
+                localStorage.setItem('user', tokenPayload['user_id']);
+
+                if ($rootScope.returnTo.State && $rootScope.returnTo.StateParams && $rootScope.returnTo.State != '/login') {
+                    $location.path($rootScope.returnTo.State + $rootScope.returnToStateParams);
+                } else if ($rootScope.returnTo.State && $rootScope.returnTo.State != '/login') {
+                    $location.path($rootScope.returnTo.State);
+                } else {
+                    $state.go('list_routines');
+                }
+            })
+            .error(function(response){
+                console.log(response);
+            });
+        };
+
+    }]);
+
+    routineAppControllers.controller('UserCreateController', ['UserService', function(UserService){
+
+        var vm = this;
+
+        vm.submit = function() {
+            console.log(vm.user);
+            var userJson = angular.toJson(vm.user);
+
+            UserService.createUser(userJson)
+            .success(function(response){
+                console.log('hit');
+                console.log(response);
+            })
+            .error(function(){
+
+            });
+        };
+
+    }]);
 
 })();

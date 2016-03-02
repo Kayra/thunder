@@ -25,7 +25,7 @@
       <div class="row">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 
-          <a href="/"><h1>Thunder</h1></a>
+          <a ui-sref="list_routines"><h1>Thunder</h1></a>
 
           <div ui-view></div>
 
@@ -47,6 +47,9 @@
 
     <!-- Wrapper for reading and writing browser cookies (ngCookies) -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.js"></script>
+
+    <!-- Library to help work with JWTs -->
+    <script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

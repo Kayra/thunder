@@ -7,6 +7,8 @@ class Routine(models.Model):
     name = models.CharField(max_length=255)
     total_time = models.DurationField(default=timedelta(), blank=True)
 
+    user = models.ForeignKey('auth.User')
+
     def __str__(self):
         return self.name
 

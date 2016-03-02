@@ -15,8 +15,8 @@
         </div>
 
         <div class="error"
-        ng-show="create.routine.name.$dirty && create.routine.name.$invalid && !create.routine.name.$focused"
-        ng-messages="create.routine.$error">
+        ng-show="edit.routine.name.$dirty && edit.routine.name.$invalid && !edit.routine.name.$focused"
+        ng-messages="edit.routine.$error">
             <p ng-message="required">Please enter a name.</p>
             <p ng-message="maxlength">Please keep the routine name shorter than 255 characters.</p>
         </div>

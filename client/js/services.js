@@ -13,7 +13,7 @@
         };
 
         routine.getRoutine = function(routineId) {
-            return $http.get(domain + 'routines/routines/' + routineId);
+            return $http.get(domain + 'routines/routines/' + routineId + '/');
         };
 
         routine.createRoutine = function(routineJson) {
@@ -41,11 +41,11 @@
         };
 
         routine.createExercise = function(exerciseJson) {
-            return $http.post(domain + 'routines/exercises/', exerciseJson)
+            return $http.post(domain + 'routines/exercises/', exerciseJson);
         };
 
         routine.editExercise = function(exerciseJson, exerciseId) {
-            return $http.put(domain + 'routines/exercises/' + exerciseId + '/', exerciseJson)
+            return $http.put(domain + 'routines/exercises/' + exerciseId + '/', exerciseJson);
         };
 
         routine.deleteExercise = function(exerciseId) {
@@ -53,6 +53,38 @@
         };
 
         return routine;
+
+    }]);
+
+    routineAppServices.factory("UserService", ['$http', 'jwtHelper', function($http, jwtHelper) {
+
+        var user = {};
+
+        user.createUser = function(userJson) {
+            return $http.post(domain + 'users/users/', userJson);
+        };
+
+        user.authenticateUser = function(userJson) {
+            return $http.post(domain + 'users/user-auth/', userJson);
+        };
+
+        user.refreshToken = function(token) {
+            return $http.post(domain + 'users/token-refresh/', token, {
+                skipAuthorization: true
+            });
+        };
+
+        user.isLoggedIn = function() {
+            var token = localStorage.getItem('token');
+
+            if (token && !jwtHelper.isTokenExpired(token)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return user;
 
     }]);
 
