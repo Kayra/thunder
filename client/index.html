@@ -27,6 +27,12 @@
 
           <a ui-sref="list_routines"><h1>Thunder</h1></a>
 
+          <div ng-controller="NavController as nav">
+            <a ui-sref="login_user" ng-show="!nav.userIsLoggedIn()">Login</a>
+            <a href="#" ng-click="nav.logout()" ng-show="nav.userIsLoggedIn()" ng-cloak>Log out</a>
+          </div>
+
+
           <div ui-view></div>
 
         </div>

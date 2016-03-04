@@ -426,13 +426,14 @@
 
             UserService.authenticateUser(userJson)
             .success(function(response){
+
                 var tokenPayload = jwtHelper.decodeToken(response['token']);
                 localStorage.setItem('token', response['token']);
                 localStorage.setItem('user', tokenPayload['user_id']);
 
-                if ($rootScope.returnTo.State && $rootScope.returnTo.StateParams && $rootScope.returnTo.State != '/login') {
-                    $location.path($rootScope.returnTo.State + $rootScope.returnToStateParams);
-                } else if ($rootScope.returnTo.State && $rootScope.returnTo.State != '/login') {
+                if ($rootScope.returnTo && $rootScope.returnTo.StateParams && $rootScope.returnTo.State != '/login') {
+                    $location.path($rootScope.returnTo.State + $rootScope.returnTo.StateParams);
+                } else if ($rootScope.returnTo && $rootScope.returnTo.State != '/login') {
                     $location.path($rootScope.returnTo.State);
                 } else {
                     $state.go('list_routines');
@@ -461,6 +462,24 @@
             .error(function(){
 
             });
+        };
+
+    }]);
+
+    routineAppControllers.controller('NavController', ['UserService', '$state', function(UserService, $state){
+
+        var vm = this;
+
+        vm.logout = function() {
+
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            $state.go('login_user');
+
+        };
+
+        vm.userIsLoggedIn = function() {
+            return UserService.isLoggedIn();
         };
 
     }]);
