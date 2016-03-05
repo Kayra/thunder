@@ -7,11 +7,16 @@
 
     <h3>Exercise {{ use.current_position }} out of {{ use.total_exercises }}</h3>
 
-    <button type="button" ng-click="use.timerStartStop()">Start/Pause</button>
-
-    <button type="button" ng-click="use.timerReset()">Reset</button>
+    <button type="button" ng-click="use.previousExercise()" class="btn btn-primary">Previous</button>
+    <button type="button" ng-click="use.timerStartStop()" class="btn btn-primary">Start/Pause</button>
+    <button type="button" ng-click="use.nextExercise()" class="btn btn-primary">Next</button>
 
     <br />
 
-    <a href="/"><button>Back to rountines list</button></a>
+    <button type="button" ng-click="use.timerReset()" class="btn btn-primary">Reset</button>
+
+    <br />
+    <br />
+
+    <a href="/"><button class="btn btn-primary">Back to rountines list</button></a>
 </div>

@@ -362,6 +362,30 @@
 
         };
 
+        vm.previousExercise = function() {
+            console.log(vm.current_position);
+            if (vm.current_position - 1 >= 1) {
+                vm.current_position = vm.current_position - 1;
+                vm.current_exercise = setCurrentExercise(vm.exercises, vm.current_position);
+
+                if (angular.isDefined(count_down)) {
+                    $interval.cancel(count_down);
+                    count_down = undefined;
+                }
+            }
+        };
+
+        vm.nextExercise = function() {
+            if (vm.current_position + 1 <= vm.exercises.length) {
+                vm.current_position = vm.current_position + 1;
+                vm.current_exercise = setCurrentExercise(vm.exercises, vm.current_position);
+                if (angular.isDefined(count_down)) {
+                    $interval.cancel(count_down);
+                    count_down = undefined;
+                }
+            }
+        };
+
         function exerciseReset(){
 
             vm.current_position = 1;
@@ -411,7 +435,6 @@
             }
 
         };
-
 
     }]);
 
