@@ -5,7 +5,7 @@
                 ]);
 
 
-    routineAppControllers.controller('RoutineListController', ['RoutineService', 'SharedProperties', function(RoutineService, SharedProperties) {
+    routineAppControllers.controller('RoutineListController', ['RoutineService', 'SharedProperties', '$state', function(RoutineService, SharedProperties, $state) {
 
         var vm = this;
 
@@ -17,6 +17,9 @@
             RoutineService.getRoutines()
             .success(function(response){
                 vm.routines = response;
+                if (vm.routines.length === 0) {
+                    $state.go('create_routine')
+                }
             })
             .error(function() {
                 // Need error handling
