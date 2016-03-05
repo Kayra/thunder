@@ -51,44 +51,37 @@
             .state('list_routines', {
                 url: '/',
                 templateUrl: '/partials/list_routines.html',
-                controller: 'RoutineListController as list',
-                authenticate: true
+                controller: 'RoutineListController as list'
             })
             .state('create_routine', {
                 url: '/create_routine',
                 templateUrl: '/partials/create_routine.html',
-                controller: 'RoutineCreateRoutineController as create',
-                authenticate: true
+                controller: 'RoutineCreateRoutineController as create'
             })
             .state('create_exercises', {
                 url: '/create_exercises',
                 templateUrl: '/partials/create_exercises.html',
-                controller: 'RoutineCreateExercisesController as create',
-                authenticate: true
+                controller: 'RoutineCreateExercisesController as create'
             })
             .state('edit_routine', {
                 url: '/edit/:routineName',
                 templateUrl: '/partials/edit_routine.html',
-                controller: 'RoutineEditController as edit',
-                authenticate: true
+                controller: 'RoutineEditController as edit'
             })
             .state('use_routine', {
                 url: '/use/:routineName',
                 templateUrl: '/partials/use_routine.html',
-                controller: 'RoutineUseController as use',
-                authenticate: true
+                controller: 'RoutineUseController as use'
             })
             .state('login_user', {
                 url: '/login',
                 templateUrl: '/partials/login_user.html',
-                controller: 'UserLoginController as login',
-                authenticate: false
+                controller: 'UserLoginController as login'
             })
             .state('create_user', {
                 url: '/signup',
                 templateUrl: '/partials/create_user.html',
-                controller: 'UserCreateController as create',
-                authenticate: false
+                controller: 'UserCreateController as create'
             });
 
         $urlRouterProvider.otherwise('/');
@@ -99,7 +92,7 @@
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState) {
 
-            if (!UserService.isLoggedIn() && toState.name!="login_user") {
+            if (!UserService.isLoggedIn() && toState.name!="login_user" && toState.name!="create_user" ) {
 
                 $rootScope.returnTo = new Object();
 

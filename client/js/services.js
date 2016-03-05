@@ -61,11 +61,15 @@
         var user = {};
 
         user.createUser = function(userJson) {
-            return $http.post(domain + 'users/users/', userJson);
+            return $http.post(domain + 'users/users/', userJson, {
+                skipAuthorization: true
+            });
         };
 
         user.authenticateUser = function(userJson) {
-            return $http.post(domain + 'users/user-auth/', userJson);
+            return $http.post(domain + 'users/user-auth/', userJson, {
+                skipAuthorization: true
+            });
         };
 
         user.refreshToken = function(token) {

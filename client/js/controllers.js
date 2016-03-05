@@ -78,7 +78,7 @@
         vm.createExercises = function(exercisesJson){
             RoutineService.createExercises(exercisesJson)
             .success(function(response) {
-
+                $state.go('list_routines');
             })
             .error(function() {
                 // Need error handling
@@ -108,7 +108,6 @@
             var exercisesJson = angular.toJson(exerciseObjs);
             vm.createExercises(exercisesJson);
 
-            $state.go('list_routines');
         };
 
     }]);
@@ -469,18 +468,17 @@
 
     }]);
 
-    routineAppControllers.controller('UserCreateController', ['UserService', function(UserService){
+    routineAppControllers.controller('UserCreateController', ['UserService', '$state', function(UserService, $state){
 
         var vm = this;
 
         vm.submit = function() {
-            console.log(vm.user);
+
             var userJson = angular.toJson(vm.user);
 
             UserService.createUser(userJson)
             .success(function(response){
-                console.log('hit');
-                console.log(response);
+                $state.go('login_user');
             })
             .error(function(){
 

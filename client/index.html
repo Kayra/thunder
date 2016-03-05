@@ -29,6 +29,7 @@
 
           <div ng-controller="NavController as nav">
             <a ui-sref="login_user" ng-show="!nav.userIsLoggedIn()">Login</a>
+            <a ui-sref="create_user" ng-show="!nav.userIsLoggedIn()">Sign up</a>
             <a href="#" ng-click="nav.logout()" ng-show="nav.userIsLoggedIn()" ng-cloak>Log out</a>
           </div>
 
