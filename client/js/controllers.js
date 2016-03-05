@@ -480,7 +480,15 @@
             .success(function(response){
                 $state.go('login_user');
             })
-            .error(function(){
+            .error(function(response){
+
+                var errorString = "";
+
+                for(var error in response) {
+                    errorString += error + ': ' + response[error] + ' ';
+                }
+
+                alert(errorString);
 
             });
         };

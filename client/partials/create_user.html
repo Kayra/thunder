@@ -33,7 +33,7 @@
             ng-maxlength="255"
             required
             ng-focus
-            type="text"
+            type="email"
             placeholder="Email address"
             class="form-control">
         </div>
@@ -42,6 +42,7 @@
         ng-show="createUser.email.$dirty && createUser.email.$invalid && !createUser.email.$focused"
         ng-messages="createUser.email.$error">
             <p ng-message="required">Please enter an email address.</p>
+            <p ng-message="email">Please enter a valid email address.</p>
             <p ng-message="maxlength">Please keep the email address shorter than 255 characters.</p>
         </div>
     </fieldset>
@@ -91,6 +92,6 @@
         </div>
     </fieldset>
 
-    <button type="submit" ng-disabled="createUser.$invalid" class="btn btn-primary">Log in</button>
+    <button type="submit" ng-disabled="createUser.$invalid" class="btn btn-primary">Sign up</button>
 
 </form>
