@@ -6,8 +6,9 @@
         'ngMessages',
         'ngCookies',
         'angular-jwt',
+        'routineApp.userControllers',
+        'routineApp.routineControllers',
         'routineApp.services',
-        'routineApp.controllers',
         'routineApp.directives'
     ])
 
