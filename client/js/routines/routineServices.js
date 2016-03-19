@@ -1,10 +1,10 @@
 (function(){
 
-    var routineAppServices = angular.module('routineApp.services', []);
+    var routineServices = angular.module('routineApp.routineServices', []);
 
     var domain = 'http://127.0.0.1:8000/';
 
-    routineAppServices.factory("RoutineService", ['$http', function($http, AuthUser){
+    routineServices.factory("RoutineService", ['$http', function($http){
 
         var routine = {};
 
@@ -55,59 +55,5 @@
         return routine;
 
     }]);
-
-    routineAppServices.factory("UserService", ['$http', 'jwtHelper', function($http, jwtHelper) {
-
-        var user = {};
-
-        user.createUser = function(userJson) {
-            return $http.post(domain + 'users/users/', userJson, {
-                skipAuthorization: true
-            });
-        };
-
-        user.authenticateUser = function(userJson) {
-            return $http.post(domain + 'users/user-auth/', userJson, {
-                skipAuthorization: true
-            });
-        };
-
-        user.refreshToken = function(token) {
-            return $http.post(domain + 'users/token-refresh/', token, {
-                skipAuthorization: true
-            });
-        };
-
-        user.isLoggedIn = function() {
-            var token = localStorage.getItem('token');
-
-            if (token && !jwtHelper.isTokenExpired(token)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        return user;
-
-    }]);
-
-    routineAppServices.factory("SharedProperties", function() {
-
-        var property = {};
-
-        var value;
-
-        property.getProperty = function() {
-            return value;
-        };
-
-        property.setProperty = function(newValue) {
-            value = newValue;
-        };
-
-        return property;
-
-    });
 
 })();
