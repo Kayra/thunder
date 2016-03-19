@@ -56,12 +56,12 @@
                 controller: 'RoutineListController as list'
             })
             .state('routine_create_routine', {
-                url: '/create_routine',
+                url: '/create-routine',
                 templateUrl: '/partials/routines/routine_create_routine.html',
                 controller: 'RoutineCreateRoutineController as create'
             })
             .state('routine_create_exercises', {
-                url: '/create_exercises',
+                url: '/create-exercises',
                 templateUrl: '/partials/routines/routine_create_exercises.html',
                 controller: 'RoutineCreateExercisesController as create'
             })
