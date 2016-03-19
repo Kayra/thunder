@@ -18,7 +18,7 @@
             .success(function(response){
                 vm.routines = response;
                 if (vm.routines.length === 0) {
-                    $state.go('create_routine')
+                    $state.go('routine_create_routine')
                 }
             })
             .error(function() {
@@ -55,7 +55,7 @@
 
             vm.createRoutine(routineJson);
 
-            $state.go('create_exercises');
+            $state.go('routine_create_exercises');
 
         };
 
@@ -81,7 +81,7 @@
         vm.createExercises = function(exercisesJson){
             RoutineService.createExercises(exercisesJson)
             .success(function(response) {
-                $state.go('list_routines');
+                $state.go('routines');
             })
             .error(function() {
                 // Need error handling
@@ -212,7 +212,7 @@
         vm.deleteRoutine = function(routineId) {
             RoutineService.deleteRoutine(routineId)
             .success(function(response){
-                $state.go('list_routines');
+                $state.go('routines');
             })
             .error(function(){
 

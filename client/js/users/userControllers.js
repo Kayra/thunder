@@ -22,7 +22,7 @@
                 } else if ($rootScope.returnTo && $rootScope.returnTo.State != '/login') {
                     $location.path($rootScope.returnTo.State);
                 } else {
-                    $state.go('list_routines');
+                    $state.go('routines');
                 }
             })
             .error(function(response){
@@ -42,7 +42,7 @@
 
             UserService.createUser(userJson)
             .success(function(response){
-                $state.go('login_user');
+                $state.go('user_login');
             })
             .error(function(response){
 
@@ -67,7 +67,7 @@
 
             localStorage.removeItem('token');
             localStorage.removeItem('user');
-            $state.go('login_user');
+            $state.go('user_login');
 
         };
 

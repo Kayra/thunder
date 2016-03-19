@@ -10,12 +10,12 @@
         <tr ng-repeat="routine in list.routines">
             <td>{{ routine.name }}</td>
             <td>{{ routine.total_time }}</td>
-            <td><a href="/use/{{ routine.name }}" ng-click="list.setId(routine.id)"><button>Use</button></a></td>
-            <td><a href="/edit/{{ routine.name }}" ng-click="list.setId(routine.id)"><button>Edit</button></a></td>
+            <td><a href="/use/{{ routine.name }}" ng-click="list.setId(routine.id)" class="btn btn-primary">Use</a></td>
+            <td><a href="/edit/{{ routine.name }}" ng-click="list.setId(routine.id)" class="btn btn-primary">Edit</a></td>
         </tr>
     </tbody>
 
 </table>
 
-<a href="/create_routine"><button>Add new routine</button></a>
+<a href="/create_routine" class="btn btn-primary">Add new routine</a>
 </div>

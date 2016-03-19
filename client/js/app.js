@@ -49,37 +49,37 @@
         });
 
         $stateProvider
-            .state('list_routines', {
+            .state('routines', {
                 url: '/',
                 templateUrl: '/partials/list_routines.html',
                 controller: 'RoutineListController as list'
             })
-            .state('create_routine', {
+            .state('routine_create_routine', {
                 url: '/create_routine',
                 templateUrl: '/partials/create_routine.html',
                 controller: 'RoutineCreateRoutineController as create'
             })
-            .state('create_exercises', {
+            .state('routine_create_exercises', {
                 url: '/create_exercises',
                 templateUrl: '/partials/create_exercises.html',
                 controller: 'RoutineCreateExercisesController as create'
             })
-            .state('edit_routine', {
+            .state('routine_edit', {
                 url: '/edit/:routineName',
                 templateUrl: '/partials/edit_routine.html',
                 controller: 'RoutineEditController as edit'
             })
-            .state('use_routine', {
+            .state('routine_use', {
                 url: '/use/:routineName',
                 templateUrl: '/partials/use_routine.html',
                 controller: 'RoutineUseController as use'
             })
-            .state('login_user', {
+            .state('user_authenticate', {
                 url: '/login',
                 templateUrl: '/partials/login_user.html',
                 controller: 'UserLoginController as login'
             })
-            .state('create_user', {
+            .state('user_create', {
                 url: '/signup',
                 templateUrl: '/partials/create_user.html',
                 controller: 'UserCreateController as create'
