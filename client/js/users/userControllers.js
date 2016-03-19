@@ -67,7 +67,7 @@
 
             localStorage.removeItem('token');
             localStorage.removeItem('user');
-            $state.go('user_login');
+            $state.go('user_authenticate');
 
         };
 
