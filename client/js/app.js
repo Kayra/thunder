@@ -6,6 +6,7 @@
         'ngMessages',
         'ngCookies',
         'angular-jwt',
+        'routineApp.homeControllers',
         'routineApp.routineControllers',
         'routineApp.routineServices',
         'routineApp.userControllers',
@@ -50,6 +51,11 @@
         });
 
         $stateProvider
+            .state('home', {
+                url: '/home',
+                templateUrl: '/partials/home/home.html',
+                controller: 'HomeController as home'
+            })
             .state('routines', {
                 url: '/',
                 templateUrl: '/partials/routines/routines.html',
