@@ -1,21 +1,21 @@
-<div>
-<table class="routine_list">
-    <thead>
-        <tr>
-            <th>Routine</th>
-            <th>Total time</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="routine in list.routines">
-            <td>{{ routine.name }}</td>
-            <td>{{ routine.total_time }}</td>
-            <td><a ui-sref="routine_use({ routineName: routine.name })" ng-click="list.setId(routine.id)" class="btn btn-primary">Use</a></td>
-            <td><a ui-sref="routine_edit({ routineEdit: routine.name })" ng-click="list.setId(routine.id)" class="btn btn-primary">Edit</a></td>
-        </tr>
-    </tbody>
+<div class="routines">
+    <table class="routine_list">
+        <thead>
+            <tr>
+                <th>Routine</th>
+                <th>Total time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="routine in list.routines">
+                <td>{{ routine.name }}</td>
+                <td>{{ routine.total_time }}</td>
+                <td><a ui-sref="routine_use({ routineName: routine.name })" ng-click="list.setId(routine.id)" class="btn btn-primary">Use</a></td>
+                <td><a ui-sref="routine_edit({ routineEdit: routine.name })" ng-click="list.setId(routine.id)" class="btn btn-primary">Edit</a></td>
+            </tr>
+        </tbody>
 
-</table>
+    </table>
 
-<a ui-sref="routine_create_routine" class="btn btn-primary">Add new routine</a>
+    <a ui-sref="routine_create_routine" class="btn btn-primary">Add new routine</a>
 </div>
