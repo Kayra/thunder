@@ -13,11 +13,9 @@
         var vm = this;
 
         vm.logout = function() {
-
             localStorage.removeItem('token');
             localStorage.removeItem('user');
             $state.go('user_authenticate');
-
         };
 
         vm.userIsLoggedIn = function() {
@@ -25,7 +23,6 @@
         };
 
         vm.isHomePage = function() {
-            console.log($state.current.name);
             return $state.current.name == 'home';
         };
 
