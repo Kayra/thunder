@@ -1,5 +1,5 @@
-<div>
-    <h3>{{ use.routine.name }} - {{ use.routine.total_time }}</h3>
+<div class="routine-use">
+    <h4>{{ use.routine.name }} - {{ use.routine.total_time }}</h4>
 
     <h1>{{ use.current_exercise.name }}</h1>
 
@@ -7,16 +7,12 @@
 
     <h3>Exercise {{ use.current_position }} out of {{ use.total_exercises }}</h3>
 
-    <button type="button" ng-click="use.previousExercise()" class="btn btn-primary">Previous</button>
-    <button type="button" ng-click="use.timerStartStop()" class="btn btn-primary">Start/Pause</button>
-    <button type="button" ng-click="use.nextExercise()" class="btn btn-primary">Next</button>
+    <ul class="list-unstyled list-inline">
+        <li><span ng-click="use.previousExercise()" class="glyphicon glyphicon-step-backward"></span></li>
+        <li><span ng-click="use.timerReset()" class="glyphicon glyphicon-stop"></span></li>
+        <li><span ng-click="use.timerStartStop()" class="glyphicon glyphicon-play"></span></li>
+        <li><span ng-click="use.nextExercise()" class="glyphicon glyphicon-step-forward"></span></li>
+    </ul>
 
-    <br />
-
-    <button type="button" ng-click="use.timerReset()" class="btn btn-primary">Reset</button>
-
-    <br />
-    <br />
-
-    <a href="/"><button class="btn btn-primary">Back to rountines list</button></a>
+    <a ui-sref="routines" class="btn btn-primary">Back to rountines list</a>
 </div>
