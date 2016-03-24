@@ -1,67 +1,62 @@
-<form name="createRoutine" novalidate ng-submit='edit.submit()'>
+<div class="routine-edit">
+    <form name="createRoutine" novalidate ng-submit='edit.submit()'>
 
-    <fieldset>
-        <label>Routine name</label>
-        <div class="form-group">
-            <input name="name"
-            ng-model="edit.routine.name"
-            id="routine-name"
-            required
-            ng-maxlength="255"
-            ng-focus
-            type="text"
-            placeholder="Routine name"
-            class="form-control">
-        </div>
-
-        <div class="error"
-        ng-show="edit.routine.name.$dirty && edit.routine.name.$invalid && !edit.routine.name.$focused"
-        ng-messages="edit.routine.$error">
-            <p ng-message="required">Please enter a name.</p>
-            <p ng-message="maxlength">Please keep the routine name shorter than 255 characters.</p>
-        </div>
-    </fieldset>
-
-    <br>
-
-    <fieldset ng-repeat="exercise in edit.exercises">
-        <p>
-        <label>Exercise name</label>
-         <input maxlength="255"
-                name="name"
+        <fieldset class="routine">
+            <div class="form-group">
+                <input name="name"
+                ng-model="edit.routine.name"
+                id="routine-name"
+                required
+                ng-maxlength="255"
+                ng-focus
                 type="text"
-                ng-model="exercise.name"
+                placeholder="Routine name"
                 class="form-control">
+            </div>
 
-        <label>Completion time</label>
-        <select ng-options="n for n in [] | range:0:61"
-                ng-model="exercise.minutes"
-                required="required">
-        </select>
-        Minutes
+            <div class="error"
+            ng-show="edit.routine.name.$dirty && edit.routine.name.$invalid && !edit.routine.name.$focused"
+            ng-messages="edit.routine.$error">
+                <p ng-message="required">Please enter a name.</p>
+                <p ng-message="maxlength">Please keep the routine name shorter than 255 characters.</p>
+            </div>
+        </fieldset>
 
-        <select ng-options="n for n in [] | range:0:61"
-                ng-model="exercise.seconds"
-                required="required">
-        </select>
-        Seconds
+        <fieldset ng-repeat="exercise in edit.exercises" class="exercise">
+             <input maxlength="255"
+                    name="name"
+                    type="text"
+                    ng-model="exercise.name"
+                    class="form-control">
 
-        <input ng-model="exercise.position" value="{{ exercise.position }}" name="position" type="hidden">
+            <span ng-click="edit.deleteExerciseClick($index, exercise.id)" class="glyphicon glyphicon-remove pull-right"></span>
 
-        <button type='button' ng-show="$last" ng-click="edit.deleteExerciseClick()" class="btn btn-primary"> - </button>
-        </p>
-    </fieldset>
+            <div class="completion-time">
+                <label>Completion time</label>
+                <select ng-options="n for n in [] | range:0:61"
+                        ng-model="exercise.minutes"
+                        required="required">
+                </select>
+                Minutes
 
-    <button type='button' ng-click="edit.addNewExercise()" class="btn btn-primary">Add exercise</button><br><br>
+                <select ng-options="n for n in [] | range:0:61"
+                        ng-model="exercise.seconds"
+                        required="required">
+                </select>
+                Seconds
 
-    <button type="submit" ng-disabled="createRoutine.$invalid" class="btn btn-primary">Save routine</button>
+                <input ng-model="exercise.position" value="{{ exercise.position }}" name="position" type="hidden">
+            </div>
+        </fieldset>
 
-    <br>
-    <a href="/"><button class="btn btn-primary">Return to routine list</button></a>
+        <button type='button' ng-click="edit.addNewExercise()" class="btn btn-primary">Add exercise</button>
+        <br><br>
+        <button type="submit" ng-disabled="createRoutine.$invalid" class="btn btn-success">Save routine</button>
+        <br><br>
+        <a ui-sref="routines" class="btn btn-primary">Return to routine list</a>
+        <br><br><br>
+        <button type="button" ng-click="edit.deleteRoutine(edit.routine.id)" class="btn btn-danger">Delete routine</button>
 
-    <br>
-    <br>
 
-    <button type="button" ng-click="edit.deleteRoutine(edit.routine.id)" class="btn btn-danger">Delete routine</button>
-
-</form>
+    </form>
+</div>

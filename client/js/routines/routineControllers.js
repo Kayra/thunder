@@ -170,13 +170,9 @@
             });
         };
 
-        vm.deleteExerciseClick = function() {
-            var lastExercise = vm.exercises.length - 1;
-
-            // delete exercise from the database
-            vm.deleteExercise(vm.exercises[lastExercise].id);
-
-            vm.exercises.splice(lastExercise);
+        vm.deleteExerciseClick = function(index, id) {
+            vm.exercises.splice(index, 1);
+            vm.deleteExercise(id);
         };
 
         vm.editExercise = function(exerciseJson, exerciseId) {
