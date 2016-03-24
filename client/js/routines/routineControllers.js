@@ -5,13 +5,9 @@
             ]);
 
 
-    routineAppControllers.controller('RoutineListController', ['RoutineService', 'SharedProperties', '$state', function(RoutineService, SharedProperties, $state) {
+    routineAppControllers.controller('RoutineListController', ['RoutineService', '$state', function(RoutineService, $state) {
 
         var vm = this;
-
-        vm.setId = function(id) {
-            SharedProperties.setProperty(id);
-        };
 
         vm.getRoutines = function() {
             RoutineService.getRoutines()
@@ -31,14 +27,14 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineCreateRoutineController', ['RoutineService', 'SharedProperties', '$state', function(RoutineService, SharedProperties, $state) {
+    routineAppControllers.controller('RoutineCreateRoutineController', ['RoutineService', '$state', function(RoutineService, $state) {
 
         var vm = this;
 
         vm.createRoutine = function(routineJson) {
             RoutineService.createRoutine(routineJson)
             .success(function(response) {
-                SharedProperties.setProperty(response.id);
+                localStorage.setItem('id', response.id);
             })
             .error(function(){
                 // Need error handling
@@ -62,7 +58,7 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineCreateExercisesController', ['RoutineService', 'SharedProperties', '$state', function(RoutineService, SharedProperties, $state) {
+    routineAppControllers.controller('RoutineCreateExercisesController', ['RoutineService', '$state', '$stateParams', function(RoutineService, $state, $stateParams) {
 
         var vm = this;
 
@@ -90,7 +86,7 @@
 
         vm.submit = function() {
 
-            var routineId = SharedProperties.getProperty();
+            var routineId = localStorage.getItem('id');
 
             var exerciseObjs = [];
 
@@ -116,11 +112,11 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineEditController', ['RoutineService', 'SharedProperties', '$location', '$state', function(RoutineService, SharedProperties, $location, $state) {
+    routineAppControllers.controller('RoutineEditController', ['RoutineService', '$location', '$state', '$stateParams', function(RoutineService, $location, $state, $stateParams) {
 
         var vm = this;
 
-        var routineId = SharedProperties.getProperty();
+        var routineId = $stateParams.id;
 
         vm.getRoutine = function(routineId) {
             RoutineService.getRoutine(routineId)
@@ -276,11 +272,11 @@
     }]);
 
 
-    routineAppControllers.controller('RoutineUseController', ['RoutineService', 'SharedProperties', '$interval', '$location', function( RoutineService, SharedProperties, $interval, $location){
+    routineAppControllers.controller('RoutineUseController', ['RoutineService', '$interval', '$location', '$stateParams', function( RoutineService, $interval, $location, $stateParams){
 
         var vm = this;
 
-        var routineId = SharedProperties.getProperty();
+        var routineId = $stateParams.id;
 
         vm.getRoutine = function(routineId) {
             RoutineService.getRoutine(routineId)
@@ -414,7 +410,7 @@
                 // return time;
             } else if (time.minutes > 0) {
                 time.minutes == time.minutes--;
-                time.seconds = 60;
+                time.seconds = 59;
                 // return time;
             }
 

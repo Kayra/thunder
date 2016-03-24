@@ -7,8 +7,8 @@
 
             <span class="pull-right">
                 <h2>{{ routine.total_time }}</h2>
-                <a class="glyphicon glyphicon-edit" ui-sref="routine_edit({ routineEdit: routine.name })" ng-click="list.setId(routine.id)"></a>
-                <a class="glyphicon glyphicon-chevron-right" ui-sref="routine_use({ routineUse: routine.name })" ng-click="list.setId(routine.id)"></a>
+                <a class="glyphicon glyphicon-edit" ui-sref="routine_edit({ id: routine.id })"></a>
+                <a class="glyphicon glyphicon-chevron-right" ui-sref="routine_use({ id: routine.id })"></a>
             </span>
 
         </li>

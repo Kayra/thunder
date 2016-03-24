@@ -40,22 +40,4 @@
 
     }]);
 
-    userServices.factory("SharedProperties", function() {
-
-        var property = {};
-
-        var value;
-
-        property.getProperty = function() {
-            return value;
-        };
-
-        property.setProperty = function(newValue) {
-            value = newValue;
-        };
-
-        return property;
-
-    });
-
 })();

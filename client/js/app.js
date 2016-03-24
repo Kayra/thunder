@@ -72,12 +72,12 @@
                 controller: 'RoutineCreateExercisesController as create'
             })
             .state('routine_edit', {
-                url: '/edit/:routineName',
+                url: '/edit/:id',
                 templateUrl: '/partials/routines/routine_edit.html',
                 controller: 'RoutineEditController as edit'
             })
             .state('routine_use', {
-                url: '/use/:routineName',
+                url: '/use/:id',
                 templateUrl: '/partials/routines/routine_use.html',
                 controller: 'RoutineUseController as use'
             })
