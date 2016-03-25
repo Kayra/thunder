@@ -29,7 +29,7 @@
             <a ui-sref="routines"><h1>Thunder</h1></a>
             <a ui-sref="user_authenticate" ng-show="!nav.userIsLoggedIn()">Login</a>
             <a ui-sref="user_create" ng-show="!nav.userIsLoggedIn()">Sign up</a>
-            <a href="#" ng-click="nav.logout()" ng-show="nav.userIsLoggedIn()" ng-cloak>Log out</a>
+            <span ng-show="nav.userIsLoggedIn()" ng-cloak>Hello {{ nav.userName }} - </span><a href="#" ng-click="nav.logout()" ng-show="nav.userIsLoggedIn()" ng-cloak>Log out</a></li>
           </div>
 
           <div ui-view></div>

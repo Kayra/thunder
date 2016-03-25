@@ -12,6 +12,8 @@
 
         var vm = this;
 
+        vm.userName = localStorage.getItem('userName');
+
         vm.logout = function() {
             localStorage.removeItem('token');
             localStorage.removeItem('user');

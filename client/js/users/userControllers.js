@@ -16,6 +16,7 @@
                 var tokenPayload = jwtHelper.decodeToken(response['token']);
                 localStorage.setItem('token', response['token']);
                 localStorage.setItem('user', tokenPayload['user_id']);
+                localStorage.setItem('userName', tokenPayload['username']);
 
                 if ($rootScope.returnTo && $rootScope.returnTo.StateParams && $rootScope.returnTo.State != '/login') {
                     $location.path($rootScope.returnTo.State + $rootScope.returnTo.StateParams);
