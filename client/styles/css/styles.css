@@ -37,14 +37,14 @@
 
 /* #Forms */
 /* ================================================== */
-.routine-edit form {
+.routine-edit form, .routine-create-exercises form {
   padding: 1em 0; }
 
-.routine-edit .form-control {
+.routine-edit .form-control, .routine-create-exercises .form-control {
   display: inline-block;
   width: 90%; }
 
-.routine-edit .completion-time {
+.routine-edit .completion-time, .routine-create-exercises .completion-time {
   margin: 0.7em 0; }
 
 /* #Lists */

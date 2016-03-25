@@ -1,50 +1,40 @@
-<h2>Now enter the exercises that will comprise your workout</h2>
+<div class="routine-create-exercises">
+    <h2>Now enter the exercises that will comprise your workout</h2>
 
-<form name="create-exercises" novalidate ng-submit="create.submit()" class="routine_add_exercises">
+    <form name="create-exercises" novalidate ng-submit="create.submit()">
 
-<table>
-    <thead>
-        <tr>
-            <th>Exercise name</th>
-            <th>Completion time</th>
-        </tr>
-    </thead>
-
-    <tbody class="form-group">
-        <tr ng-repeat="exercise in create.exercises">
-            <td>
-                <input maxlength="255"
+        <fieldset class="form-group" ng-repeat="exercise in create.exercises" class="exercise">
+            <input maxlength="255"
                 name="name"
                 type="text"
                 ng-model="exercise.name"
-                class="form-control"></td>
-            <td>
+                class="form-control">
+
+            <span ng-click="create.removeExerciseClick($index, exercise.id)" class="glyphicon glyphicon-remove pull-right"></span>
+
+            <div class="completion-time">
+                <label>Completion time</label>
                 <select ng-options="n for n in [] | range:0:61"
-                ng-model="exercise.minutes"
-                ng-init="exercise.minutes='00'"
-                required="required">
-                </select>
-                Minutes
+                    ng-model="exercise.minutes"
+                    ng-init="exercise.minutes='00'"
+                    required="required">
+                    </select>
+                    Minutes
 
                 <select ng-options="n for n in [] | range:0:61"
-                ng-model="exercise.seconds"
-                ng-init="exercise.seconds='00'"
-                required="required">
-                </select>
-                Seconds
-            </td>
+                    ng-model="exercise.seconds"
+                    ng-init="exercise.seconds='00'"
+                    required="required">
+                    </select>
+                    Seconds
+            </div>
 
             <input ng-model="exercise.position" value="{{ exercise.position }}" name="position" type="hidden">
+        </fieldset>
 
-            <td>
-                <button type='button' ng-show="$last" ng-click="create.removeExercise()" class="btn btn-primary"> - </button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+        <button type='button' ng-click="create.addNewExercise()" class="btn btn-primary">Add exercise</button><br><br>
 
-    <button type='button' ng-click="create.addNewExercise()" class="btn btn-primary">Add exercise</button><br><br>
+        <button type="submit" ng-disabled="routineCreate.$invalid" class="btn btn-primary">Save exercises</button>
 
-    <button type="submit" ng-disabled="routineCreate.$invalid" class="btn btn-primary">Save exercises</button>
-
-</form>
+    </form>
+</div>

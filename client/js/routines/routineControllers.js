@@ -69,9 +69,8 @@
             vm.exercises.push({'position': newExercisePosition});
         };
 
-        vm.removeExercise = function() {
-            var lastExercise = vm.exercises.length - 1;
-            vm.exercises.splice(lastExercise);
+        vm.removeExerciseClick = function(index, id) {
+            vm.exercises.splice(index, 1);
         };
 
         vm.createExercises = function(exercisesJson){
@@ -164,11 +163,6 @@
             .error(function(){
 
             });
-        };
-
-        vm.deleteExerciseClick = function(index, id) {
-            vm.exercises.splice(index, 1);
-            vm.deleteExercise(id);
         };
 
         vm.editExercise = function(exerciseJson, exerciseId) {
