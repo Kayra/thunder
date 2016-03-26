@@ -43,7 +43,7 @@
 
             UserService.createUser(userJson)
             .success(function(response){
-                $state.go('user_login');
+                $state.go('user_authenticate');
             })
             .error(function(response){
 

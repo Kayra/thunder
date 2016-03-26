@@ -351,7 +351,7 @@
         };
 
         vm.previousExercise = function() {
-            console.log(vm.current_position);
+
             if (vm.current_position - 1 >= 1) {
                 vm.current_position = vm.current_position - 1;
                 vm.current_exercise = setCurrentExercise(vm.exercises, vm.current_position);

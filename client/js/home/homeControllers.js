@@ -17,6 +17,7 @@
         vm.logout = function() {
             localStorage.removeItem('token');
             localStorage.removeItem('user');
+            localStorage.removeItem('userName');
             $state.go('user_authenticate');
         };
 

@@ -1,26 +1,29 @@
-<form name="routineCreate" novalidate ng-submit='create.submit()'>
+<div class="routine-create-routine">
 
-    <label for="routine-name">Please enter the name of the routine you would like to create</label>
+    <h4>Please enter the name of the routine you would like to create</h4>
 
-    <div class="form-group">
-        <input name="name"
-        ng-model="create.routine.name"
-        id="routine-name"
-        required
-        ng-maxlength="255"
-        ng-focus
-        type="text"
-        placeholder="Routine name"
-        class="form-control">
-    </div>
+    <form name="routineCreate" novalidate ng-submit='create.submit()'>
 
-    <div class="error"
-    ng-show="create.routine.name.$dirty && create.routine.name.$invalid && !create.routine.name.$focused"
-    ng-messages="create.routine.$error">
-        <p ng-message="required">Please enter a name.</p>
-        <p ng-message="maxlength">Please keep the routine name shorter than 255 characters.</p>
-    </div>
+        <div class="form-group">
+            <input name="name"
+            ng-model="create.routine.name"
+            id="routine-name"
+            required
+            ng-maxlength="255"
+            ng-focus
+            type="text"
+            placeholder="Routine name"
+            class="form-control">
+        </div>
 
-    <button type="submit" ng-disabled="routineCreate.$invalid" class="btn btn-primary">Continue</button>
+        <div class="error"
+        ng-show="create.routine.name.$dirty && create.routine.name.$invalid && !create.routine.name.$focused"
+        ng-messages="create.routine.$error">
+            <p ng-message="required">Please enter a name.</p>
+            <p ng-message="maxlength">Please keep the routine name shorter than 255 characters.</p>
+        </div>
 
-</form>
+        <button type="submit" ng-disabled="routineCreate.$invalid" class="btn btn-primary">Continue</button>
+
+    </form>
+</div>

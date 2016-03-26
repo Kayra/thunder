@@ -37,7 +37,7 @@
 
 /* #Forms */
 /* ================================================== */
-.routine-edit form, .routine-create-exercises form {
+.routine-edit form {
   padding: 1em 0; }
 
 .routine-edit .form-control, .routine-create-exercises .form-control {
