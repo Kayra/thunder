@@ -16,10 +16,6 @@
 
     .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $locationProvider, $urlRouterProvider, jwtInterceptorProvider){
 
-        // CSRF Support
-        $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-        $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-
         jwtInterceptorProvider.authPrefix = '';
 
         jwtInterceptorProvider.tokenGetter = function(jwtHelper, UserService) {
