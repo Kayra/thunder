@@ -60,6 +60,9 @@
 /* ================================================== */
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  .btn {
+    font-size: 2em; }
+
   .nav .title {
     font-size: 4.5em; }
   .nav .link {
@@ -74,8 +77,30 @@
   .routines .btn.add-routine {
     margin-top: 0.5em; }
 
-  .btn {
-    font-size: 2em; } }
+  /* Form pages */
+  h4 {
+    font-size: 3em; }
+
+  form {
+    margin-bottom: 3em; }
+    form .form-control {
+      font-size: 2em;
+      height: auto; }
+
+  .glyphicon-remove {
+    font-size: 3.7em;
+    top: 0.05em; }
+
+  .routine-edit .form-control, .routine-create-exercises .form-control {
+    width: 90%; }
+
+  .routine-create-routine h4, .routine-create-exercises h4 {
+    margin-bottom: 0.7em; }
+  .routine-create-routine fieldset, .routine-create-exercises fieldset {
+    margin-bottom: 2em; }
+
+  .completion-time {
+    font-size: 1.5em; } }
 /* Medium devices (desktops, 992px and up) */
 
 /*# sourceMappingURL=styles.css.map */
