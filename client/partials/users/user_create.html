@@ -1,97 +1,99 @@
-<h1>Sign up</h1>
+<div class="user-create">
+    <h1>Sign up</h1>
 
-<form name="createUser" novalidate ng-submit="create.submit()">
+    <form name="createUser" novalidate ng-submit="create.submit()">
 
-    <fieldset>
-        <label>Username</label>
-        <div class="form-group">
-            <input name="username"
-            ng-model="create.user.username"
-            id="username"
-            required
-            maxlength="255"
-            ng-focus
-            type="text"
-            placeholder="Username"
-            class="form-control">
-        </div>
+        <fieldset>
+            <label>Username</label>
+            <div class="form-group">
+                <input name="username"
+                ng-model="create.user.username"
+                id="username"
+                required
+                maxlength="255"
+                ng-focus
+                type="text"
+                placeholder="Username"
+                class="form-control">
+            </div>
 
-        <div class="error"
-        ng-show="createUser.username.$dirty && createUser.username.$invalid && !createUser.username.$focused"
-        ng-messages="createUser.username.$error">
-            <p ng-message="required">Please enter a username.</p>
-            <p ng-message="maxlength">Please keep the username shorter than 255 characters.</p>
-        </div>
-    </fieldset>
+            <div class="error"
+            ng-show="createUser.username.$dirty && createUser.username.$invalid && !createUser.username.$focused"
+            ng-messages="createUser.username.$error">
+                <p ng-message="required">Please enter a username.</p>
+                <p ng-message="maxlength">Please keep the username shorter than 255 characters.</p>
+            </div>
+        </fieldset>
 
-    <fieldset>
-        <label>Email address</label>
-        <div class="form-group">
-            <input name="email"
-            ng-model="create.user.email"
-            id="email"
-            ng-maxlength="255"
-            required
-            ng-focus
-            type="email"
-            placeholder="Email address"
-            class="form-control">
-        </div>
+        <fieldset>
+            <label>Email address</label>
+            <div class="form-group">
+                <input name="email"
+                ng-model="create.user.email"
+                id="email"
+                ng-maxlength="255"
+                required
+                ng-focus
+                type="email"
+                placeholder="Email address"
+                class="form-control">
+            </div>
 
-        <div class="error"
-        ng-show="createUser.email.$dirty && createUser.email.$invalid && !createUser.email.$focused"
-        ng-messages="createUser.email.$error">
-            <p ng-message="required">Please enter an email address.</p>
-            <p ng-message="email">Please enter a valid email address.</p>
-            <p ng-message="maxlength">Please keep the email address shorter than 255 characters.</p>
-        </div>
-    </fieldset>
+            <div class="error"
+            ng-show="createUser.email.$dirty && createUser.email.$invalid && !createUser.email.$focused"
+            ng-messages="createUser.email.$error">
+                <p ng-message="required">Please enter an email address.</p>
+                <p ng-message="email">Please enter a valid email address.</p>
+                <p ng-message="maxlength">Please keep the email address shorter than 255 characters.</p>
+            </div>
+        </fieldset>
 
 
-    <fieldset>
-        <label>Password</label>
-        <div class="form-group">
-            <input name="password"
-            ng-model="create.user.password"
-            id="password"
-            required
-            ng-maxlength="255"
-            ng-focus
-            type="password"
-            class="form-control">
-        </div>
+        <fieldset>
+            <label>Password</label>
+            <div class="form-group">
+                <input name="password"
+                ng-model="create.user.password"
+                id="password"
+                required
+                ng-maxlength="255"
+                ng-focus
+                type="password"
+                class="form-control">
+            </div>
 
-        <div class="error"
-        ng-show="createUser.password.$dirty && createUser.password.$invalid && !createUser.password.$focused"
-        ng-messages="createUser.password.$error">
-            <p ng-message="required">Please enter a password.</p>
-            <p ng-message="maxlength">Please keep the password shorter than 255 characters.</p>
-        </div>
-    </fieldset>
+            <div class="error"
+            ng-show="createUser.password.$dirty && createUser.password.$invalid && !createUser.password.$focused"
+            ng-messages="createUser.password.$error">
+                <p ng-message="required">Please enter a password.</p>
+                <p ng-message="maxlength">Please keep the password shorter than 255 characters.</p>
+            </div>
+        </fieldset>
 
-    <fieldset>
-        <label>Password confirmation</label>
-        <div class="form-group">
-            <input name="confirmPassword"
-            ng-model="create.user.confirmPassword"
-            id="confirmPassword"
-            required
-            ng-maxlength="255"
-            compare-to="create.user.password"
-            ng-focus
-            type="password"
-            class="form-control">
-        </div>
+        <fieldset>
+            <label>Password confirmation</label>
+            <div class="form-group">
+                <input name="confirmPassword"
+                ng-model="create.user.confirmPassword"
+                id="confirmPassword"
+                required
+                ng-maxlength="255"
+                compare-to="create.user.password"
+                ng-focus
+                type="password"
+                class="form-control">
+            </div>
 
-        <div class="error"
-        ng-show="createUser.confirmPassword.$dirty && createUser.confirmPassword.$invalid && !createUser.confirmPassword.$focused && createUser.confirmPassword.$error"
-        ng-messages="createUser.confirmPassword.$error">
-            <p ng-message="required">Please confirm your password.</p>
-            <p ng-message="maxlength">Please keep the password shorter than 255 characters.</p>
-            <p ng-message="compareTo">Please ensure the passwords match.</p>
-        </div>
-    </fieldset>
+            <div class="error"
+            ng-show="createUser.confirmPassword.$dirty && createUser.confirmPassword.$invalid && !createUser.confirmPassword.$focused && createUser.confirmPassword.$error"
+            ng-messages="createUser.confirmPassword.$error">
+                <p ng-message="required">Please confirm your password.</p>
+                <p ng-message="maxlength">Please keep the password shorter than 255 characters.</p>
+                <p ng-message="compareTo">Please ensure the passwords match.</p>
+            </div>
+        </fieldset>
 
-    <button type="submit" ng-disabled="createUser.$invalid" class="btn btn-primary">Sign up</button>
+        <button type="submit" ng-disabled="createUser.$invalid" class="btn btn-primary">Sign up</button>
 
-</form>
+    </form>
+</div>

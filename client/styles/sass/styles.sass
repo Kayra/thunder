@@ -59,6 +59,12 @@ $screen-md-max:              ($screen-lg-min - 1)
 /* #Typography */
 /* ================================================== */
 
+.nav
+    .title
+        font-size: 3em
+    .link
+        font-size: 1.2em
+
 .routine-use
     h1
         font-size: 4em
@@ -72,6 +78,7 @@ $screen-md-max:              ($screen-lg-min - 1)
 
 .btn
     width: 100%
+    font-size: 1.2em
 
 /* #Images */
 /* ================================================== */
@@ -91,17 +98,30 @@ $screen-md-max:              ($screen-lg-min - 1)
 /* #Forms */
 /* ================================================== */
 
+form
+    margin-bottom: 0.7em
+
+.form-control
+    font-size: 1.2em
+    height: auto
+
 .routine-edit
     form
         padding: 1em 0
+    .buttons .btn-return
+        margin-top: 1.5em
+    .buttons .btn
+        margin-bottom: 0.6em
 
 .routine-edit, .routine-create-exercises
     .form-control
         display: inline-block
         width: 90%
+        height: auto
 
 .routine-edit, .routine-create-exercises
     .completion-time
+        font-size: 1em
         margin: 0.7em 0
 
 
@@ -152,18 +172,22 @@ $screen-md-max:              ($screen-lg-min - 1)
 
         ul
             font-size: 5em
+
     /* Form pages */
+
+    form
+        .form-control
+            font-size: 2em
+            height: auto
+
+        label
+            font-size: 1.5em
+
+        margin-bottom: 3em
 
     .routine-create-routine, .routine-create-exercises, .routine-edit
         h4
             font-size: 3em
-
-        form
-            .form-control
-                font-size: 2em
-                height: auto
-
-            margin-bottom: 3em
 
     .completion-time
         font-size: 1.5em
@@ -185,12 +209,6 @@ $screen-md-max:              ($screen-lg-min - 1)
     .routine-edit
         .exercise
             margin: 1.5em 0
-        .buttons .btn-return
-            margin-top: 1.5em
-        .buttons .btn
-            margin-bottom: 0.6em
-
-
 
 /* Medium devices (desktops, 992px and up) */
 // @media (min-width: $screen-md-min)

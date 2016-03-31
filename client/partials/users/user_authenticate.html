@@ -1,50 +1,52 @@
-<h1>Log in</h1>
+<div class="user-authenticate">
+    <h1>Log in</h1>
 
-<form name="loginUser" novalidate ng-submit='login.submit()'>
+    <form name="loginUser" novalidate ng-submit='login.submit()'>
 
-    <fieldset>
-        <label>Username</label>
-        <div class="form-group">
-            <input name="username"
-            ng-model="login.user.username"
-            id="username"
-            required
-            ng-maxlength="255"
-            ng-focus
-            type="text"
-            placeholder="Username"
-            class="form-control">
-        </div>
+        <fieldset>
+            <label>Username</label>
+            <div class="form-group">
+                <input name="username"
+                ng-model="login.user.username"
+                id="username"
+                required
+                ng-maxlength="255"
+                ng-focus
+                type="text"
+                placeholder="Username"
+                class="form-control">
+            </div>
 
-        <div class="error"
-        ng-show="loginUser.username.$dirty && loginUser.username.$invalid && !loginUser.username.$focused"
-        ng-messages="loginUser.$error">
-            <p ng-message="required">Please enter a username.</p>
-            <p ng-message="maxlength">A username can't be longer than 255 characters.</p>
-        </div>
-    </fieldset>
+            <div class="error"
+            ng-show="loginUser.username.$dirty && loginUser.username.$invalid && !loginUser.username.$focused"
+            ng-messages="loginUser.$error">
+                <p ng-message="required">Please enter a username.</p>
+                <p ng-message="maxlength">A username can't be longer than 255 characters.</p>
+            </div>
+        </fieldset>
 
 
-    <fieldset>
-        <label>Password</label>
-        <div class="form-group">
-            <input name="password"
-            ng-model="login.user.password"
-            id="password"
-            required
-            ng-focus
-            type="password"
-            placeholder="Password"
-            class="form-control">
-        </div>
+        <fieldset>
+            <label>Password</label>
+            <div class="form-group">
+                <input name="password"
+                ng-model="login.user.password"
+                id="password"
+                required
+                ng-focus
+                type="password"
+                placeholder="Password"
+                class="form-control">
+            </div>
 
-        <div class="error"
-        ng-show="loginUser.password.$dirty && loginUser.password.$invalid && !loginUser.password.$focused"
-        ng-messages="loginUser.$error">
-            <p ng-message="required">Please enter a password.</p>
-        </div>
-    </fieldset>
+            <div class="error"
+            ng-show="loginUser.password.$dirty && loginUser.password.$invalid && !loginUser.password.$focused"
+            ng-messages="loginUser.$error">
+                <p ng-message="required">Please enter a password.</p>
+            </div>
+        </fieldset>
 
-    <button type="submit" ng-disabled="loginUser.$invalid" class="btn btn-primary">Log in</button>
+        <button type="submit" ng-disabled="loginUser.$invalid" class="btn btn-primary">Log in</button>
 
-</form>
+    </form>
+</div>

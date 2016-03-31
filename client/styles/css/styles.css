@@ -12,6 +12,11 @@
 
 /* #Typography */
 /* ================================================== */
+.nav .title {
+  font-size: 3em; }
+.nav .link {
+  font-size: 1.2em; }
+
 .routine-use h1 {
   font-size: 4em; }
 
@@ -20,7 +25,8 @@
 /* #Buttons */
 /* ================================================== */
 .btn {
-  width: 100%; }
+  width: 100%;
+  font-size: 1.2em; }
 
 /* #Images */
 /* ================================================== */
@@ -37,14 +43,27 @@
 
 /* #Forms */
 /* ================================================== */
+form {
+  margin-bottom: 0.7em; }
+
+.form-control {
+  font-size: 1.2em;
+  height: auto; }
+
 .routine-edit form {
   padding: 1em 0; }
+.routine-edit .buttons .btn-return {
+  margin-top: 1.5em; }
+.routine-edit .buttons .btn {
+  margin-bottom: 0.6em; }
 
 .routine-edit .form-control, .routine-create-exercises .form-control {
   display: inline-block;
-  width: 90%; }
+  width: 90%;
+  height: auto; }
 
 .routine-edit .completion-time, .routine-create-exercises .completion-time {
+  font-size: 1em;
   margin: 0.7em 0; }
 
 /* #Lists */
@@ -87,13 +106,16 @@
     font-size: 5em; }
 
   /* Form pages */
-  .routine-create-routine h4, .routine-create-exercises h4, .routine-edit h4 {
-    font-size: 3em; }
-  .routine-create-routine form, .routine-create-exercises form, .routine-edit form {
+  form {
     margin-bottom: 3em; }
-    .routine-create-routine form .form-control, .routine-create-exercises form .form-control, .routine-edit form .form-control {
+    form .form-control {
       font-size: 2em;
       height: auto; }
+    form label {
+      font-size: 1.5em; }
+
+  .routine-create-routine h4, .routine-create-exercises h4, .routine-edit h4 {
+    font-size: 3em; }
 
   .completion-time {
     font-size: 1.5em; }
@@ -111,11 +133,7 @@
     margin-bottom: 2em; }
 
   .routine-edit .exercise {
-    margin: 1.5em 0; }
-  .routine-edit .buttons .btn-return {
-    margin-top: 1.5em; }
-  .routine-edit .buttons .btn {
-    margin-bottom: 0.6em; } }
+    margin: 1.5em 0; } }
 /* Medium devices (desktops, 992px and up) */
 
 /*# sourceMappingURL=styles.css.map */
