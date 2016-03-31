@@ -91,7 +91,6 @@ $screen-md-max:              ($screen-lg-min - 1)
 /* #Forms */
 /* ================================================== */
 
-
 .routine-edit
     form
         padding: 1em 0
@@ -122,8 +121,24 @@ $screen-md-max:              ($screen-lg-min - 1)
 /* ================================================== */
 
 /* Small devices (tablets, 768px and up) */
-// @media (min-width: $screen-sm-min)
+@media (min-width: $screen-sm-min)
+    .nav
+        .title
+            font-size: 4.5em
+        .link
+            font-size: 1.5em
 
+    .routines
+        h2
+            font-size: 3em
+        .glyphicon
+            font-size: 2.4em
+        li
+            margin: 1em 0
+        .btn.add-routine
+            margin-top: 0.5em
 
+    .btn
+        font-size: 2em
 /* Medium devices (desktops, 992px and up) */
 // @media (min-width: $screen-md-min)

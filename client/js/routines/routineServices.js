@@ -2,7 +2,7 @@
 
     var routineServices = angular.module('routineApp.routineServices', []);
 
-    var domain = 'http://127.0.0.1:8000/';
+    var domain = 'http://192.168.0.7:8000/';
 
     routineServices.factory("RoutineService", ['$http', function($http){
 

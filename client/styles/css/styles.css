@@ -59,6 +59,23 @@
 /* #Media Queries */
 /* ================================================== */
 /* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .nav .title {
+    font-size: 4.5em; }
+  .nav .link {
+    font-size: 1.5em; }
+
+  .routines h2 {
+    font-size: 3em; }
+  .routines .glyphicon {
+    font-size: 2.4em; }
+  .routines li {
+    margin: 1em 0; }
+  .routines .btn.add-routine {
+    margin-top: 0.5em; }
+
+  .btn {
+    font-size: 2em; } }
 /* Medium devices (desktops, 992px and up) */
 
 /*# sourceMappingURL=styles.css.map */
