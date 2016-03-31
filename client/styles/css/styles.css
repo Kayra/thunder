@@ -77,13 +77,21 @@
   .routines .btn.add-routine {
     margin-top: 0.5em; }
 
-  /* Form pages */
-  h4 {
+  .routine-use h1 {
+    font-size: 6em; }
+  .routine-use h3 {
     font-size: 3em; }
+  .routine-use h4 {
+    font-size: 2em; }
+  .routine-use ul {
+    font-size: 5em; }
 
-  form {
+  /* Form pages */
+  .routine-create-routine h4, .routine-create-exercises h4, .routine-edit h4 {
+    font-size: 3em; }
+  .routine-create-routine form, .routine-create-exercises form, .routine-edit form {
     margin-bottom: 3em; }
-    form .form-control {
+    .routine-create-routine form .form-control, .routine-create-exercises form .form-control, .routine-edit form .form-control {
       font-size: 2em;
       height: auto; }
 
