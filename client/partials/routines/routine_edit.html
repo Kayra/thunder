@@ -1,5 +1,5 @@
 <div class="routine-edit">
-    <form name="createRoutine" novalidate ng-submit='edit.submit()'>
+    <form name="editRoutine" novalidate ng-submit='edit.submit()'>
 
         <fieldset class="routine">
             <div class="form-group">
@@ -49,13 +49,13 @@
             </div>
         </fieldset>
 
-        <button type='button' ng-click="edit.addNewExercise()" class="btn btn-primary">Add exercise</button>
-        <br><br>
-        <button type="submit" ng-disabled="createRoutine.$invalid" class="btn btn-success">Save routine</button>
-        <br><br>
-        <a ui-sref="routines" class="btn btn-primary">Return to routine list</a>
-        <br><br><br>
-        <button type="button" ng-click="edit.deleteRoutine(edit.routine.id)" class="btn btn-danger">Delete routine</button>
+        <div class="buttons">
+            <button type='button' ng-click="edit.addNewExercise()" class="btn btn-primary">Add exercise</button>
+            <button type="submit" ng-disabled="createRoutine.$invalid" class="btn btn-success">Save routine</button>
+            <button type="button" ng-click="edit.deleteRoutine(edit.routine.id)" class="btn btn-danger">Delete routine</button>
+
+            <a ui-sref="routines" class="btn btn-primary btn-return">Return to routine list</a>
+        </div>
 
 
     </form>

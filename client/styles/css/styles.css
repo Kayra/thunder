@@ -87,6 +87,9 @@
       font-size: 2em;
       height: auto; }
 
+  .completion-time {
+    font-size: 1.5em; }
+
   .glyphicon-remove {
     font-size: 3.7em;
     top: 0.05em; }
@@ -99,8 +102,12 @@
   .routine-create-routine fieldset, .routine-create-exercises fieldset {
     margin-bottom: 2em; }
 
-  .completion-time {
-    font-size: 1.5em; } }
+  .routine-edit .exercise {
+    margin: 1.5em 0; }
+  .routine-edit .buttons .btn-return {
+    margin-top: 1.5em; }
+  .routine-edit .buttons .btn {
+    margin-bottom: 0.6em; } }
 /* Medium devices (desktops, 992px and up) */
 
 /*# sourceMappingURL=styles.css.map */
