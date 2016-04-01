@@ -56,6 +56,9 @@ $screen-md-max:              ($screen-lg-min - 1)
 .routine-use
     text-align: center
 
+.routine-time
+    margin-right: 0.5em
+
 /* #Typography */
 /* ================================================== */
 
@@ -69,9 +72,21 @@ $screen-md-max:              ($screen-lg-min - 1)
     h1
         font-size: 4em
 
+.completion-time p
+    display: inline
+
 /* #Links */
 /* ================================================== */
 
+.link-unstyled
+    text-decoration: none
+    color: #333333
+    &:hover
+        text-decoration: none
+        color: #333333
+    &:focus
+        text-decoration: none
+        color: #333333
 
 /* #Buttons */
 /* ================================================== */
@@ -97,6 +112,9 @@ $screen-md-max:              ($screen-lg-min - 1)
 
 /* #Forms */
 /* ================================================== */
+
+select
+    background-color: white
 
 form
     margin-bottom: 0.7em
@@ -210,5 +228,26 @@ form
         .exercise
             margin: 1.5em 0
 
+    .completion-time
+        label
+            font-size: 1.5em
+        p
+            font-size: 1.5em
+        select
+            margin-left: 1em
+
 /* Medium devices (desktops, 992px and up) */
-// @media (min-width: $screen-md-min)
+@media (min-width: $screen-md-min)
+    .btn
+        width: 33%
+        padding: 0.5em 0.5em
+
+    .routine-edit, .routine-create-exercises
+        .form-control
+            width: 94%
+
+    .completion-time
+        font-size: 1.5em
+
+    select
+        font-size: 1.5em

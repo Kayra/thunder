@@ -3,10 +3,10 @@
     <ul class="list-unstyled">
         <li class="routine" ng-repeat="routine in list.routines">
 
-            <h2>{{ routine.name }}</h2>
+            <a ui-sref="routine_use({ id: routine.id })" class="link-unstyled"><h2>{{ routine.name }}</h2></a>
 
             <span class="pull-right">
-                <h2>{{ routine.total_time }}</h2>
+                <a ui-sref="routine_use({ id: routine.id })" class="routine-time link-unstyled"><h2>{{ routine.total_time }}</h2></a>
                 <a class="glyphicon glyphicon-edit" ui-sref="routine_edit({ id: routine.id })"></a>
                 <a class="glyphicon glyphicon-chevron-right" ui-sref="routine_use({ id: routine.id })"></a>
             </span>

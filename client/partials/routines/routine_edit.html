@@ -37,13 +37,13 @@
                         ng-model="exercise.minutes"
                         required="required">
                 </select>
-                Minutes
+                <p>Minutes</p>
 
                 <select ng-options="n for n in [] | range:0:61"
                         ng-model="exercise.seconds"
                         required="required">
                 </select>
-                Seconds
+                <p>Seconds</p>
 
                 <input ng-model="exercise.position" value="{{ exercise.position }}" name="position" type="hidden">
             </div>

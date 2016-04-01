@@ -10,6 +10,9 @@
 .routine-use {
   text-align: center; }
 
+.routine-time {
+  margin-right: 0.5em; }
+
 /* #Typography */
 /* ================================================== */
 .nav .title {
@@ -20,8 +23,21 @@
 .routine-use h1 {
   font-size: 4em; }
 
+.completion-time p {
+  display: inline; }
+
 /* #Links */
 /* ================================================== */
+.link-unstyled {
+  text-decoration: none;
+  color: #333333; }
+  .link-unstyled:hover {
+    text-decoration: none;
+    color: #333333; }
+  .link-unstyled:focus {
+    text-decoration: none;
+    color: #333333; }
+
 /* #Buttons */
 /* ================================================== */
 .btn {
@@ -43,6 +59,9 @@
 
 /* #Forms */
 /* ================================================== */
+select {
+  background-color: white; }
+
 form {
   margin-bottom: 0.7em; }
 
@@ -133,7 +152,27 @@ form {
     margin-bottom: 2em; }
 
   .routine-edit .exercise {
-    margin: 1.5em 0; } }
+    margin: 1.5em 0; }
+
+  .completion-time label {
+    font-size: 1.5em; }
+  .completion-time p {
+    font-size: 1.5em; }
+  .completion-time select {
+    margin-left: 1em; } }
 /* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .btn {
+    width: 33%;
+    padding: 0.5em 0.5em; }
+
+  .routine-edit .form-control, .routine-create-exercises .form-control {
+    width: 94%; }
+
+  .completion-time {
+    font-size: 1.5em; }
+
+  select {
+    font-size: 1.5em; } }
 
 /*# sourceMappingURL=styles.css.map */
