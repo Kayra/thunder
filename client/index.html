@@ -26,10 +26,21 @@
         <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 
           <div ng-controller="NavController as nav" ng-hide="nav.isHomePage()" class="nav">
-            <a ui-sref="routines"><h1 class="title">Thunder</h1></a>
-            <a ui-sref="user_authenticate" ng-show="!nav.userIsLoggedIn()" class="link">Login</a>
-            <a ui-sref="user_create" ng-show="!nav.userIsLoggedIn()" class="link">Sign up</a>
-            <span ng-show="nav.userIsLoggedIn()" ng-cloak class="link">Hello {{ nav.userName }} - </span><a href="#" ng-click="nav.logout()" ng-show="nav.userIsLoggedIn()" ng-cloak class="link">Log out</a>
+
+            <a ui-sref="routines"><h1>Thunder</h1></a>
+
+            <div class="user">
+                <div ng-show="!nav.userIsLoggedIn()" ng-cloak>
+                    <a ui-sref="user_authenticate">Login</a>
+                    <p class="text-inline">-</p>
+                    <a ui-sref="user_create">Sign up</a>
+                </div>
+
+                <div ng-show="nav.userIsLoggedIn()" ng-cloak>
+                    <p class="text-inline">Hello {{ nav.userName }} - </p><a href="#" ng-click="nav.logout()">Log out</a>
+                </div>
+            </div>
+
           </div>
 
           <div ui-view></div>

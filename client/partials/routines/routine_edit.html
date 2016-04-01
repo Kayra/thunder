@@ -37,21 +37,21 @@
                         ng-model="exercise.minutes"
                         required="required">
                 </select>
-                <p>Minutes</p>
+                <p class="text-inline">Minutes</p>
 
                 <select ng-options="n for n in [] | range:0:61"
                         ng-model="exercise.seconds"
                         required="required">
                 </select>
-                <p>Seconds</p>
+                <p class="text-inline">Seconds</p>
 
                 <input ng-model="exercise.position" value="{{ exercise.position }}" name="position" type="hidden">
             </div>
         </fieldset>
 
         <div class="buttons">
-            <button type='button' ng-click="edit.addNewExercise()" class="btn btn-primary">Add exercise</button>
-            <button type="submit" ng-disabled="createRoutine.$invalid" class="btn btn-success">Save routine</button>
+            <button type='button' ng-click="edit.addNewExerciseClick()" class="btn btn-primary">Add exercise</button>
+            <button type="submit" ng-disabled="createRoutine.$invalid" class="btn btn-success">Save changes</button>
             <button type="button" ng-click="edit.deleteRoutine(edit.routine.id)" class="btn btn-danger">Delete routine</button>
 
             <a ui-sref="routines" class="btn btn-primary btn-return">Return to routine list</a>

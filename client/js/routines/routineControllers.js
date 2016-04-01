@@ -69,7 +69,7 @@
             vm.exercises.push({'position': newExercisePosition});
         };
 
-        vm.removeExerciseClick = function(index, id) {
+        vm.removeExerciseClick = function(index) {
             vm.exercises.splice(index, 1);
         };
 
@@ -150,9 +150,14 @@
             });
         };
 
-        vm.addNewExercise = function() {
+        vm.addNewExerciseClick = function() {
             var newExercisePosition = vm.exercises.length + 1;
             vm.exercises.push({'position': newExercisePosition, 'minutes': '00', 'seconds': '00'});
+        };
+
+        vm.deleteExerciseClick = function(index, id) {
+            vm.exercises.splice(index, 1);
+            vm.deleteExercise(id);
         };
 
         vm.createExercise = function(exerciseJson) {

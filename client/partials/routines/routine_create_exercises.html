@@ -11,7 +11,7 @@
                 ng-model="exercise.name"
                 class="form-control">
 
-            <span ng-click="create.removeExerciseClick($index, exercise.id)" class="glyphicon glyphicon-remove pull-right"></span>
+            <span ng-click="create.removeExerciseClick($index)" class="glyphicon glyphicon-remove pull-right"></span>
 
             <div class="completion-time">
                 <label>Completion time</label>
@@ -20,14 +20,14 @@
                     ng-init="exercise.minutes='00'"
                     required="required">
                     </select>
-                    Minutes
+                    <p class="text-inline">Minutes</p>
 
                 <select ng-options="n for n in [] | range:0:61"
                     ng-model="exercise.seconds"
                     ng-init="exercise.seconds='00'"
                     required="required">
                     </select>
-                    Seconds
+                    <p class="text-inline">Seconds</p>
             </div>
 
             <input ng-model="exercise.position" value="{{ exercise.position }}" name="position" type="hidden">

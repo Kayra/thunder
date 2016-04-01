@@ -15,15 +15,15 @@
 
 /* #Typography */
 /* ================================================== */
-.nav .title {
+.nav h1 {
   font-size: 3em; }
-.nav .link {
+.nav .user {
   font-size: 1.2em; }
 
 .routine-use h1 {
   font-size: 4em; }
 
-.completion-time p {
+.text-inline {
   display: inline; }
 
 /* #Links */
@@ -101,9 +101,9 @@ form {
   .btn {
     font-size: 2em; }
 
-  .nav .title {
+  .nav h1 {
     font-size: 4.5em; }
-  .nav .link {
+  .nav .user {
     font-size: 1.5em; }
 
   .routines h2 {
