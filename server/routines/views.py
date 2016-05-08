@@ -6,7 +6,7 @@ from routines.serializers import RoutineSerializer, ExerciseSerializer
 from routines.utilities import updateTotalTime
 
 
-class RoutineList(generics.ListCreateAPIView):
+class RoutineListCreate(generics.ListCreateAPIView):
     queryset = Routine.objects.all()
     serializer_class = RoutineSerializer
 

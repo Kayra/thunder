@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class RoutineAPITests(TestCase):
 
     def setUp(self):
-        pass
+        testUser = User.objects.create(username='test', email='test@test.com', password='test123')
 
     def test_get_user(self):
         pass

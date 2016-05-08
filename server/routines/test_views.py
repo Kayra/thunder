@@ -3,13 +3,14 @@ import json
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
+from django.contrib.auth.models import User
 from .models import Routine, Exercise
 
 
 def createExerciseForAPI(number=1):
 
     """
-        Convinience function to create a test exercise
+    Convenience function to create a test exercise object to be submitted to the API.
     """
     routine = Routine.objects.get(name='test2')
 
@@ -26,13 +27,15 @@ class RoutineAPITests(TestCase):
 
     def setUp(self):
 
+        testUser = User.objects.create(username='test', email='test@test.com', password='test123')
+
         exerciseNames = ['warm up', 'jog', 'run', 'jog', 'run']
 
-        testRoutine1 = Routine.objects.create(name='test1', total_time='00:05:00')
+        testRoutine1 = Routine.objects.create(name='test1', total_time='00:05:00', user=testUser)
         for index, exerciseName in enumerate(exerciseNames, start=1):
             Exercise.objects.create(name=exerciseName, completion_time='00:01:00', position=index, routine=testRoutine1)
 
-        testRoutine2 = Routine.objects.create(name='test2', total_time='00:05:00')
+        testRoutine2 = Routine.objects.create(name='test2', total_time='00:05:00', user=testUser)
         for index, exerciseName in enumerate(exerciseNames, start=1):
             Exercise.objects.create(name=exerciseName, completion_time='00:01:00', position=index, routine=testRoutine2)
 
