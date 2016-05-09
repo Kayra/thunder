@@ -22,7 +22,7 @@ class RoutineDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RoutineSerializer
 
 
-class ExerciseList(generics.ListCreateAPIView):
+class ExerciseListCreate(generics.ListCreateAPIView):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
