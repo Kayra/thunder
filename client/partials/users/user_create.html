@@ -96,4 +96,10 @@
         <button type="submit" ng-disabled="createUser.$invalid" class="btn btn-primary">Sign up</button>
 
     </form>
+
+    <div class="alert alert-danger fade in" ng-show="create.error">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Error!</strong> {{ create.error }}
+    </div>
+
 </div>

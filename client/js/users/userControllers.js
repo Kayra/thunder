@@ -26,8 +26,12 @@
                     $state.go('routines');
                 }
             })
-            .error(function(response){
-                console.log(response);
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
@@ -45,16 +49,12 @@
             .success(function(response){
                 $state.go('user_authenticate');
             })
-            .error(function(response){
-
-                var errorString = "";
-
-                for(var error in response) {
-                    errorString += error + ': ' + response[error] + ' ';
-                }
-
-                alert(errorString);
-
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
