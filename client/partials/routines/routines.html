@@ -15,4 +15,9 @@
     </ul>
 
     <a ui-sref="routine_create_routine" class="btn btn-primary add-routine">Add new routine</a>
+
+    <div class="alert alert-danger fade in" ng-show="list.error">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Error!</strong> {{ list.error }}
+    </div>
 </div>

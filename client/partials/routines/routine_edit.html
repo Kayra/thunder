@@ -59,4 +59,9 @@
 
 
     </form>
+
+    <div class="alert alert-danger fade in" ng-show="edit.error">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Error!</strong> {{ edit.error }}
+    </div>
 </div>

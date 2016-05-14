@@ -15,4 +15,9 @@
     </ul>
 
     <a ui-sref="routines" class="btn btn-primary">Back to rountines list</a>
+
+    <div class="alert alert-danger fade in" ng-show="use.error">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Error!</strong> {{ use.error }}
+    </div>
 </div>
