@@ -17,8 +17,12 @@
                     $state.go('routine_create_routine')
                 }
             })
-            .error(function() {
-                // Need error handling
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         }
 
@@ -36,8 +40,12 @@
             .success(function(response) {
                 localStorage.setItem('id', response.id);
             })
-            .error(function(){
-                // Need error handling
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
@@ -78,8 +86,12 @@
             .success(function(response) {
                 $state.go('routines');
             })
-            .error(function() {
-                // Need error handling
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
@@ -122,8 +134,12 @@
             .success(function(response){
                 vm.routine = response;
             })
-            .error(function(){
-
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
@@ -133,8 +149,12 @@
                 vm.exercises = response;
                 vm.formatCompletionTimes(vm.exercises);
             })
-            .error(function(){
-
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         }
 
@@ -165,8 +185,12 @@
             .success(function(response){
 
             })
-            .error(function(){
-
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
@@ -175,8 +199,12 @@
             .success(function(response){
 
             })
-            .error(function(){
-
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
@@ -185,8 +213,12 @@
             .success(function(response){
 
             })
-            .error(function(){
-
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
@@ -195,8 +227,12 @@
             .success(function(response){
 
             })
-            .error(function(){
-
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
@@ -205,8 +241,12 @@
             .success(function(response){
                 $state.go('routines');
             })
-            .error(function(){
-
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         }
 
@@ -282,8 +322,12 @@
             .success(function(response){
                 vm.routine = response;
             })
-            .error(function(){
-
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
@@ -295,8 +339,12 @@
                 vm.current_position = 1;
                 vm.current_exercise = setCurrentExercise(vm.exercises, vm.current_position);
             })
-            .error(function(){
-
+            .error(function(response, headers){
+                if (headers == 0) {
+                    vm.error = "The server seems to be down.";
+                } else {
+                    vm.error = response;
+                };
             });
         };
 
