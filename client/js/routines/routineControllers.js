@@ -11,18 +11,14 @@
 
         vm.getRoutines = function() {
             RoutineService.getRoutines()
-            .success(function(response){
+            .success(function(response) {
                 vm.routines = response;
                 if (vm.routines.length === 0) {
                     $state.go('routine_create_routine')
                 }
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         }
 
@@ -40,12 +36,8 @@
             .success(function(response) {
                 localStorage.setItem('id', response.id);
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
@@ -81,17 +73,13 @@
             vm.exercises.splice(index, 1);
         };
 
-        vm.createExercises = function(exercisesJson){
+        vm.createExercises = function(exercisesJson) {
             RoutineService.createExercises(exercisesJson)
             .success(function(response) {
                 $state.go('routines');
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
@@ -101,7 +89,7 @@
 
             var exerciseObjs = [];
 
-            angular.forEach(vm.exercises, function(exercise, index){
+            angular.forEach(vm.exercises, function(exercise, index) {
                 if (exercise.name) {
 
                     var exerciseObj = {};
@@ -131,36 +119,28 @@
 
         vm.getRoutine = function(routineId) {
             RoutineService.getRoutine(routineId)
-            .success(function(response){
+            .success(function(response) {
                 vm.routine = response;
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
         vm.getExercises = function(routineId) {
             RoutineService.getExercises(routineId)
-            .success(function(response){
+            .success(function(response) {
                 vm.exercises = response;
                 vm.formatCompletionTimes(vm.exercises);
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         }
 
         // Format the completion time to fit in the form
-        vm.formatCompletionTimes = function(exercises){
-            exercises.forEach(function(exercise){
+        vm.formatCompletionTimes = function(exercises) {
+            exercises.forEach(function(exercise) {
 
                 var completion_time = exercise.completion_time.split(":");
 
@@ -185,40 +165,28 @@
             .success(function(response){
 
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
         vm.editExercise = function(exerciseJson, exerciseId) {
             RoutineService.editExercise(exerciseJson, exerciseId)
-            .success(function(response){
+            .success(function(response) {
 
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
         vm.editRoutine = function(routineJson, routineId) {
             RoutineService.editRoutine(routineJson, routineId)
-            .success(function(response){
+            .success(function(response) {
 
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
@@ -227,26 +195,18 @@
             .success(function(response){
 
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
         vm.deleteRoutine = function(routineId) {
             RoutineService.deleteRoutine(routineId)
-            .success(function(response){
+            .success(function(response) {
                 $state.go('routines');
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         }
 
@@ -254,7 +214,7 @@
 
             newExercises = [];
 
-            exercises.forEach(function(exercise){
+            exercises.forEach(function(exercise) {
                 if (typeof exercise.id == 'undefined') {
                     newExercises.push(exercise);
                 }
@@ -270,7 +230,7 @@
 
             var exerciseObjs = [];
 
-            angular.forEach(vm.exercises, function(exercise, index){
+            angular.forEach(vm.exercises, function(exercise, index) {
 
                 if (typeof exercise.id !== 'undefined') {
 
@@ -322,29 +282,21 @@
             .success(function(response){
                 vm.routine = response;
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
         vm.getExercises = function(routineId) {
             RoutineService.getExercises(routineId)
-            .success(function(response){
+            .success(function(response) {
                 vm.exercises = response;
                 vm.total_exercises = vm.exercises.length;
                 vm.current_position = 1;
                 vm.current_exercise = setCurrentExercise(vm.exercises, vm.current_position);
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
@@ -392,7 +344,7 @@
 
         };
 
-        vm.timerReset = function(){
+        vm.timerReset = function() {
 
             if (angular.isDefined(count_down)) {
                 $interval.cancel(count_down);
@@ -427,7 +379,7 @@
             }
         };
 
-        function exerciseReset(){
+        function exerciseReset() {
 
             vm.current_position = 1;
             vm.current_exercise = setCurrentExercise(vm.exercises, vm.current_position);
@@ -436,11 +388,11 @@
 
         }
 
-        function exerciseHasEnded(time){
+        function exerciseHasEnded(time) {
             return time.seconds == 0 && time.minutes == 00;
         }
 
-        function setCurrentExercise(exercises, position){
+        function setCurrentExercise(exercises, position) {
 
             var indexPosition = position - 1;
             var current_exercise = exercises[indexPosition];
@@ -450,20 +402,18 @@
             return current_exercise;
         }
 
-        function countDown(time){
+        function countDown(time) {
 
-            if (time.seconds > 0 && time.minutes > -1){
+            if (time.seconds > 0 && time.minutes > -1) {
                 time.seconds == time.seconds--;
-                // return time;
             } else if (time.minutes > 0) {
                 time.minutes == time.minutes--;
                 time.seconds = 59;
-                // return time;
             }
 
         };
 
-        function completionTimeToObj(completion_time){
+        function completionTimeToObj(completion_time) {
 
             // Not starting at index of 0 because django stores times as 00:00:00
             var completionSplit = completion_time.split(":");
