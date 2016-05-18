@@ -2,7 +2,7 @@
 
     var routineAppControllers = angular.module('routineApp.userControllers', []);
 
-    routineAppControllers.controller('UserLoginController', ['UserService', 'jwtHelper', '$state', '$rootScope', '$location', function(UserService, jwtHelper, $state, $rootScope, $location){
+    routineAppControllers.controller('UserLoginController', ['UserService', 'jwtHelper', '$state', '$rootScope', '$location', function(UserService, jwtHelper, $state, $rootScope, $location) {
 
         var vm = this;
 
@@ -26,18 +26,14 @@
                     $state.go('routines');
                 }
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
     }]);
 
-    routineAppControllers.controller('UserCreateController', ['UserService', '$state', function(UserService, $state){
+    routineAppControllers.controller('UserCreateController', ['UserService', '$state', function(UserService, $state) {
 
         var vm = this;
 
@@ -46,15 +42,11 @@
             var userJson = angular.toJson(vm.user);
 
             UserService.createUser(userJson)
-            .success(function(response){
+            .success(function(response) {
                 $state.go('user_authenticate');
             })
-            .error(function(response, headers){
-                if (headers == 0) {
-                    vm.error = "The server seems to be down.";
-                } else {
-                    vm.error = response;
-                };
+            .error(function(response, headers) {
+                vm.error = errorHandler(response, headers);
             });
         };
 
