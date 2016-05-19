@@ -11,7 +11,8 @@
         'routineApp.routineServices',
         'routineApp.userControllers',
         'routineApp.userServices',
-        'routineApp.directives'
+        'routineApp.directives',
+        'routineApp.filters'
     ])
 
     .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $locationProvider, $urlRouterProvider, jwtInterceptorProvider){

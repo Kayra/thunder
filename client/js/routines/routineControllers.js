@@ -1,8 +1,6 @@
 (function(){
 
-    var routineAppControllers = angular.module('routineApp.routineControllers', ['routineApp.filters',
-            'ngCookies',
-            ]);
+    var routineAppControllers = angular.module('routineApp.routineControllers', []);
 
 
     routineAppControllers.controller('RoutineListController', ['RoutineService', '$state', function(RoutineService, $state) {
@@ -162,9 +160,6 @@
 
         vm.createExercise = function(exerciseJson) {
             RoutineService.createExercise(exerciseJson)
-            .success(function(response){
-
-            })
             .error(function(response, headers) {
                 vm.error = errorHandler(response, headers);
             });
@@ -172,9 +167,6 @@
 
         vm.editExercise = function(exerciseJson, exerciseId) {
             RoutineService.editExercise(exerciseJson, exerciseId)
-            .success(function(response) {
-
-            })
             .error(function(response, headers) {
                 vm.error = errorHandler(response, headers);
             });
@@ -182,9 +174,6 @@
 
         vm.editRoutine = function(routineJson, routineId) {
             RoutineService.editRoutine(routineJson, routineId)
-            .success(function(response) {
-
-            })
             .error(function(response, headers) {
                 vm.error = errorHandler(response, headers);
             });
@@ -192,9 +181,6 @@
 
         vm.deleteExercise = function(exerciseId) {
             RoutineService.deleteExercise(exerciseId)
-            .success(function(response){
-
-            })
             .error(function(response, headers) {
                 vm.error = errorHandler(response, headers);
             });
