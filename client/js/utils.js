@@ -5,7 +5,7 @@
             return "The server seems to be down.";
         } else {
             return response;
-        };
+        }
     };
 
 })()
