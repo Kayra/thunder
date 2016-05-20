@@ -4,7 +4,6 @@
         'ui.router',
         'ngResource',
         'ngMessages',
-        'ngCookies',
         'angular-jwt',
         'routineApp.homeControllers',
         'routineApp.routineControllers',
