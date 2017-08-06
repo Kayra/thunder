@@ -1,4 +1,4 @@
 Thunder
 ==============================
 
-Fitness routine timer
+A web application to create and use custom fitness routines.
