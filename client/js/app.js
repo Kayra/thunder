@@ -14,7 +14,12 @@
         'routineApp.filters'
     ])
 
-    .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $locationProvider, $urlRouterProvider, jwtInterceptorProvider){
+    .config(function($interpolateProvider, $httpProvider, $resourceProvider, $stateProvider, $locationProvider,
+                     $urlRouterProvider, jwtInterceptorProvider, jwtOptionsProvider) {
+
+        jwtOptionsProvider.config({
+            whiteListedDomains: ['http://thunderapi.kayra.co.uk/', 'localhost']
+        });
 
         jwtInterceptorProvider.authPrefix = '';
 
