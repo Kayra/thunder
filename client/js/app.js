@@ -18,7 +18,7 @@
                      $urlRouterProvider, jwtInterceptorProvider, jwtOptionsProvider) {
 
         jwtOptionsProvider.config({
-            whiteListedDomains: ['http://thunderapi.kayra.co.uk/', 'localhost']
+            whiteListedDomains: ['thunderapi.kayra.co.uk/', 'localhost', '127.0.0.1']
         });
 
         jwtInterceptorProvider.authPrefix = '';
